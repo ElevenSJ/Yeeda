@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <!-- 隐藏标题栏 -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!-- 隐藏状态栏
+        <item name="android:windowFullscreen">true</item>-->
+    </style>
+
+    <style name="AppTheme.Fullscreen" parent="AppTheme">
+
+        <!-- 隐藏标题栏 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 隐藏状态栏-->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--启动页样式及窗口背景-->
+    <style name="SplashTheme" parent="AppTheme.Fullscreen">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+    <!-- 字体风格 -->
+    <style name="TxtTitleWhiteNormal">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="TxtCommonWhiteNormal">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="TxtCommonWhiteSmall">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="TxtCommonWhiteLittle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="TxtHintCommonWhiteNormal">
+        <item name="android:textColor">@color/common_hint_text</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+</resources>
