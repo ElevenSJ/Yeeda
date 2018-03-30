@@ -29,7 +29,12 @@ dependencies {
 
     api 'com.android.support:appcompat-v7:27.1.0'
     api 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //日志
     api 'com.orhanobut:logger:2.2.0'
 
-
+    //网络
+    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
 }

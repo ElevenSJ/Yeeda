@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.sj.module_lib.BuildConfig;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.module_lib.utils.Utils;
 
@@ -26,7 +27,10 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        Logger.addLogAdapter(new AndroidLogAdapter());
+        if (BuildConfig.DEBUG==true){
+            Logger.addLogAdapter(new AndroidLogAdapter());
+            Logger.t("Yeeda");
+        }
         Utils.init(this);
         ToastUtils.init(false);
     }

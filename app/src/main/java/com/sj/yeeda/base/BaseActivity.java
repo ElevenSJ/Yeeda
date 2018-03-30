@@ -21,8 +21,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         presenter = getPresenter();
         try {
             presenter.start();
-        }catch (NullPointerException e){
-            Logger.e("BasePresenter",e);
+        }catch (Exception e){
+            Logger.e("BasePresenter is null");
         }
 
     }

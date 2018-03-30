@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sj.module_lib.utils.DeviceUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.base.BaseActivity;
 
@@ -36,6 +37,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        DeviceUtils.getUniqueId(this);
     }
 
     @Override
@@ -51,7 +53,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                     presenter.getCode(edtPhoneValue.getText().toString().trim());
                     break;
                 case R.id.bt_login:
-                    presenter.doLogin(edtPhoneValue.getText().toString().trim(),edtCodeValue.getText().toString().trim(),"deviceId");
+                    presenter.doLogin(edtPhoneValue.getText().toString().trim(),edtCodeValue.getText().toString().trim(), DeviceUtils.getUniqueId(this));
                     break;
                 case R.id.tv_register_detail:
                     presenter.toRegister();

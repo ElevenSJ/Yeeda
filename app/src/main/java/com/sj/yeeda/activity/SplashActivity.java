@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
+import com.sj.module_lib.base.BasePresenter;
 import com.sj.yeeda.activity.user.LoginActivity;
 import com.sj.yeeda.base.BaseActivity;
 
@@ -19,6 +20,11 @@ public class SplashActivity  extends BaseActivity{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         toLogin();
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return null;
     }
 
     private void toLogin() {
