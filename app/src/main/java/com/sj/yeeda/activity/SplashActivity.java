@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 
+import com.jady.retrofitclient.HttpManager;
 import com.sj.module_lib.base.BasePresenter;
-import com.sj.yeeda.activity.user.LoginActivity;
+import com.sj.yeeda.activity.http.UrlConfig;
+import com.sj.yeeda.activity.user.login.LoginActivity;
 import com.sj.yeeda.base.BaseActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 创建时间: on 2018/3/30.
@@ -32,6 +37,15 @@ public class SplashActivity  extends BaseActivity{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                HttpManager.init(SplashActivity.this.getApplicationContext(), UrlConfig.BASE_URL);
+//                HttpManager.getInstance().setOnGetHeadersListener(new HttpManager.OnGetHeadersListener() {
+//                    @Override
+//                    public Map<String, String> getHeaders() {
+//                        Map<String, String> headers = new HashMap<>();
+//                        headers.put("access_token", "1234");
+//                        return headers;
+//                    }
+//                });
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -40,7 +54,7 @@ public class SplashActivity  extends BaseActivity{
                     }
                 });
             }
-        },3000);
+        },2000);
 
     }
 }

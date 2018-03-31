@@ -23,7 +23,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.user.LoginActivity"
+        <activity android:name=".activity.user.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".activity.user.register.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

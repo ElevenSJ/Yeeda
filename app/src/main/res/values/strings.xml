@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">艺搭环保</string>
 
-    <!--登录页 -->
+    <!--登录、注册页 -->
     <string name="txt_title_login">登录</string>
+    <string name="txt_title_register">注册</string>
+    <string name="txt_register">立即注册</string>
     <string name="txt_phone">手机号</string>
     <string name="txt_phone_hint">请输入手机号码</string>
     <string name="txt_code">验证码</string>
     <string name="txt_code_hint">请输入验证码</string>
     <string name="txt_get_code">获取验证码</string>
     <string name="txt_not_register">还没有账号？<u>立即注册</u></string>
+    <string name="txt_to_login">已有账号？<u>立即登录</u></string>
 </resources>

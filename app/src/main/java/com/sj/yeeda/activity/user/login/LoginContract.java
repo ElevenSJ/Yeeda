@@ -1,4 +1,4 @@
-package com.sj.yeeda.activity.user;
+package com.sj.yeeda.activity.user.login;
 
 
 import com.sj.module_lib.base.BasePresenter;
@@ -14,8 +14,6 @@ import com.sj.module_lib.base.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView {
-        void toRegister();
-        void checkEdit(String msg);
         void toMainActivity();
         void refreshCodeTxt();
     }
@@ -23,7 +21,6 @@ public interface LoginContract {
     interface Presenter extends BasePresenter {
         void getCode(String phoneNum);
         void doLogin(String phoneNum,String codeNum,String deviceId);
-        void toRegister();
     }
 
 }

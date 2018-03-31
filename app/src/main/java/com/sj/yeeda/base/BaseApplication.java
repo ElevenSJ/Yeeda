@@ -29,7 +29,6 @@ public class BaseApplication extends Application {
         sInstance = this;
         if (BuildConfig.DEBUG==true){
             Logger.addLogAdapter(new AndroidLogAdapter());
-            Logger.t("Yeeda");
         }
         Utils.init(this);
         ToastUtils.init(false);
