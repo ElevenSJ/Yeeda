@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme">
+
+    <ImageView
+        android:id="@+id/img_header_bg"
+        android:layout_alignParentStart="true"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:src="@drawable/bg_personal_centor"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/img_user_icon"
+        android:layout_below="@+id/img_header_bg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="-40dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+
+    <TextView
+        android:id="@+id/txt_user_name"
+        style="@style/TxtTitleBlackNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignBottom="@+id/img_user_icon"
+        android:layout_toEndOf="@+id/img_user_icon"
+        android:gravity="center"
+        android:text="用户名" />
+
+</RelativeLayout>

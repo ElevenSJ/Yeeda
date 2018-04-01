@@ -53,4 +53,8 @@
         <item name="android:textSize">14dp</item>
     </style>
 
+    <style name="TxtTitleBlackNormal">
+        <item name="android:textColor">@color/black_alpha60</item>
+        <item name="android:textSize">18dp</item>
+    </style>
 </resources>

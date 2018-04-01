@@ -1,4 +1,4 @@
-package com.sj.yeeda.activity.http;
+package com.sj.yeeda.http;
 
 /**
  * 创建时间: on 2018/3/31.

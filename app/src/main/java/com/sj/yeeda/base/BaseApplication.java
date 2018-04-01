@@ -5,6 +5,7 @@ import android.app.Application;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.BuildConfig;
+import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.module_lib.utils.Utils;
 
@@ -32,5 +33,6 @@ public class BaseApplication extends Application {
         }
         Utils.init(this);
         ToastUtils.init(false);
+        SPUtils.init(sInstance);
     }
 }

@@ -5,12 +5,13 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
+import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
-import com.sj.yeeda.activity.http.BaseResponse;
-import com.sj.yeeda.activity.http.Callback;
-import com.sj.yeeda.activity.http.UrlConfig;
+import com.sj.yeeda.Utils.SPFileUtils;
+import com.sj.yeeda.http.BaseResponse;
+import com.sj.yeeda.http.Callback;
+import com.sj.yeeda.http.UrlConfig;
 import com.sj.yeeda.activity.user.login.bean.LoginBean;
-import com.sj.yeeda.activity.user.register.bean.RegisterBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,19 +46,20 @@ public class LoginPresenter implements LoginContract.Presenter {
             ToastUtils.showShortToast("手机号码不正确");
             return;
         }
+        mView.refreshCodeTxt(true);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("phone", phoneNum);
         HttpManager.get(UrlConfig.GET_SMSCODE_URL, parameters, new Callback<BaseResponse>() {
             @Override
             public void onSuccess(BaseResponse data) {
                 ToastUtils.showShortToast(data.getMessage());
-                mView.refreshCodeTxt();
                 Logger.v(data.toString());
             }
 
             @Override
             public void onFailure(String error_code, String error_message) {
                 Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
+                mView.refreshCodeTxt(false);
             }
         });
     }
@@ -78,22 +80,30 @@ public class LoginPresenter implements LoginContract.Presenter {
             ToastUtils.showShortToast("请输入验证码");
             return;
         }
+        mView.showProgress();
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("phone", phoneNum);
         parameters.put("checkcode", codeNum);
-        parameters.put("checkcode", deviceId);
+        parameters.put("deviceId", deviceId);
         HttpManager.get(UrlConfig.LOGIN_URL, parameters, new Callback<BaseResponse>() {
             @Override
             public void onSuccess(BaseResponse data) {
                 LoginBean loginBean = new Gson().fromJson(data.getData().toString(),LoginBean.class);
-                String token = loginBean.getTokenId();
-                Logger.v(token);
+                String tokenId = loginBean.getTokenId();
+                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.TOKEN_ID,tokenId);
+                Logger.v(tokenId);
                 mView.toMainActivity();
             }
 
             @Override
             public void onFailure(String error_code, String error_message) {
+                ToastUtils.showShortToast(error_message);
                 Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
+            }
+
+            @Override
+            public void onFinish() {
+                mView.dismissProgress();
             }
         });
     }

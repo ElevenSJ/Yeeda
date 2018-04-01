@@ -1,11 +1,8 @@
-package com.sj.yeeda.activity.http;
+package com.sj.yeeda.http;
 
-import com.google.gson.Gson;
 import com.jady.retrofitclient.callback.HttpCallback;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.ToastUtils;
-
-import java.lang.reflect.Type;
 
 
 /**
@@ -17,6 +14,7 @@ public abstract class Callback<T extends BaseResponse> extends HttpCallback<T> {
     @Override
     public void onResolve(T t) {
         Logger.i(t.toString());
+        onFinish();
         if (t.isSuccess()){
             onSuccess(t);
         }else{
@@ -26,6 +24,7 @@ public abstract class Callback<T extends BaseResponse> extends HttpCallback<T> {
 
     @Override
     public void onFailed(String error_code, String error_message) {
+        onFinish();
         if (enableShowToast()) {
             ToastUtils.showShortToast(error_message);
         }
@@ -39,5 +38,7 @@ public abstract class Callback<T extends BaseResponse> extends HttpCallback<T> {
     public boolean enableShowToast() {
         return true;
     }
+
+    public  void onFinish(){};
 
 }

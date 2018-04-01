@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.sj.module_lib.utils.DeviceUtils;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.user.login.LoginActivity;
+import com.sj.yeeda.activity.user.supply.SupplyUserInfoActivity;
 import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
@@ -19,9 +18,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Administrator on 2018/3/31.
+ * 创建时间: on 2018/3/29.
+ * 创建人: 孙杰
+ * 功能描述:注册页
  */
-
 public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterContract.View {
     @BindView(R.id.edt_phone_value)
     EditText edtPhoneValue;
@@ -39,6 +39,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         @Override
         public void onTick(long millisUntilFinished) {
             btGetcode.setText(millisUntilFinished/1000+"秒");
+            btGetcode.setEnabled(false);
         }
 
         @Override
@@ -71,28 +72,26 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 presenter.doRegister(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim());
                 break;
             case R.id.tv_toLogin:
-                Intent toLogin = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(toLogin);
                 finish();
                 break;
             default:
         }
     }
 
-    @Override
-    public void toMainActivity() {
-
-    }
 
     @Override
     public void toSupplyUserInfoActivity() {
-
+        Intent supplyUserInfo = new Intent(RegisterActivity.this, SupplyUserInfoActivity.class);
+        startActivity(supplyUserInfo);
     }
 
     @Override
-    public void refreshCodeTxt() {
-        btGetcode.setEnabled(false);
-        timer.start();
+    public void refreshCodeTxt(boolean refresh) {
+        if (refresh){
+            timer.start();
+        }else{
+            timer.onFinish();
+        }
     }
 
     @Override

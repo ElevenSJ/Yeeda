@@ -15,7 +15,7 @@ public interface LoginContract {
 
     interface View extends BaseView {
         void toMainActivity();
-        void refreshCodeTxt();
+        void refreshCodeTxt(boolean refresh);
     }
 
     interface Presenter extends BasePresenter {

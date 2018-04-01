@@ -14,9 +14,8 @@ import com.sj.module_lib.base.BaseView;
 public interface RegisterContract {
 
     interface View extends BaseView {
-        void toMainActivity();
         void toSupplyUserInfoActivity();
-        void refreshCodeTxt();
+        void refreshCodeTxt(boolean refresh);
     }
 
     interface Presenter extends BasePresenter {

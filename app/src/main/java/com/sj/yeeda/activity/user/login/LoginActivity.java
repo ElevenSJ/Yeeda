@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sj.module_lib.utils.DeviceUtils;
-import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.user.register.RegisterActivity;
 import com.sj.yeeda.base.BaseActivity;
 
@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * 创建人: 孙杰
  * 功能描述:登录页
  */
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View{
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
     @BindView(R.id.edt_phone_value)
     EditText edtPhoneValue;
     @BindView(R.id.edt_code_value)
@@ -39,20 +39,23 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public LoginPresenter getPresenter() {
         presenter = new LoginPresenter(this);
-        return presenter ;
+        return presenter;
     }
 
-    /** 倒计时60秒，一次1秒 */
-    CountDownTimer timer = new CountDownTimer(60*1000, 1000) {
+    /**
+     * 倒计时60秒，一次1秒
+     */
+    CountDownTimer timer = new CountDownTimer(60 * 1000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            btGetcode.setText(millisUntilFinished/1000+"秒");
+            btGetcode.setEnabled(false);
+            btGetcode.setText(millisUntilFinished / 1000 + "秒");
         }
 
         @Override
         public void onFinish() {
-            btGetcode.setText(LoginActivity.this.getText(R.string.txt_get_code));
             btGetcode.setEnabled(true);
+            btGetcode.setText(LoginActivity.this.getText(R.string.txt_get_code));
         }
     };
 
@@ -63,32 +66,46 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.bt_getcode,R.id.bt_login,R.id.tv_register_detail})
-    public void onClick(View view){
-            switch (view.getId()){
-                case R.id.bt_getcode:
-                    presenter.getCode(edtPhoneValue.getText().toString().trim());
-                    break;
-                case R.id.bt_login:
-                    presenter.doLogin(edtPhoneValue.getText().toString().trim(),edtCodeValue.getText().toString().trim(), DeviceUtils.getUniqueId(this));
-                    break;
-                case R.id.tv_register_detail:
-                    Intent register = new Intent(LoginActivity.this, RegisterActivity.class);
-                    startActivityForResult(register,921);
-                    break;
-                    default:
-            }
+    @OnClick({R.id.bt_getcode, R.id.bt_login, R.id.tv_register_detail})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_getcode:
+                presenter.getCode(edtPhoneValue.getText().toString().trim());
+                break;
+            case R.id.bt_login:
+                presenter.doLogin(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim(), DeviceUtils.getUniqueId(this));
+                break;
+            case R.id.tv_register_detail:
+                Intent register = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(register);
+                break;
+            default:
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null && intent.getBooleanExtra("isLogined", false)) {
+            toMainActivity();
+        }
     }
 
     @Override
     public void toMainActivity() {
-
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
+        finish();
     }
 
+
     @Override
-    public void refreshCodeTxt() {
-        btGetcode.setEnabled(false);
-        timer.start();
+    public void refreshCodeTxt(boolean refresh) {
+        if (refresh) {
+            timer.start();
+        } else {
+            timer.onFinish();
+        }
     }
 
     @Override
