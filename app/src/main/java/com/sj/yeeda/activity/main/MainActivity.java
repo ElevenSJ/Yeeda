@@ -11,14 +11,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
-import com.sj.yeeda.base.BaseActivity;
+import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
+import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<MainPresenter>
@@ -42,16 +43,15 @@ public class MainActivity extends BaseActivity<MainPresenter>
     TextView btService;
     @BindView(R.id.bt_user_center)
     TextView btUserCenter;
+    ImageView imgUserIcon;
+    TextView txtUserName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initView();
-    }
-
-    private void initView() {
+    public void initView() {
         navView.setItemIconTintList(null);
         navView.setNavigationItemSelectedListener(this);
+        imgUserIcon =navView.findViewById(R.id.img_user_icon);
+        txtUserName = navView.findViewById(R.id.txt_user_name);
     }
 
     @Override
@@ -67,9 +67,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -105,15 +104,18 @@ public class MainActivity extends BaseActivity<MainPresenter>
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             ToastUtils.showShortToast(item.getTitle().toString());
         }
+        Intent intent = new Intent();
         switch (id) {
             case R.id.nav_plan_shop:
                 break;
             case R.id.nav_my_order:
                 break;
             case R.id.nav_personal_center:
+                intent.setClass(MainActivity.this, UserCenterActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_my_venue:
                 break;
@@ -132,4 +134,14 @@ public class MainActivity extends BaseActivity<MainPresenter>
     public void loginOut() {
         finish();
     }
+
+    @Override
+    public void updateUserView(UserInfoBean userInfoBean) {
+        if (userInfoBean == null){
+            return;
+        }
+        imgUserIcon.setImageResource(R.mipmap.ic_launcher_round);
+        txtUserName.setText(userInfoBean.getUserName());
+    }
+
 }

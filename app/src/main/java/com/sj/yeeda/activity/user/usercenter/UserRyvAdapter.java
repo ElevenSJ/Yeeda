@@ -1,6 +1,7 @@
 package com.sj.yeeda.activity.user.usercenter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -27,24 +28,23 @@ public class UserRyvAdapter extends RecyclerArrayAdapter<UserCenterRyvItem> {
         return new UserCenterRyvHolder(parent);
     }
 
-    private class UserCenterRyvHolder extends BaseViewHolder{
+    private static class UserCenterRyvHolder extends BaseViewHolder<UserCenterRyvItem> {
 
         private TextView mTextView;
 
         public UserCenterRyvHolder(ViewGroup parent) {
             super(parent, R.layout.ryl_user_center_item);
-            mTextView = (TextView) $(R.id.textView);
+            mTextView = $(R.id.textView);
         }
 
         public void setData(final UserCenterRyvItem data) {
             super.setData(data);
             mTextView.setText(data.getName());
-            mTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ToastUtils.showShortToast(data.getName());
-                }
-            });
+            Drawable drawableLeft = getContext().getResources().getDrawable(data.getDrawableLeftId());// 找到资源图片
+            Drawable drawableRight = getContext().getResources().getDrawable(data.getDrawableRightId());// 找到资源图片
+            drawableLeft.setBounds(0, 0, drawableLeft.getMinimumWidth(), drawableLeft.getMinimumHeight());// 设置图片宽高
+            drawableRight.setBounds(0, 0, drawableRight.getMinimumWidth(), drawableRight.getMinimumHeight());// 设置图片宽高
+            mTextView.setCompoundDrawables(drawableLeft, null, drawableRight, null);// 设置到控件中
         }
     }
 }

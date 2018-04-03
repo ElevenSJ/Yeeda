@@ -26,7 +26,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/loading"
-        android:textColor="#9a9b98"
-        android:textSize="12sp"/>
-
+        style="@style/TxtCommonBlackNormal"/>
 </LinearLayout>

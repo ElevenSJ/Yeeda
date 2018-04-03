@@ -84,4 +84,17 @@ public class UserInfoBean  implements Serializable{
     public void setIcon(String icon) {
         this.icon = icon;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfoBean{" +
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
+    }
 }

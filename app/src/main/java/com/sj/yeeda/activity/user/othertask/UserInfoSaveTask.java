@@ -19,7 +19,7 @@ public class UserInfoSaveTask extends AsyncTask<UserInfoBean, Integer, Boolean> 
 
     @Override
     protected Boolean doInBackground(UserInfoBean... userInfoBeans) {
-//序列化到本地
+        //序列化到本地
         try {
             FileOutputStream outStream = BaseApplication.getApp().openFileOutput("user.obj",
                     Context.MODE_PRIVATE);
@@ -31,9 +31,6 @@ public class UserInfoSaveTask extends AsyncTask<UserInfoBean, Integer, Boolean> 
             Logger.e(e.getMessage());
             return false;
         }
-//            ObjectInputStream in=new ObjectInputStream(new FileInputStream("user.obj"));
-//            User user=(User)in.readObject();
-//            in.close();
         return true;
     }
 }

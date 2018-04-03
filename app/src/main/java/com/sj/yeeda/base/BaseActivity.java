@@ -31,6 +31,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
         ButterKnife.bind(this);
+        initView();
         presenter = getPresenter();
         try {
             presenter.start();
@@ -70,4 +71,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     public abstract int getContentView();
 
+    public void initView() {
+
+    }
 }

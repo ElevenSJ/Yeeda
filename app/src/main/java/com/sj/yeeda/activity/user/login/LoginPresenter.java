@@ -58,7 +58,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
             @Override
             public void onFailure(String error_code, String error_message) {
-                Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
                 mView.refreshCodeTxt(false);
             }
         });

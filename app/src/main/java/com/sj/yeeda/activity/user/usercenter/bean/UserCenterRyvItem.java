@@ -8,11 +8,13 @@ package com.sj.yeeda.activity.user.usercenter.bean;
 
 public class UserCenterRyvItem {
     String name;
-    int drawableId;
+    int drawableLeftId;
+    int drawableRightId;
 
-    public UserCenterRyvItem(String name, int drawableId) {
+    public UserCenterRyvItem(String name, int drawableLeftId,int drawableRightId) {
         this.name = name;
-        this.drawableId = drawableId;
+        this.drawableLeftId = drawableLeftId;
+        this.drawableRightId = drawableRightId;
     }
 
     public String getName() {
@@ -23,11 +25,19 @@ public class UserCenterRyvItem {
         this.name = name;
     }
 
-    public int getDrawableId() {
-        return drawableId;
+    public int getDrawableLeftId() {
+        return drawableLeftId;
     }
 
-    public void setDrawableId(int drawableId) {
-        this.drawableId = drawableId;
+    public void setDrawableLeftId(int drawableLeftId) {
+        this.drawableLeftId = drawableLeftId;
+    }
+
+    public int getDrawableRightId() {
+        return drawableRightId;
+    }
+
+    public void setDrawableRightId(int drawableRightId) {
+        this.drawableRightId = drawableRightId;
     }
 }

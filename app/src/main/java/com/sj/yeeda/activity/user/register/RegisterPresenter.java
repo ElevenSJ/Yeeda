@@ -47,14 +47,11 @@ public class RegisterPresenter implements RegisterContract.Presenter{
             @Override
             public void onSuccess(BaseResponse data) {
                 ToastUtils.showShortToast("短信验证码发送成功！");
-
-                Logger.v(data.toString());
             }
 
             @Override
             public void onFailure(String error_code, String error_message) {
                 mView.refreshCodeTxt(false);
-                Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
             }
         });
     }
@@ -80,7 +77,6 @@ public class RegisterPresenter implements RegisterContract.Presenter{
                 RegisterBean registerBean = new Gson().fromJson(data.getData().toString(),RegisterBean.class);
                 String tokenId = registerBean.getTokenId();
                 SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.TOKEN_ID,tokenId);
-                Logger.v(tokenId);
                 mView.toSupplyUserInfoActivity();
             }
 

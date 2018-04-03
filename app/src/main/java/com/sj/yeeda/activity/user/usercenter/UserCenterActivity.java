@@ -1,7 +1,6 @@
 package com.sj.yeeda.activity.user.usercenter;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,8 +12,8 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
-import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.TitleBaseActivity;
 
 import butterknife.BindView;
@@ -25,7 +24,7 @@ import butterknife.BindView;
  * 功能描述:个人中心
  */
 
-public class UserCenterActivity extends TitleBaseActivity {
+public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> implements UserCenterContract.View {
     @BindView(R.id.ryl_view)
     EasyRecyclerView ryvView;
     @BindView(R.id.img_user_head)
@@ -35,9 +34,11 @@ public class UserCenterActivity extends TitleBaseActivity {
 
     UserRyvAdapter mAdapter;
 
+
     @Override
-    public BasePresenter getPresenter() {
-        return null;
+    public UserCenterPresenter getPresenter() {
+        presenter = new UserCenterPresenter(this);
+        return presenter;
     }
 
     @Override
@@ -46,27 +47,7 @@ public class UserCenterActivity extends TitleBaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initView();
-        initData();
-
-    }
-
-    private void initData() {
-        UserCenterRyvItem[] items = new UserCenterRyvItem[6];
-        items[0] = new UserCenterRyvItem("个人信息",R.drawable.img_personal_center);
-        items[1] = new UserCenterRyvItem("我的订单",R.drawable.img_personal_center);
-        items[2] = new UserCenterRyvItem("我的开票信息",R.drawable.img_personal_center);
-        items[3] = new UserCenterRyvItem("我的场馆",R.drawable.img_personal_center);
-        items[4] = new UserCenterRyvItem("联系客服",R.drawable.img_personal_center);
-        items[5] = new UserCenterRyvItem("设置",R.drawable.img_personal_center);
-
-        mAdapter.addAll(items);
-
-    }
-
-    private void initView() {
+    public void initView() {
         setTitleTxt(this.getString(R.string.txt_user_center_title));
         setImgTitleRight(true, new View.OnClickListener() {
             @Override
@@ -79,17 +60,25 @@ public class UserCenterActivity extends TitleBaseActivity {
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         ryvView.setLayoutManager(layoutManager);
-        DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.gray_AD), 1, 30, 30);
-        dividerDecoration.setDrawLastItem(true);
+        DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.gray_AD), 1, 16, 16);
+        dividerDecoration.setDrawLastItem(false);
         ryvView.addItemDecoration(dividerDecoration);
         mAdapter = new UserRyvAdapter(this);
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                ToastUtils.showShortToast(mAdapter.getItem(position).getName());
             }
         });
         ryvView.setAdapter(mAdapter);
     }
 
+    @Override
+    public void upDataView(UserInfoBean userInfoBean, UserCenterRyvItem[] items) {
+        if (userInfoBean!=null){
+            imgUserHead.setImageResource(R.mipmap.ic_launcher_round);
+            txtUserName.setText(userInfoBean.getUserName());
+        }
+        mAdapter.addAll(items);
+    }
 }

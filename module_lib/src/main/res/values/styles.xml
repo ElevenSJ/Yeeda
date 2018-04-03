@@ -28,4 +28,41 @@
         <item name="colorAccent">#ff69B841</item>
     </style>
 
+
+    <!-- 字体风格 -->
+    <style name="TxtTitleWhiteNormal">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TxtCommonWhiteNormal">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TxtCommonWhiteSmall">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TxtCommonWhiteLittle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TxtHintCommonWhiteNormal">
+        <item name="android:textColor">@color/common_hint_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TxtTitleBlackNormal">
+        <item name="android:textColor">@color/black_alpha60</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TxtCommonBlackNormal">
+        <item name="android:textColor">@color/black_alpha60</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

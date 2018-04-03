@@ -56,7 +56,13 @@ public class SupplyUserInfoPresenter implements SupplyUserInfoContract.Presenter
             @Override
             public void onSuccess(BaseResponse data) {
                 UserInfoBean userInfo = new Gson().fromJson(data.getData().toString(), UserInfoBean.class);
-                userInfoSaveTask = new UserInfoSaveTask();
+                userInfoSaveTask = new UserInfoSaveTask(){
+                    @Override
+                    protected void onPostExecute(Boolean aBoolean) {
+                        super.onPostExecute(aBoolean);
+                        Logger.i(aBoolean ? "用户信息本地序列化成功" : "用户信息本地序列化失败" );
+                    }
+                };
                 userInfoSaveTask.execute(userInfo);
                 mView.toMainActivity();
             }
