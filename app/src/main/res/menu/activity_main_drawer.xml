@@ -3,39 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gp_plan_shop">
         <item
             android:id="@+id/nav_plan_shop"
-            android:icon="@drawable/img_home_plan_shop"
+            android:icon="@drawable/img_plan_shop"
             android:title="方案商城"
             />
     </group>
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gp_my_order">
         <item
             android:id="@+id/nav_my_order"
             android:icon="@drawable/img_my_order"
             android:title="我的订单" />
     </group>
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gp_personal_center">
         <item
             android:id="@+id/nav_personal_center"
             android:icon="@drawable/img_personal_center"
             android:title="个人中心" />
     </group>
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gp_my_venue">
         <item
             android:id="@+id/nav_my_venue"
             android:icon="@drawable/img_my_venue"
             android:title="我的场馆" />
     </group>
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gp_customer_service">
         <item
             android:id="@+id/nav_customer_service"
             android:icon="@drawable/img_customer_service"
             android:title="联系客服" />
     </group>
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/gp_exit">
         <item
             android:id="@+id/nav_exit"
             android:icon="@drawable/img_exit"

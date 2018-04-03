@@ -20,15 +20,18 @@ public abstract class Callback<T extends BaseResponse> extends HttpCallback<T> {
         }else{
             onFailed(t.getCode(), t.getMessage());
         }
+
     }
 
     @Override
     public void onFailed(String error_code, String error_message) {
+        Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
         onFinish();
         if (enableShowToast()) {
             ToastUtils.showShortToast(error_message);
         }
         onFailure(error_code, error_message);
+
     }
 
     public abstract void onSuccess(T v);

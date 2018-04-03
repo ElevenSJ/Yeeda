@@ -1,4 +1,4 @@
-package com.sj.module_lib.base;
+package com.sj.yeeda.base;
 
 import android.support.annotation.Keep;
 

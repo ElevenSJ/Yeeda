@@ -36,9 +36,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edt_phone_value"
+        android:id="@+id/edt_name_value"
         style="@style/TxtCommonWhiteNormal"
-        android:layout_width="188dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
@@ -50,6 +50,8 @@
         android:singleLine="true"
         android:textColorHint="@color/common_hint_text"
         app:layout_constraintBottom_toTopOf="@+id/line"
+        app:layout_constraintEnd_toEndOf="@+id/line"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_phone_name" />
 
     <TextView
@@ -59,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/txt_supply_name"
-        app:layout_constraintBottom_toBottomOf="@+id/edt_phone_value"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_name_value"
         app:layout_constraintStart_toStartOf="@+id/line" />
 
     <TextView
@@ -83,6 +85,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/bt_green_selector"
+        android:gravity="center"
         android:text="@string/txt_bt_sure"
         app:layout_constraintEnd_toEndOf="@+id/line"
         app:layout_constraintHorizontal_bias="0.0"
@@ -98,7 +101,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/edt_phone_value"
+        app:layout_constraintBottom_toTopOf="@+id/edt_name_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +135,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/bt_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/edt_phone_value"
+        app:layout_constraintStart_toStartOf="@+id/edt_name_value"
         app:layout_constraintTop_toBottomOf="@+id/line"
         app:layout_constraintVertical_bias="0.0">
 

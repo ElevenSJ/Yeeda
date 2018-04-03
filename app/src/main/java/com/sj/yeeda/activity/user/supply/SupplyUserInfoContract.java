@@ -1,7 +1,7 @@
 package com.sj.yeeda.activity.user.supply;
 
-import com.sj.module_lib.base.BasePresenter;
-import com.sj.module_lib.base.BaseView;
+import com.sj.yeeda.base.BasePresenter;
+import com.sj.yeeda.base.BaseView;
 
 /**
  * 创建时间: on 2018/4/1.
@@ -15,6 +15,6 @@ public interface SupplyUserInfoContract {
     }
 
     interface Presenter extends BasePresenter{
-
+        void  supplyInfo(String phoneNum,String userName,String userSex);
     }
 }

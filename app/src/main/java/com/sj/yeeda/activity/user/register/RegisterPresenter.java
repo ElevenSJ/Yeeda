@@ -41,7 +41,7 @@ public class RegisterPresenter implements RegisterContract.Presenter{
             return;
         }
         mView.refreshCodeTxt(true);
-        Map<String, Object> parameters = new HashMap<>();
+        Map<String, Object> parameters = new HashMap<>(1);
         parameters.put("phone", phoneNum);
         HttpManager.get(UrlConfig.GET_SMSCODE_URL, parameters, new Callback<BaseResponse>() {
             @Override
@@ -71,7 +71,7 @@ public class RegisterPresenter implements RegisterContract.Presenter{
             return;
         }
         mView.showProgress();
-        Map<String, Object> parameters = new HashMap<>();
+        Map<String, Object> parameters = new HashMap<>(2);
         parameters.put("phone", phoneNum);
         parameters.put("msmcode", codeNum);
         HttpManager.get(UrlConfig.REGISTER_URL, parameters, new Callback<BaseResponse>() {
@@ -86,8 +86,6 @@ public class RegisterPresenter implements RegisterContract.Presenter{
 
             @Override
             public void onFailure(String error_code, String error_message) {
-                ToastUtils.showShortToast(error_message);
-                Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
             }
 
             @Override

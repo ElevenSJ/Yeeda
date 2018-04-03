@@ -1,7 +1,7 @@
 package com.sj.yeeda.activity.main;
 
-import com.sj.module_lib.base.BasePresenter;
-import com.sj.module_lib.base.BaseView;
+import com.sj.yeeda.base.BasePresenter;
+import com.sj.yeeda.base.BaseView;
 
 /**
  * 创建时间: on 2018/4/1.
@@ -10,10 +10,12 @@ import com.sj.module_lib.base.BaseView;
  */
 public class MainContract {
     interface View extends BaseView {
+        void loginOut();
 
     }
 
     interface Presenter extends BasePresenter {
+        void loginOut();
 
     }
 }

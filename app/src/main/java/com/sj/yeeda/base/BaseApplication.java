@@ -8,6 +8,7 @@ import com.sj.module_lib.BuildConfig;
 import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.module_lib.utils.Utils;
+import com.sj.yeeda.Utils.SPFileUtils;
 
 
 /**
@@ -28,11 +29,5 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        if (BuildConfig.DEBUG==true){
-            Logger.addLogAdapter(new AndroidLogAdapter());
-        }
-        Utils.init(this);
-        ToastUtils.init(false);
-        SPUtils.init(sInstance);
     }
 }

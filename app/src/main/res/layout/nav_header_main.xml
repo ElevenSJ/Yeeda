@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme">
 
     <ImageView
         android:id="@+id/img_header_bg"
-        android:layout_alignParentStart="true"
         android:layout_width="match_parent"
         android:layout_height="140dp"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_personal_centor"
-        android:scaleType="centerCrop"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/img_user_icon"
-        android:layout_below="@+id/img_header_bg"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="-40dp"
+        android:layout_below="@+id/img_header_bg"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 
 
@@ -29,11 +34,16 @@
         style="@style/TxtTitleBlackNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="10dp"
         android:layout_alignBottom="@+id/img_user_icon"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
         android:layout_toEndOf="@+id/img_user_icon"
         android:gravity="center"
-        android:text="用户名" />
+        android:text="用户名"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toEndOf="@+id/img_user_icon"
+        app:layout_constraintTop_toBottomOf="@+id/img_header_bg" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

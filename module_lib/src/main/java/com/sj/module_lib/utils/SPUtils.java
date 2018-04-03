@@ -57,6 +57,7 @@ public class SPUtils {
             sharedPreferences.put(FILE_NAME,sp);
         editor = sp.edit();
         }
+        editor.commit();
         return spUtils;
     }
 
@@ -107,12 +108,72 @@ public class SPUtils {
         }
         editor.apply();
     }
+    /**
+     * 存储同步commit
+     */
+    public void commit(String[] keys, Object[] objects) {
+        if(editor == null) {
+            Logger.e("SharedPreferences please call the method of edit()");
+            return;
+        }
+        if(keys.length!=objects.length) {
+            Logger.e("key - value not map  each other");
+            return;
+        }
+        for (int i = 0; i < keys.length; i++) {
+            if (objects[i] instanceof String) {
+                editor.putString(keys[i], (String) objects[i]);
+            } else if (objects[i] instanceof Integer) {
+                editor.putInt(keys[i], (Integer)  objects[i]);
+            } else if (objects[i] instanceof Boolean) {
+                editor.putBoolean(keys[i], (Boolean) objects[i]);
+            } else if (objects[i] instanceof Float) {
+                editor.putFloat(keys[i], (Float) objects[i]);
+            } else if (objects[i] instanceof Long) {
+                editor.putLong(keys[i], (Long) objects[i]);
+            } else {
+                editor.putString(keys[i], objects[i].toString());
+            }
+        }
+        editor.commit();
+    }
+
+    /**
+     * 存储异步apply
+     */
+    public void apply(String[] keys, Object[] objects) {
+        if(editor == null) {
+            Logger.e("SharedPreferences please call the method of edit()");
+            return;
+        }
+        if(keys.length!=objects.length) {
+            Logger.e("key - value not map  each other");
+            return;
+        }
+        for (int i = 0; i < keys.length; i++) {
+            if (objects[i] instanceof String) {
+                editor.putString(keys[i], (String) objects[i]);
+            } else if (objects[i] instanceof Integer) {
+                editor.putInt(keys[i], (Integer)  objects[i]);
+            } else if (objects[i] instanceof Boolean) {
+                editor.putBoolean(keys[i], (Boolean) objects[i]);
+            } else if (objects[i] instanceof Float) {
+                editor.putFloat(keys[i], (Float) objects[i]);
+            } else if (objects[i] instanceof Long) {
+                editor.putLong(keys[i], (Long) objects[i]);
+            } else {
+                editor.putString(keys[i], objects[i].toString());
+            }
+        }
+        editor.apply();
+    }
 
     /**
      * 获取保存的数据
      */
     public Object getSharedPreference(String FILE_NAME,String key, Object defaultObject) {
-        if (sharedPreferences.containsKey(FILE_NAME)){
+        if (!sharedPreferences.containsKey(FILE_NAME)){
+            Logger.e("SharedPreferences please call the method of edit()");
             return null;
         }
         if (defaultObject instanceof String) {

@@ -1,14 +1,13 @@
 package com.sj.yeeda.activity.user.login;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.DeviceUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.main.MainActivity;
@@ -16,7 +15,6 @@ import com.sj.yeeda.activity.user.register.RegisterActivity;
 import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -42,6 +40,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         return presenter;
     }
 
+    @Override
+    public int getContentView() {
+        return R.layout.activity_login;
+    }
+
     /**
      * 倒计时60秒，一次1秒
      */
@@ -59,15 +62,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         }
     };
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-    }
-
     @OnClick({R.id.bt_getcode, R.id.bt_login, R.id.tv_register_detail})
     public void onClick(View view) {
+        Logger.i("onClick(View view):"+view.getId());
         switch (view.getId()) {
             case R.id.bt_getcode:
                 presenter.getCode(edtPhoneValue.getText().toString().trim());

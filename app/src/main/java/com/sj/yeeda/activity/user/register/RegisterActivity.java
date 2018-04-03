@@ -1,9 +1,7 @@
 package com.sj.yeeda.activity.user.register;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +12,6 @@ import com.sj.yeeda.activity.user.supply.SupplyUserInfoActivity;
 import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -56,10 +53,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
+    public int getContentView() {
+        return R.layout.activity_register;
     }
 
     @OnClick({R.id.bt_getcode, R.id.bt_register, R.id.tv_toLogin})
@@ -72,9 +67,11 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 presenter.doRegister(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim());
                 break;
             case R.id.tv_toLogin:
-                finish();
+//                finish();
+                toSupplyUserInfoActivity();
                 break;
             default:
+                break;
         }
     }
 
@@ -82,6 +79,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @Override
     public void toSupplyUserInfoActivity() {
         Intent supplyUserInfo = new Intent(RegisterActivity.this, SupplyUserInfoActivity.class);
+        supplyUserInfo.putExtra("phoneNum",edtPhoneValue.getText().toString().trim());
         startActivity(supplyUserInfo);
     }
 

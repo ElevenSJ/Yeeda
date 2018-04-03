@@ -47,7 +47,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             return;
         }
         mView.refreshCodeTxt(true);
-        Map<String, Object> parameters = new HashMap<>();
+        Map<String, Object> parameters = new HashMap<>(1);
         parameters.put("phone", phoneNum);
         HttpManager.get(UrlConfig.GET_SMSCODE_URL, parameters, new Callback<BaseResponse>() {
             @Override
@@ -81,7 +81,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             return;
         }
         mView.showProgress();
-        Map<String, Object> parameters = new HashMap<>();
+        Map<String, Object> parameters = new HashMap<>(3);
         parameters.put("phone", phoneNum);
         parameters.put("checkcode", codeNum);
         parameters.put("deviceId", deviceId);
@@ -90,15 +90,13 @@ public class LoginPresenter implements LoginContract.Presenter {
             public void onSuccess(BaseResponse data) {
                 LoginBean loginBean = new Gson().fromJson(data.getData().toString(),LoginBean.class);
                 String tokenId = loginBean.getTokenId();
-                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.TOKEN_ID,tokenId);
-                Logger.v(tokenId);
+                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID,SPFileUtils.IS_LOGIN},new Object[]{tokenId,true});
                 mView.toMainActivity();
             }
 
             @Override
             public void onFailure(String error_code, String error_message) {
-                ToastUtils.showShortToast(error_message);
-                Logger.e("onFailure   err_code:"+error_code+",message:"+error_message);
+
             }
 
             @Override

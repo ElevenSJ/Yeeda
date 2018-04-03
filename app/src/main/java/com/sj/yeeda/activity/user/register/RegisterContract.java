@@ -1,8 +1,8 @@
 package com.sj.yeeda.activity.user.register;
 
 
-import com.sj.module_lib.base.BasePresenter;
-import com.sj.module_lib.base.BaseView;
+import com.sj.yeeda.base.BasePresenter;
+import com.sj.yeeda.base.BaseView;
 
 /**
  * <p>类说明</p>

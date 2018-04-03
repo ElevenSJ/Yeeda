@@ -23,9 +23,16 @@
     <string name="txt_supply_sex_male">男</string>
     <string name="txt_supply_sex_female">女</string>
     <string name="txt_supply_name_hint">请输入您的姓名</string>
-    <string name="title_activity_main">MainActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--首页 -->
+    <string name="txt_home_plan_shop_name">方案商城\nSOLUTIONS</string>
+    <string name="txt_home_design_name">特展设计\nDESIGN</string>
+    <string name="txt_home_orders_name">我的订单\nORDERS</string>
+    <string name="txt_home_service_name">客户服务\nSERVICE</string>
+    <string name="txt_home_user_center_name">个人中心\nUSER CENTER</string>
+
+    <!--个人中心 -->
+    <string name="txt_user_center_title">个人中心</string>
+
 
 </resources>
