@@ -10,6 +10,7 @@ import com.sj.yeeda.activity.user.othertask.UserInfoSaveTask;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.http.BaseResponse;
 import com.sj.yeeda.http.Callback;
+import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 
 import java.util.HashMap;
@@ -36,16 +37,17 @@ public class MainPresenter implements MainContract.Presenter {
     public void getUserInfo() {
         Map<String, Object> parameters = new HashMap<>(1);
         parameters.put("token", SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, ""));
-        HttpManager.get(UrlConfig.QUERY_USER_URL, parameters, new Callback<BaseResponse>() {
+        HttpManager.get(UrlConfig.QUERY_USER_URL, parameters, new Callback() {
             @Override
-            public void onSuccess(BaseResponse data) {
-                UserInfoBean userInfoBean = new Gson().fromJson(data.getData().toString(), UserInfoBean.class);
+            public void onSuccess(String json) {
+                UserInfoBean userInfoBean = new GsonResponsePasare<UserInfoBean>() {
+                }.deal(json);
                 mView.updateUserView(userInfoBean);
-                new UserInfoSaveTask(){
+                new UserInfoSaveTask() {
                     @Override
                     protected void onPostExecute(Boolean aBoolean) {
                         super.onPostExecute(aBoolean);
-                        Logger.i(aBoolean ? "用户信息本地序列化成功" : "用户信息本地序列化失败" );
+                        Logger.i(aBoolean ? "用户信息本地序列化成功" : "用户信息本地序列化失败");
                     }
                 }.execute(userInfoBean);
             }
@@ -53,11 +55,32 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onFailure(String error_code, String error_message) {
             }
+
+            @Override
+            public boolean enableShowToast() {
+                return false;
+            }
         });
     }
 
     @Override
     public void loginOut() {
+        Map<String, Object> parameters = new HashMap<>(1);
+        parameters.put("token", SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, ""));
+        HttpManager.get(UrlConfig.LOGIN_OUT_URL, parameters, new Callback() {
+            @Override
+            public void onSuccess(String s) {
+
+            }
+            @Override
+            public void onFailure(String error_code, String error_message) {
+
+            }
+            @Override
+            public boolean enableShowToast() {
+                return false;
+            }
+        });
         SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID, SPFileUtils.IS_LOGIN}, new Object[]{"", false});
         mView.loginOut();
     }

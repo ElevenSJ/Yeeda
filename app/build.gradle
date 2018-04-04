@@ -13,7 +13,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            //是否zip对齐
+            zipAlignEnabled true
+            // 缩减resource文件
+            shrinkResources true
+            //Proguard
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,4 +42,5 @@ dependencies {
 
     //easyrecyclerview
     implementation 'com.jude:easyrecyclerview:4.4.2'
+
 }

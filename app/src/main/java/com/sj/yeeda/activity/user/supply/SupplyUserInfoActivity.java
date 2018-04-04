@@ -57,7 +57,7 @@ public class SupplyUserInfoActivity extends BaseActivity<SupplyUserInfoPresenter
 
     @OnClick(R.id.bt_login)
     public void onViewClicked() {
-        String sex = radioGroup.getCheckedRadioButtonId()==R.id.rdbt_male?"1":"2";
+        String sex = radioGroup.getCheckedRadioButtonId()!=R.id.rdbt_male?"0":"1";
         presenter.supplyInfo(phoneNun,edtNameValue.getText().toString().trim(),sex);
     }
 }

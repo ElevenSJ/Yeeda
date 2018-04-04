@@ -16,6 +16,8 @@ public class UrlConfig {
     public static final String REGISTER_URL = "/appRegister";
     //登录
     public static final String LOGIN_URL = "/appLogin";
+    //注销
+    public static final String LOGIN_OUT_URL = "/appLoginOut";
     //查询个人信息
     public static final String QUERY_USER_URL = "/appQueryUserInfo";
     //修改个人信息

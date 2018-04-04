@@ -8,8 +8,10 @@ import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
+import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.http.BaseResponse;
 import com.sj.yeeda.http.Callback;
+import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 import com.sj.yeeda.activity.user.login.bean.LoginBean;
 
@@ -49,11 +51,10 @@ public class LoginPresenter implements LoginContract.Presenter {
         mView.refreshCodeTxt(true);
         Map<String, Object> parameters = new HashMap<>(1);
         parameters.put("phone", phoneNum);
-        HttpManager.get(UrlConfig.GET_SMSCODE_URL, parameters, new Callback<BaseResponse>() {
+        HttpManager.get(UrlConfig.GET_SMSCODE_URL, parameters, new Callback() {
             @Override
-            public void onSuccess(BaseResponse data) {
-                ToastUtils.showShortToast(data.getMessage());
-                Logger.v(data.toString());
+            public void onSuccess(String s) {
+                ToastUtils.showShortToast(s);
             }
 
             @Override
@@ -84,10 +85,11 @@ public class LoginPresenter implements LoginContract.Presenter {
         parameters.put("phone", phoneNum);
         parameters.put("checkcode", codeNum);
         parameters.put("deviceId", deviceId);
-        HttpManager.get(UrlConfig.LOGIN_URL, parameters, new Callback<BaseResponse>() {
+        HttpManager.get(UrlConfig.LOGIN_URL, parameters, new Callback() {
             @Override
-            public void onSuccess(BaseResponse data) {
-                LoginBean loginBean = new Gson().fromJson(data.getData().toString(),LoginBean.class);
+            public void onSuccess(String json) {
+                LoginBean loginBean = new GsonResponsePasare<LoginBean>() {
+                }.deal(json);
                 String tokenId = loginBean.getTokenId();
                 SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID,SPFileUtils.IS_LOGIN},new Object[]{tokenId,true});
                 mView.toMainActivity();

@@ -7,12 +7,12 @@ package com.sj.yeeda.http;
  */
 public class BaseResponse<T> {
 
-    private String code;
-    private T data;
-    private String exception;
-    private String message;
-    private int result;
-    private boolean success;
+    String code;
+    String exception;
+    String message;
+    T data;
+    int result;
+    boolean success;
 
     public String getCode() {
         return code;
@@ -20,14 +20,6 @@ public class BaseResponse<T> {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 
     public String getException() {
@@ -46,6 +38,14 @@ public class BaseResponse<T> {
         this.message = message;
     }
 
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
     public int getResult() {
         return result;
     }
@@ -60,17 +60,5 @@ public class BaseResponse<T> {
 
     public void setSuccess(boolean success) {
         this.success = success;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseResponse{" +
-                "code='" + code + '\'' +
-                ", data=" + data +
-                ", exception='" + exception + '\'' +
-                ", message='" + message + '\'' +
-                ", result=" + result +
-                ", success=" + success +
-                '}';
     }
 }

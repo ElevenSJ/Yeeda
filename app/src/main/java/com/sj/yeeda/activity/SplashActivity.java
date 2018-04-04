@@ -11,9 +11,11 @@ import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.BuildConfig;
+import com.sj.module_lib.utils.FileToolUtils;
 import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.module_lib.utils.Utils;
+import com.sj.yeeda.Utils.FileUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.user.login.LoginActivity;
@@ -46,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
         SPUtils.init(this);
         SPUtils.getInstance().edit(SPFileUtils.FILE_USER);
         HttpManager.init(this.getApplicationContext(), UrlConfig.BASE_URL);
+//        HttpManager.initCache(FileToolUtils.getRootPath()+ FileUtils.CACHE_NET,1024*1024*20);
 //        HttpManager.getInstance().setOnHeadersListener(new HttpManager.OnGetHeadersListener() {
 //            @Override
 //            public Map<String, String> getHeaders() {

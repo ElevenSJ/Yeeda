@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.SplashActivity"
             android:noHistory="true"
@@ -24,18 +24,26 @@
         </activity>
         <activity
             android:name=".activity.user.login.LoginActivity"
+            android:theme="@style/AppTheme.NoTitle"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
             android:name=".activity.user.register.RegisterActivity"
+            android:theme="@style/AppTheme.NoTitle"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
             android:name=".activity.user.supply.SupplyUserInfoActivity"
+            android:theme="@style/AppTheme.NoTitle"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name=".activity.main.MainActivity"/>
+            android:name=".activity.main.MainActivity"
+            android:theme="@style/AppTheme.NoTitle"/>
         <activity
-            android:name=".activity.user.usercenter.UserCenterActivity"/>
+            android:name=".activity.user.usercenter.UserCenterActivity"
+            android:theme="@style/AppTheme.NoTitle"/>
+        <activity
+            android:name=".activity.solutions.SolutionsListActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

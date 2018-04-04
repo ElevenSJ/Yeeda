@@ -1,6 +1,5 @@
 package com.sj.yeeda.activity.user.usercenter;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -74,11 +73,15 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
     }
 
     @Override
-    public void upDataView(UserInfoBean userInfoBean, UserCenterRyvItem[] items) {
+    public void upDataItemView(UserCenterRyvItem[] items) {
+        mAdapter.addAll(items);
+    }
+
+    @Override
+    public void upDataHeadView(UserInfoBean userInfoBean) {
         if (userInfoBean!=null){
             imgUserHead.setImageResource(R.mipmap.ic_launcher_round);
             txtUserName.setText(userInfoBean.getUserName());
         }
-        mAdapter.addAll(items);
     }
 }

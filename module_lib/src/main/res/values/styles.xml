@@ -65,4 +65,14 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TxtCommonGraySmall">
+        <item name="android:textColor">@color/gray_66</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TxtCommonGrayLitter">
+        <item name="android:textColor">@color/gray_66</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>

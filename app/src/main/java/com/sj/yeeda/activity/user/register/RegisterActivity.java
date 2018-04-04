@@ -67,8 +67,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 presenter.doRegister(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim());
                 break;
             case R.id.tv_toLogin:
-//                finish();
-                toSupplyUserInfoActivity();
+                finish();
                 break;
             default:
                 break;

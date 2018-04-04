@@ -1,7 +1,6 @@
 package com.sj.yeeda.activity.main;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,9 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sj.module_lib.glide.ImageUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.solutions.SolutionsListActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
 import com.sj.yeeda.base.BaseActivity;
@@ -50,6 +51,7 @@ public class MainActivity extends BaseActivity<MainPresenter>
     public void initView() {
         navView.setItemIconTintList(null);
         navView.setNavigationItemSelectedListener(this);
+
         imgUserIcon =navView.findViewById(R.id.img_user_icon);
         txtUserName = navView.findViewById(R.id.txt_user_name);
     }
@@ -85,6 +87,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
             case R.id.img_home_service:
                 break;
             case R.id.bt_solutions:
+                intent.setClass(MainActivity.this, SolutionsListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.bt_design:
                 break;
@@ -140,7 +144,7 @@ public class MainActivity extends BaseActivity<MainPresenter>
         if (userInfoBean == null){
             return;
         }
-        imgUserIcon.setImageResource(R.mipmap.ic_launcher_round);
+        ImageUtils.loadImageWithError(userInfoBean.getIcon(),R.drawable.logo,imgUserIcon);
         txtUserName.setText(userInfoBean.getUserName());
     }
 

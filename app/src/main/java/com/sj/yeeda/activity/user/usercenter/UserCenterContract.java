@@ -13,7 +13,8 @@ import com.sj.yeeda.base.BaseView;
 public interface UserCenterContract {
 
     interface View extends BaseView {
-        void upDataView(UserInfoBean userInfoBean, UserCenterRyvItem[] items);
+        void upDataItemView(UserCenterRyvItem[] items);
+        void upDataHeadView(UserInfoBean userInfoBean);
     }
 
     interface Presenter extends BasePresenter {

@@ -14,3 +14,5 @@
 
     原型设计：
     https://www.xiaopiu.com/h5/byId?id=5a7c5c1d1c40bd6a063f1976&type=project&activePage=1
+
+    https://github.com/guiying712/AndroidModulePattern/tree/494e7deda04ea1a9dc0bad006ca218c635a8957f

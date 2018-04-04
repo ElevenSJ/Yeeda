@@ -34,5 +34,12 @@
     <!--个人中心 -->
     <string name="txt_user_center_title">个人中心</string>
 
+    <string name="txt_user_center_info">个人信息</string>
+    <string name="txt_user_center_order">我的订单</string>
+    <string name="txt_user_center_bill">我的开票信息</string>
+    <string name="txt_user_center_venue">我的场馆</string>
+    <string name="txt_user_center_service">联系客服</string>
+    <string name="txt_user_center_setting">设置</string>
+
 
 </resources>

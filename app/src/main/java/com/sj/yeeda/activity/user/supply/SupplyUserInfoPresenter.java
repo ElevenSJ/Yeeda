@@ -9,9 +9,11 @@ import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.user.othertask.UserInfoSaveTask;
+import com.sj.yeeda.activity.user.register.bean.RegisterBean;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.http.BaseResponse;
 import com.sj.yeeda.http.Callback;
+import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 
 import java.util.HashMap;
@@ -52,10 +54,11 @@ public class SupplyUserInfoPresenter implements SupplyUserInfoContract.Presenter
         parameters.put("phone", phoneNum);
         parameters.put("email", "");
 
-        HttpManager.postByBody(UrlConfig.UPDATE_USER_URL, parameters, new Callback<BaseResponse>() {
+        HttpManager.postByBody(UrlConfig.UPDATE_USER_URL, parameters, new Callback() {
             @Override
-            public void onSuccess(BaseResponse data) {
-                UserInfoBean userInfo = new Gson().fromJson(data.getData().toString(), UserInfoBean.class);
+            public void onSuccess(String json) {
+                UserInfoBean userInfo = new GsonResponsePasare<UserInfoBean>() {
+                }.deal(json);
                 userInfoSaveTask = new UserInfoSaveTask(){
                     @Override
                     protected void onPostExecute(Boolean aBoolean) {

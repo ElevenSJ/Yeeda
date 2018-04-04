@@ -7,5 +7,15 @@ package com.sj.yeeda.Utils;
  */
 public class FileUtils {
 
+    //网络缓存目录
+    public static String APP_DIR = "/YeeDa";
+
+    //用户信息文件
     public static String FILE_NAME_USERINFO = "user.obj";
+
+    //图片缓存目录
+    public static String CACHE_IMAGE = APP_DIR+"/.CacheImages";
+
+    //网络缓存目录
+    public static String CACHE_NET = APP_DIR+"/.CacheNet";
 }
