@@ -1,18 +1,14 @@
 package com.sj.yeeda.activity.user.othertask;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.orhanobut.logger.Logger;
 import com.sj.yeeda.Utils.FileUtils;
-import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.base.BaseApplication;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
  * 创建时间: on 2018/4/3.

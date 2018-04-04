@@ -2,9 +2,9 @@ package com.sj.yeeda.activity.user.usercenter;
 
 import com.orhanobut.logger.Logger;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.user.othertask.UserInfoGetTask;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
+import com.sj.yeeda.activity.user.othertask.UserInfoGetTask;
 
 /**
  * 创建时间: on 2018/4/3.

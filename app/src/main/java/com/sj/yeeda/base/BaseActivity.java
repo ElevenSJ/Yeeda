@@ -22,7 +22,7 @@ import butterknife.OnClick;
  * 创建人: 孙杰
  * 功能描述:activity 基类
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity<T> extends AppCompatActivity implements BaseView {
     public T presenter;
     private CustomDialog progressDialog;
 
@@ -34,7 +34,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         initView();
         presenter = getPresenter();
         try {
-            presenter.start();
+            ((BasePresenter)presenter).start();
         } catch (Exception e) {
             Logger.e("BasePresenter is null");
         }

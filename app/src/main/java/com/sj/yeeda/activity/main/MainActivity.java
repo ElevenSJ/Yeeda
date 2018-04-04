@@ -52,8 +52,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
         navView.setItemIconTintList(null);
         navView.setNavigationItemSelectedListener(this);
 
-        imgUserIcon =navView.findViewById(R.id.img_user_icon);
-        txtUserName = navView.findViewById(R.id.txt_user_name);
+        imgUserIcon =navView.getHeaderView(0).findViewById(R.id.img_user_icon);
+        txtUserName = navView.getHeaderView(0).findViewById(R.id.txt_user_name);
     }
 
     @Override

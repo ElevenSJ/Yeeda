@@ -22,5 +22,7 @@ public class UrlConfig {
     public static final String QUERY_USER_URL = "/appQueryUserInfo";
     //修改个人信息
     public static final String UPDATE_USER_URL = "/appUpdateUserInfo";
+    //查询方案列表
+    public static final String QUERY_SOLUTIONS_URL = "/appSchemeList";
 
 }

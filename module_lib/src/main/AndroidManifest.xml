@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <application>
         <meta-data
-            android:name="com.guiying.module.common.glide.OkHttpGlideModule"
+            android:name="com.sj.module_lib.glide.OkHttpGlideModule"
             android:value="GlideModule" />
 
 

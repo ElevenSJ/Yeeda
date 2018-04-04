@@ -1,14 +1,11 @@
 package com.sj.yeeda.activity.main;
 
-import com.google.gson.Gson;
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
-import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.user.othertask.UserInfoSaveTask;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
-import com.sj.yeeda.http.BaseResponse;
 import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
@@ -42,7 +39,6 @@ public class MainPresenter implements MainContract.Presenter {
             public void onSuccess(String json) {
                 UserInfoBean userInfoBean = new GsonResponsePasare<UserInfoBean>() {
                 }.deal(json);
-                mView.updateUserView(userInfoBean);
                 new UserInfoSaveTask() {
                     @Override
                     protected void onPostExecute(Boolean aBoolean) {
@@ -50,6 +46,7 @@ public class MainPresenter implements MainContract.Presenter {
                         Logger.i(aBoolean ? "用户信息本地序列化成功" : "用户信息本地序列化失败");
                     }
                 }.execute(userInfoBean);
+                mView.updateUserView(userInfoBean);
             }
 
             @Override
