@@ -34,10 +34,30 @@
     </style>
 
 
+    <style name="Transparentdialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <!-- 有无边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--无标题 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <!-- 字体风格 -->
     <style name="TxtTitleWhiteNormal">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TxtCommonWhiteBig">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TxtCommonWhiteNormal">
@@ -81,13 +101,43 @@
     </style>
 
     <style name="TxtCommonGraySmall">
-        <item name="android:textColor">@color/gray_66</item>
+        <item name="android:textColor">@color/black_alpha20</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TxtCommonGrayLitter">
-        <item name="android:textColor">@color/gray_66</item>
+        <item name="android:textColor">@color/black_alpha20</item>
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="TxtCommonRedNormal">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TxtCommonRedBig">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TxtCommonRedSmall">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+    <style name="TxtCommonGrayNormal">
+        <item name="android:textColor">@color/black_alpha20</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TxtCommonBlueBig">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TxtCommonBlueNormal">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

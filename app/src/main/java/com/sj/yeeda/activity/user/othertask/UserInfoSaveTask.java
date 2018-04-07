@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.orhanobut.logger.Logger;
+import com.sj.yeeda.Utils.FileUtils;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.base.BaseApplication;
 
@@ -21,7 +22,7 @@ public class UserInfoSaveTask extends AsyncTask<UserInfoBean, Integer, Boolean> 
     protected Boolean doInBackground(UserInfoBean... userInfoBeans) {
         //序列化到本地
         try {
-            FileOutputStream outStream = BaseApplication.getApp().openFileOutput("user.obj",
+            FileOutputStream outStream = BaseApplication.getApp().openFileOutput(FileUtils.FILE_NAME_USERINFO,
                     Context.MODE_PRIVATE);
             ObjectOutputStream out = new ObjectOutputStream(outStream);
             out.writeObject(userInfoBeans[0]);

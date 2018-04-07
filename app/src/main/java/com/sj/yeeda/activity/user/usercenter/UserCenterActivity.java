@@ -1,5 +1,6 @@
 package com.sj.yeeda.activity.user.usercenter;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.bill.BillActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
 import com.sj.yeeda.base.TitleBaseActivity;
@@ -67,6 +69,24 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
             @Override
             public void onItemClick(int position) {
                 ToastUtils.showShortToast(mAdapter.getItem(position).getName());
+                Intent intent = new Intent();
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        intent.setClass(UserCenterActivity.this, BillActivity.class);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                        default:
+                }
+                startActivity(intent);
             }
         });
         ryvView.setAdapter(mAdapter);

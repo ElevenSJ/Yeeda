@@ -42,7 +42,19 @@
             android:name=".activity.user.usercenter.UserCenterActivity"
             android:theme="@style/AppTheme.NoTitle"/>
         <activity
-            android:name=".activity.solutions.SolutionsListActivity"
+            android:name=".activity.solutions.list.SolutionListActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activity.bill.BillActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activity.solutions.order.SolutionOrderActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activity.solutions.detail.SolutionDetailActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activity.pay.PayActivity"
             android:theme="@style/AppTheme"/>
     </application>
 

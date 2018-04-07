@@ -3,6 +3,7 @@ package com.sj.yeeda.activity.main;
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.user.othertask.UserInfoSaveTask;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
@@ -39,6 +40,7 @@ public class MainPresenter implements MainContract.Presenter {
             public void onSuccess(String json) {
                 UserInfoBean userInfoBean = new GsonResponsePasare<UserInfoBean>() {
                 }.deal(json);
+                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.USER_ID, userInfoBean.getId());
                 new UserInfoSaveTask() {
                     @Override
                     protected void onPostExecute(Boolean aBoolean) {
@@ -78,7 +80,7 @@ public class MainPresenter implements MainContract.Presenter {
                 return false;
             }
         });
-        SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID, SPFileUtils.IS_LOGIN}, new Object[]{"", false});
+        SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID, SPFileUtils.IS_LOGIN,SPFileUtils.USER_ID}, new Object[]{"", false,""});
         mView.loginOut();
     }
 }

@@ -6,10 +6,11 @@ package com.sj.yeeda.Utils;
  * 功能描述:
  */
 public class SPFileUtils {
-    //用户数据
+    //用户数据SP文件名
     public static String FILE_USER = "yeeda_user";
+
+    public static String USER_ID = "userID";
     public static String TOKEN_ID = "tokenID";
     public static String IS_LOGIN = "isLogin";
-    //用户数据保存文件名
-    public static String USER_INFO_FILE = "isLogin";
+
 }

@@ -14,13 +14,12 @@ import com.sj.module_lib.glide.ImageUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.solutions.SolutionsListActivity;
+import com.sj.yeeda.activity.solutions.list.SolutionListActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
 import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<MainPresenter>
@@ -79,15 +78,16 @@ public class MainActivity extends BaseActivity<MainPresenter>
 
     @OnClick({R.id.img_home_user_center, R.id.img_home_service, R.id.bt_solutions, R.id.bt_design, R.id.bt_order, R.id.bt_service, R.id.bt_user_center})
     public void onViewClicked(View view) {
+        int id = view.getId();
         Intent intent = new Intent();
-        switch (view.getId()) {
+        switch (id) {
             case R.id.img_home_user_center:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.img_home_service:
                 break;
             case R.id.bt_solutions:
-                intent.setClass(MainActivity.this, SolutionsListActivity.class);
+                intent.setClass(MainActivity.this, SolutionListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.bt_design:
@@ -101,8 +101,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
                 startActivity(intent);
                 break;
             default:
-                break;
         }
+
     }
 
     @Override
@@ -114,6 +114,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
         Intent intent = new Intent();
         switch (id) {
             case R.id.nav_plan_shop:
+                intent.setClass(MainActivity.this, SolutionListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_my_order:
                 break;

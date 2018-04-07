@@ -41,5 +41,10 @@
     <string name="txt_user_center_service">联系客服</string>
     <string name="txt_user_center_setting">设置</string>
 
+    <!--我的开票信息 -->
+    <string name="txt_bill_type_name">发票类型</string>
+    <string name="txt_bill_info_name">税号\n单位地址\n电话号码\n开户银行\n银行账户\n电子邮箱\n联系人\n联系人电话\n快递地址</string>
+
+
 
 </resources>

@@ -10,7 +10,7 @@ public class FileUtils {
     //网络缓存目录
     public static String APP_DIR = "/YeeDa";
 
-    //用户信息文件
+    //用户数据本地序列化文件名
     public static String FILE_NAME_USERINFO = "user.obj";
 
     //图片缓存目录

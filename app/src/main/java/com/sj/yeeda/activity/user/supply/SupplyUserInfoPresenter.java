@@ -43,27 +43,14 @@ public class SupplyUserInfoPresenter implements SupplyUserInfoContract.Presenter
             return;
         }
         mView.showProgress();
-        Map<String, Object> parameters = new HashMap<>(6);
+        Map<String, Object> parameters = new HashMap<>(3);
         parameters.put("token", SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, ""));
         parameters.put("userName", userName);
         parameters.put("sex", userSex);
-        parameters.put("birthday", "");
-        parameters.put("phone", phoneNum);
-        parameters.put("email", "");
 
-        HttpManager.postByBody(UrlConfig.UPDATE_USER_URL, parameters, new Callback() {
+        HttpManager.postByBody(UrlConfig.PARFIT_USER_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
-                UserInfoBean userInfo = new GsonResponsePasare<UserInfoBean>() {
-                }.deal(json);
-                userInfoSaveTask = new UserInfoSaveTask(){
-                    @Override
-                    protected void onPostExecute(Boolean aBoolean) {
-                        super.onPostExecute(aBoolean);
-                        Logger.i(aBoolean ? "用户信息本地序列化成功" : "用户信息本地序列化失败" );
-                    }
-                };
-                userInfoSaveTask.execute(userInfo);
                 mView.toMainActivity();
             }
 

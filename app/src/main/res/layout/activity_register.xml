@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/line"
+        android:id="@+id/line_venue"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginBottom="8dp"
@@ -48,7 +48,7 @@
         android:inputType="phone"
         android:maxLength="11"
         android:textColorHint="@color/common_hint_text"
-        app:layout_constraintBottom_toTopOf="@+id/line"
+        app:layout_constraintBottom_toTopOf="@+id/line_venue"
         app:layout_constraintStart_toEndOf="@+id/tv_phone_name" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_marginStart="16dp"
         android:text="@string/txt_phone"
         app:layout_constraintBottom_toBottomOf="@+id/edt_phone_value"
-        app:layout_constraintStart_toStartOf="@+id/line" />
+        app:layout_constraintStart_toStartOf="@+id/line_venue" />
 
     <EditText
         android:id="@+id/edt_code_value"
@@ -77,7 +77,7 @@
         android:textColorHint="@color/common_hint_text"
         app:layout_constraintEnd_toEndOf="@+id/edt_phone_value"
         app:layout_constraintStart_toStartOf="@+id/edt_phone_value"
-        app:layout_constraintTop_toTopOf="@+id/line" />
+        app:layout_constraintTop_toTopOf="@+id/line_venue" />
 
     <TextView
         android:id="@+id/tv_code_name"
@@ -103,8 +103,8 @@
         android:paddingHorizontal="4dp"
         android:paddingVertical="2dp"
         android:text="@string/txt_get_code"
-        app:layout_constraintEnd_toEndOf="@+id/line"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
+        app:layout_constraintEnd_toEndOf="@+id/line_venue"
+        app:layout_constraintTop_toBottomOf="@+id/line_venue" />
 
     <ImageView
         android:id="@+id/img_logo"
@@ -130,8 +130,8 @@
         android:layout_marginTop="28dp"
         android:background="@drawable/bt_green_selector"
         android:text="@string/txt_register"
-        app:layout_constraintEnd_toEndOf="@+id/line"
-        app:layout_constraintStart_toStartOf="@+id/line"
+        app:layout_constraintEnd_toEndOf="@+id/line_venue"
+        app:layout_constraintStart_toStartOf="@+id/line_venue"
         app:layout_constraintTop_toBottomOf="@+id/edt_code_value" />
 
     <TextView
