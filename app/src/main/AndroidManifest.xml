@@ -37,6 +37,7 @@
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
             android:name=".activity.main.MainActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoTitle"/>
         <activity
             android:name=".activity.user.usercenter.UserCenterActivity"
@@ -45,7 +46,7 @@
             android:name=".activity.solutions.list.SolutionListActivity"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".activity.bill.BillActivity"
+            android:name=".activity.invoice.InvoiceActivity"
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".activity.solutions.order.SolutionOrderActivity"
@@ -56,6 +57,17 @@
         <activity
             android:name=".activity.pay.PayActivity"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activity.device.DeviceActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".activity.venue.VenueActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.user.updateinfo.UserInfoUpdateActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
+
     </application>
 
 </manifest>

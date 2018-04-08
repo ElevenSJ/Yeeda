@@ -85,6 +85,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TxtCommonBlackBig">
+        <item name="android:textColor">@color/black_alpha60</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
     <style name="TxtCommonBlackNormal">
         <item name="android:textColor">@color/black_alpha60</item>
         <item name="android:textSize">14sp</item>

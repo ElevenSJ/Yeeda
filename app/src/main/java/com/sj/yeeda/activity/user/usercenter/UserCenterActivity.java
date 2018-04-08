@@ -12,9 +12,11 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.bill.BillActivity;
+import com.sj.yeeda.activity.invoice.InvoiceActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
+import com.sj.yeeda.activity.user.updateinfo.UserInfoUpdateActivity;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
+import com.sj.yeeda.activity.venue.VenueActivity;
 import com.sj.yeeda.base.TitleBaseActivity;
 
 import butterknife.BindView;
@@ -72,21 +74,32 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
                 Intent intent = new Intent();
                 switch (position){
                     case 0:
+                        //个人信息
+                        intent.setClass(UserCenterActivity.this, UserInfoUpdateActivity.class);
+                        startActivity(intent);
                         break;
                     case 1:
+                        //我的订单
                         break;
                     case 2:
-                        intent.setClass(UserCenterActivity.this, BillActivity.class);
+                        //我的开票信息
+                        intent.setClass(UserCenterActivity.this, InvoiceActivity.class);
+                        startActivity(intent);
                         break;
                     case 3:
+                        //我的场馆
+                        intent.setClass(UserCenterActivity.this, VenueActivity.class);
+                        startActivity(intent);
                         break;
                     case 4:
+                        //联系客服
                         break;
                     case 5:
+                        //设置
                         break;
                         default:
                 }
-                startActivity(intent);
+
             }
         });
         ryvView.setAdapter(mAdapter);
@@ -94,7 +107,7 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
 
     @Override
     public void upDataItemView(UserCenterRyvItem[] items) {
-        mAdapter.addAll(items);
+            mAdapter.addAll(items);
     }
 
     @Override

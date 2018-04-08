@@ -37,6 +37,7 @@ public class UserRyvAdapter extends RecyclerArrayAdapter<UserCenterRyvItem> {
             mTextView = $(R.id.textView);
         }
 
+        @Override
         public void setData(final UserCenterRyvItem data) {
             super.setData(data);
             mTextView.setText(data.getName());

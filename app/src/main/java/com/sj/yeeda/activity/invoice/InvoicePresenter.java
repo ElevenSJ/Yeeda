@@ -1,10 +1,10 @@
-package com.sj.yeeda.activity.bill;
+package com.sj.yeeda.activity.invoice;
 
 import com.jady.retrofitclient.HttpManager;
+import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
-import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
-import com.sj.yeeda.activity.bill.bean.BillBean;
+import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BillPresenter  implements BillContract.Presenter {
+public class InvoicePresenter implements InvoiceContract.Presenter {
 
-    BillContract.View mView;
+    InvoiceContract.View mView;
     String userId;
     String token;
-    public BillPresenter(BillContract.View view){
+    public InvoicePresenter(InvoiceContract.View view){
         mView = view;
     }
     @Override
@@ -29,7 +29,7 @@ public class BillPresenter  implements BillContract.Presenter {
         HttpManager.get(UrlConfig.QUERY_INVOICE_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
-                    List<BillBean> billBeanList = new GsonResponsePasare<List<BillBean>>() {
+                    List<InvoiceBean> billBeanList = new GsonResponsePasare<List<InvoiceBean>>() {
                     }.deal(json);
                     mView.upDateBillData(billBeanList);
             }
@@ -46,8 +46,9 @@ public class BillPresenter  implements BillContract.Presenter {
     }
 
     @Override
-    public void addBillInfo(BillBean billBean) {
-        Map<String, Object> parameters = new HashMap<>(11);
+    public void addBillInfo(InvoiceBean billBean) {
+        Logger.i("addBillInfo:token="+token+",uid="+userId);
+        Map<String, Object> parameters = new HashMap<>(12);
         parameters.put("token", token);
         parameters.put("uid", userId);
         parameters.put("isVatInvoice", billBean.getIsVatInvoice());
@@ -59,8 +60,11 @@ public class BillPresenter  implements BillContract.Presenter {
         parameters.put("account", billBean.getAccount());
         parameters.put("email", billBean.getEmail());
         parameters.put("expressAddress", billBean.getExpressAddress());
+        parameters.put("isDefault", billBean.getIsDefault());
 
-        HttpManager.postByBody(UrlConfig.ADD_INVOICE_URL, parameters, new Callback() {
+        Logger.i("parameters:size="+parameters.size());
+
+        HttpManager.get(UrlConfig.ADD_INVOICE_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
                 mView.queryBillData();
@@ -74,7 +78,7 @@ public class BillPresenter  implements BillContract.Presenter {
     }
 
     @Override
-    public void edtBillInfo(BillBean billBean) {
+    public void edtBillInfo(InvoiceBean billBean) {
         Map<String, Object> parameters = new HashMap<>(12);
         parameters.put("id", billBean.getId());
         parameters.put("token", token);
@@ -89,7 +93,7 @@ public class BillPresenter  implements BillContract.Presenter {
         parameters.put("email", billBean.getEmail());
         parameters.put("expressAddress", billBean.getExpressAddress());
 
-        HttpManager.postByBody(UrlConfig.EDT_INVOICE_URL, parameters, new Callback() {
+        HttpManager.get(UrlConfig.EDT_INVOICE_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
                 mView.queryBillData();

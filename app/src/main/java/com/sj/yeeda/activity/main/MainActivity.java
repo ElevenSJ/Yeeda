@@ -1,7 +1,9 @@
 package com.sj.yeeda.activity.main;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,8 +17,10 @@ import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.solutions.list.SolutionListActivity;
+import com.sj.yeeda.activity.user.login.LoginActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
+import com.sj.yeeda.activity.venue.VenueActivity;
 import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
@@ -53,6 +57,23 @@ public class MainActivity extends BaseActivity<MainPresenter>
 
         imgUserIcon =navView.getHeaderView(0).findViewById(R.id.img_user_icon);
         txtUserName = navView.getHeaderView(0).findViewById(R.id.txt_user_name);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getIntent()!=null&&getIntent().getBooleanExtra("LoginOut",false)){
+            presenter.loginOut();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        //互斥登录，退出当前设备
+        if (intent!=null&&intent.getBooleanExtra("LoginOut",false)){
+            presenter.loginOut();
+        }
     }
 
     @Override
@@ -124,6 +145,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
                 startActivity(intent);
                 break;
             case R.id.nav_my_venue:
+                intent.setClass(MainActivity.this, VenueActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_customer_service:
                 break;
@@ -138,6 +161,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
 
     @Override
     public void loginOut() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
         finish();
     }
 

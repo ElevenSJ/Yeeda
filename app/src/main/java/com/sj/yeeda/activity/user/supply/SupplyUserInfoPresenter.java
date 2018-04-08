@@ -48,7 +48,7 @@ public class SupplyUserInfoPresenter implements SupplyUserInfoContract.Presenter
         parameters.put("userName", userName);
         parameters.put("sex", userSex);
 
-        HttpManager.postByBody(UrlConfig.PARFIT_USER_URL, parameters, new Callback() {
+        HttpManager.get(UrlConfig.PARFIT_USER_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
                 mView.toMainActivity();

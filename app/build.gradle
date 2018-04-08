@@ -28,19 +28,15 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':module_lib')
-
     implementation 'com.android.support:support-v4:27.1.0'
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
     //网络
     implementation 'com.jady:retrofitclient:0.2.6'
-
     //butterknife
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-
     //easyrecyclerview
     implementation 'com.jude:easyrecyclerview:4.4.2'
-
+    implementation files('libs/alipaySdk-20180403.jar')
 }

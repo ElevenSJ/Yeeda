@@ -210,14 +210,15 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
     }
 
     @Override
-    public void toSolutionDetail() {
+    public void toSolutionDetail(SolutionBean data) {
         Intent intent = new Intent(this, SolutionDetailActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void toSolutionOrder() {
+    public void toSolutionOrder(SolutionBean data) {
         Intent intent = new Intent(this, SolutionOrderActivity.class);
+        intent.putExtra("data",data);
         startActivity(intent);
     }
 

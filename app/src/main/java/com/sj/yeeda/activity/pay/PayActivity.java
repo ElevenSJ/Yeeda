@@ -8,10 +8,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.bill.BillActivity;
 import com.sj.yeeda.activity.pay.bean.PayBean;
-import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
-import com.sj.yeeda.activity.user.usercenter.UserRyvAdapter;
 import com.sj.yeeda.base.TitleBaseActivity;
 
 import butterknife.BindView;

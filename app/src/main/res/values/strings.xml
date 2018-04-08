@@ -43,8 +43,18 @@
 
     <!--我的开票信息 -->
     <string name="txt_bill_type_name">发票类型</string>
-    <string name="txt_bill_info_name">税号\n单位地址\n电话号码\n开户银行\n银行账户\n电子邮箱\n联系人\n联系人电话\n快递地址</string>
+    <string name="txt_bill_info_name">税号\n单位地址\n电话号码\n开户银行\n银行账户\n电子邮箱\n快递地址</string>
 
+    <!--我的场馆-->
+    <string name="txt_venue_info_name">场馆地址\n场馆联系人\n场馆联系人手机</string>
 
+    <!--租赁设备-->
+    <string-array name="device_type_list">
+        <item >全部分类</item>
+        <item >投影设备</item>
+        <item >移动设备</item>
+        <item >电视</item>
+        <item >电脑</item>
+    </string-array>
 
 </resources>

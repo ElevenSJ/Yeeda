@@ -1,6 +1,8 @@
 package com.sj.yeeda.activity.solutions.list.bean;
 
-public class SolutionBean {
+import java.io.Serializable;
+
+public class SolutionBean implements Serializable{
 
 
     /**

@@ -24,9 +24,9 @@ public class UserInfoBean  implements Serializable{
     private String id;
     private String userName;
     private String sex;
-//    private String birthday;
+    private String birthday;
     private String phone;
-//    private String email;
+    private String email;
     private String icon;
 
     public String getId() {
@@ -53,13 +53,13 @@ public class UserInfoBean  implements Serializable{
         this.sex = sex;
     }
 
-//    public String getBirthday() {
-//        return birthday;
-//    }
-//
-//    public void setBirthday(String birthday) {
-//        this.birthday = birthday;
-//    }
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
 
     public String getPhone() {
         return phone;
@@ -69,13 +69,13 @@ public class UserInfoBean  implements Serializable{
         this.phone = phone;
     }
 
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getIcon() {
         return icon;
@@ -91,9 +91,9 @@ public class UserInfoBean  implements Serializable{
                 "id='" + id + '\'' +
                 ", userName='" + userName + '\'' +
                 ", sex='" + sex + '\'' +
-//                ", birthday='" + birthday + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", phone='" + phone + '\'' +
-//                ", email='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", icon='" + icon + '\'' +
                 '}';
     }

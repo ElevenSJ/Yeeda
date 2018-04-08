@@ -1,5 +1,6 @@
 package com.sj.yeeda.activity.solutions.list;
 
+import com.sj.yeeda.activity.solutions.list.bean.SolutionBean;
 import com.sj.yeeda.activity.solutions.list.bean.SolutionList;
 import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.BaseView;
@@ -13,9 +14,9 @@ public interface SolutionContract {
     interface View extends BaseView {
         void showSolutionList(SolutionList solutionList);
 
-        void toSolutionDetail();
+        void toSolutionDetail(SolutionBean data);
 
-        void toSolutionOrder();
+        void toSolutionOrder(SolutionBean data);
     }
 
     interface Presenter extends BasePresenter {

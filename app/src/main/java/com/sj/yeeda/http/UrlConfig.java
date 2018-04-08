@@ -36,4 +36,16 @@ public class UrlConfig {
     //修改用户开票信息
     public static final String EDT_INVOICE_URL = "/appUpdateUserInvoice";
 
+
+    //查询用户场馆信息
+    public static final String QUERY_VENUE_URL = "/appQueryUserVenue";
+    //增加用户场馆信息
+    public static final String ADD_VENUE_URL = "/appAddUserVenue";
+    //删除用户场馆信息
+    public static final String DEL_VENUE_URL = "/appDeleteUserVenue";
+    //修改用户场馆信息
+    public static final String EDT_VENUE_URL = "/appUpdateUserVenue";
+    //查询默认场馆
+    public static final String QUERY_DEFAULT_VENUE_URL = "/appQueryUserDefaultVenue";
+
 }

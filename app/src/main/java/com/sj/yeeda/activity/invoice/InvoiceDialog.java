@@ -1,4 +1,4 @@
-package com.sj.yeeda.activity.bill;
+package com.sj.yeeda.activity.invoice;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,14 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.bill.bean.BillBean;
-import com.sj.yeeda.base.BasePresenter;
+import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,12 +23,10 @@ import butterknife.OnClick;
 /**
  * 创建时间: on 2018/4/1.
  * 创建人: 孙杰
- * 功能描述:BillDialog
+ * 功能描述:InvoiceDialog
  */
-public class BillDialog extends Dialog implements View.OnClickListener {
+public class InvoiceDialog extends Dialog {
 
-    @BindView(R.id.img_delete)
-    ImageView imgDelete;
     @BindView(R.id.edt_bill_box_address)
     EditText edtBillBoxAddress;
     @BindView(R.id.edt_bill_email)
@@ -45,32 +41,30 @@ public class BillDialog extends Dialog implements View.OnClickListener {
     EditText edtBillCompanyAddress;
     @BindView(R.id.edt_bill_num)
     EditText edtBillNum;
-    @BindView(R.id.edt_bill_head)
-    EditText edtBillHead;
     @BindView(R.id.rdbt_bill_type1)
     RadioButton rdbtBillType1;
     @BindView(R.id.rdbt_bill_type2)
     RadioButton rdbtBillType2;
     @BindView(R.id.radioGroup)
     RadioGroup radioGroup;
-    @BindView(R.id.txt_add)
-    TextView txtAdd;
+    @BindView(R.id.edt_bill_head)
+    EditText edtBillHead;
     private boolean isCancelable = false;
     private boolean isCanceledOnTouchOutside = false;
 
-    BillPresenter present;
-    BillBean billBean;
+    private InvoicePresenter present;
+    private InvoiceBean billBean;
 
-    public BillDialog(Context context) {
+    public InvoiceDialog(Context context) {
         this(context, R.style.Transparentdialog);
     }
 
-    public BillDialog(Context context, BillPresenter basePresenter) {
+    public InvoiceDialog(Context context, InvoicePresenter basePresenter) {
         this(context, R.style.Transparentdialog);
-        present = basePresenter;
+        this.present = basePresenter;
     }
 
-    public BillDialog(Context context, int theme) {
+    public InvoiceDialog(Context context, int theme) {
         super(context, theme);
     }
 
@@ -88,14 +82,14 @@ public class BillDialog extends Dialog implements View.OnClickListener {
 
         View layoutView = getLayoutInflater().inflate(R.layout.dialog_add_bill, null);
         setContentView(layoutView);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         ButterKnife.bind(this, layoutView);
 
-        txtAdd.setOnClickListener(this);
-        imgDelete.setOnClickListener(this);
+//        txtAdd.setOnClickListener(this);
+//        imgDelete.setOnClickListener(this);
     }
 
-    public void show(BillBean billBean) {
+    public void show(InvoiceBean billBean) {
+        this.show();
         this.billBean = billBean;
         edtBillBoxAddress.setText(billBean.getExpressAddress());
         edtBillEmail.setText(billBean.getEmail());
@@ -106,11 +100,11 @@ public class BillDialog extends Dialog implements View.OnClickListener {
         edtBillNum.setText(billBean.getTariff());
         edtBillHead.setText(billBean.getTitle());
         if (TextUtils.isEmpty(billBean.getIsVatInvoice()) || billBean.getIsVatInvoice().equals("0")) {
-            rdbtBillType1.setChecked(true);
+            rdbtBillType1.setChecked(false);
         } else {
             rdbtBillType2.setChecked(true);
         }
-        this.show();
+
     }
 
     @Override
@@ -134,14 +128,13 @@ public class BillDialog extends Dialog implements View.OnClickListener {
         isCanceledOnTouchOutside = canceledOnTouchOutside;
     }
 
-    //    @Override
     @OnClick({R.id.txt_add, R.id.img_delete})
-    public void onClick(View view) {
+    public void onClickView(View view) {
         int id = view.getId();
         switch (id) {
             case R.id.txt_add:
                 if (billBean != null) {
-                    present.edtBillInfo(new BillBean.Builder().phone(edtBillTel.getText().toString())
+                    present.edtBillInfo(new InvoiceBean.Builder().phone(edtBillTel.getText().toString())
                             .expressAddress(edtBillBoxAddress.getText().toString())
                             .account(edtBillBankNum.getText().toString())
                             .bank(edtBillBankName.getText().toString())
@@ -154,7 +147,7 @@ public class BillDialog extends Dialog implements View.OnClickListener {
                             .workAddress(edtBillCompanyAddress.getText().toString())
                             .build());
                 } else {
-                    present.addBillInfo(new BillBean.Builder().phone(edtBillTel.getText().toString())
+                    present.addBillInfo(new InvoiceBean.Builder().phone(edtBillTel.getText().toString())
                             .expressAddress(edtBillBoxAddress.getText().toString())
                             .account(edtBillBankNum.getText().toString())
                             .bank(edtBillBankName.getText().toString())
@@ -173,4 +166,22 @@ public class BillDialog extends Dialog implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void dismiss() {
+        clear();
+        super.dismiss();
+    }
+
+    private void clear() {
+        billBean = null;
+        edtBillBoxAddress.setText("");
+        edtBillEmail.setText("");
+        edtBillBankNum.setText("");
+        edtBillBankName.setText("");
+        edtBillTel.setText("");
+        edtBillCompanyAddress.setText("");
+        edtBillNum.setText("");
+        edtBillHead.setText("");
+        rdbtBillType1.setChecked(true);
+    }
 }

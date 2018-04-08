@@ -1,7 +1,6 @@
-package com.sj.yeeda.activity.bill;
+package com.sj.yeeda.activity.invoice;
 
-import com.sj.yeeda.activity.bill.bean.BillBean;
-import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
+import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.BaseView;
 
@@ -12,16 +11,16 @@ import java.util.List;
  * 创建人: 孙杰
  * 功能描述:
  */
-public interface BillContract {
+public interface InvoiceContract {
     interface View extends BaseView {
         void queryBillData();
-        void upDateBillData(List<BillBean> billBeanList);
+        void upDateBillData(List<InvoiceBean> BillBeanList);
     }
 
     interface Presenter extends BasePresenter {
         void getBillInfo();
-        void addBillInfo(BillBean billBean);
-        void edtBillInfo(BillBean billBean);
+        void addBillInfo(InvoiceBean BillBean);
+        void edtBillInfo(InvoiceBean BillBean);
         void delBillInfo(String id);
     }
 }

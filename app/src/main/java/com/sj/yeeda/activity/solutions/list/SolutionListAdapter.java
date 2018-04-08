@@ -61,6 +61,7 @@ public class SolutionListAdapter extends RecyclerArrayAdapter<SolutionBean> {
 
         }
 
+        @Override
         public void setData(final SolutionBean data) {
             super.setData(data);
             ImageUtils.loadImageView(data.getSchemeIcon(),imgIconSolution);
@@ -70,11 +71,11 @@ public class SolutionListAdapter extends RecyclerArrayAdapter<SolutionBean> {
             ImageUtils.loadImageView(data.getIcon(),imgDesignerIcon);
             txtDesignerName.setText("设计师："+data.getUserName());
             ratingBar.setStepSize(3f);
-            txtSolutionPrice.setText("￥"+data.getSchemePrice());
+            txtSolutionPrice.setText("¥"+data.getSchemePrice());
             btSolutionDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mView.toSolutionDetail();
+                    mView.toSolutionDetail(data);
 
                 }
             });
@@ -82,7 +83,7 @@ public class SolutionListAdapter extends RecyclerArrayAdapter<SolutionBean> {
             btChoose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mView.toSolutionOrder();
+                    mView.toSolutionOrder(data);
                 }
             });
 
