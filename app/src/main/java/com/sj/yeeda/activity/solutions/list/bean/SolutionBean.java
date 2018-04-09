@@ -1,7 +1,9 @@
 package com.sj.yeeda.activity.solutions.list.bean;
 
-import java.io.Serializable;
+import android.support.annotation.Keep;
 
+import java.io.Serializable;
+@Keep
 public class SolutionBean implements Serializable{
 
 

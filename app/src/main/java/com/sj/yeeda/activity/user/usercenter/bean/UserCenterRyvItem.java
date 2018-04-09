@@ -1,11 +1,13 @@
 package com.sj.yeeda.activity.user.usercenter.bean;
 
+import android.support.annotation.Keep;
+
 /**
  * 创建时间: on 2018/4/3.
  * 创建人: 孙杰
  * 功能描述:
  */
-
+@Keep
 public class UserCenterRyvItem {
     String name;
     int drawableLeftId;

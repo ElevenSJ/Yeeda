@@ -1,13 +1,16 @@
 package com.sj.yeeda.activity.pay.bean;
 
-public class PayBean {
+import android.support.annotation.Keep;
+
+@Keep
+public class PayListItemBean {
 
     String name;
     int type;
     int drawableLeftId;
     int drawableRightId;
 
-    public PayBean(String name, int type,int drawableLeftId, int img_right_arrow) {
+    public PayListItemBean(String name, int type, int drawableLeftId, int img_right_arrow) {
         this.name = name;
         this.type = type;
         this.drawableLeftId = drawableLeftId;

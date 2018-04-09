@@ -16,6 +16,7 @@ import com.sj.module_lib.utils.SPUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.solutions.detail.SolutionDetailActivity;
+import com.sj.yeeda.activity.solutions.list.bean.SolutionArea;
 import com.sj.yeeda.activity.solutions.list.bean.SolutionBean;
 import com.sj.yeeda.activity.solutions.list.bean.SolutionList;
 import com.sj.yeeda.activity.solutions.order.SolutionOrderActivity;
@@ -47,7 +48,7 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
 
 
     //所有的面积数据
-    List<String> areaDatas = new ArrayList<>();
+    List<SolutionArea> areaDatas = new ArrayList<>();
     //所有筛选中选中的面积数据
     Set<Integer> areaChooseIndex = new HashSet<>();
     //所有方案数据
@@ -91,36 +92,11 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
         mAdapter = new SolutionListAdapter(this,this);
 //        mAdapter.setMore(R.layout.layout_load_more, this);
 //        mAdapter.setNoMore(R.layout.layout_load_no_more);
-        mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-            }
-        });
         rylView.setAdapterWithProgress(mAdapter);
         rylView.setRefreshListener(this);
-        areaDatas.add(0, "全部");
+        areaDatas.add(new SolutionArea("0","全部"));
     }
 
-    private void getAreaData(SolutionList solutionList) {
-        areaDatas.remove(0);
-        for (SolutionBean solutionBean : solutionList.getDataList()) {
-            if (!areaDatas.contains(solutionBean.getAreaCategory())) {
-                areaDatas.add(solutionBean.getAreaCategory());
-            }
-        }
-        //排序
-        Collections.sort(areaDatas, new Comparator<String>() {
-
-            @Override
-            public int compare(String o1, String o2) {
-                Logger.i("s1:"+o1.substring(0, o1.indexOf("-"))+"s2:"+o2.substring(0, o2.indexOf("-")));
-                return Integer.valueOf(o1.substring(0, o1.indexOf("-")))-Integer.valueOf(o2.substring(0, o2.indexOf("-")));
-            }
-        });
-        areaDatas.add(0, "全部");
-        addTabLayout();
-    }
 
     public void addTabLayout() {
         tabLayout.removeAllTabs();
@@ -132,7 +108,7 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
                 tab.setCustomView(R.layout.tab_item_layout);
                 View view = tab.getCustomView();
                 TextView textView = (TextView) view.findViewById(R.id.tv_txt);
-                textView.setText(areaDatas.get(i));
+                textView.setText(areaDatas.get(i).getAreaCategory());
             }
         }
         /**默认选择第一项itemSelected = 0 **/
@@ -184,7 +160,7 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
             //筛选临时数据
             List<SolutionBean> tmpSolutions = new ArrayList<>();
             for (SolutionBean bean : allSolutions) {
-                if (bean.getAreaCategory().equals(areaDatas.get(itemSelected))) {
+                if (bean.getAreaCategory().equals(areaDatas.get(itemSelected).getAreaCategory())) {
                     tmpSolutions.add(bean);
                 }
             }
@@ -200,7 +176,6 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
                 allSolutions.clear();
                 mAdapter.clear();
             }
-            getAreaData(solutionList);
             allSolutions.addAll(solutionList.getDataList());
             checkTabSelect();
         } else {
@@ -220,6 +195,28 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
         Intent intent = new Intent(this, SolutionOrderActivity.class);
         intent.putExtra("data",data);
         startActivity(intent);
+    }
+
+    @Override
+    public void updateAreas(List<SolutionArea> solutionAreaList) {
+        areaDatas.clear();
+        areaDatas.addAll(solutionAreaList);
+//        for (SolutionArea solutionArea : solutionAreaList) {
+//            if (!areaDatas.contains(solutionBean.getAreaCategory())) {
+//                areaDatas.add(solutionBean.getAreaCategory());
+//            }
+//        }
+//        //排序
+//        Collections.sort(areaDatas, new Comparator<String>() {
+//
+//            @Override
+//            public int compare(String o1, String o2) {
+//                Logger.i("s1:"+o1.substring(0, o1.indexOf("-"))+"s2:"+o2.substring(0, o2.indexOf("-")));
+//                return Integer.valueOf(o1.substring(0, o1.indexOf("-")))-Integer.valueOf(o2.substring(0, o2.indexOf("-")));
+//            }
+//        });
+        areaDatas.add(0, new SolutionArea("0","全部"));
+        addTabLayout();
     }
 
     @Override

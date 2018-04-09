@@ -1,5 +1,7 @@
 package com.sj.yeeda.activity.device.bean;
 
+import android.support.annotation.Keep;
+
 import java.io.Serializable;
 
 /**
@@ -7,18 +9,20 @@ import java.io.Serializable;
  * 创建人: 孙杰
  * 功能描述:
  */
-
+@Keep
 public class DeviceBean implements Serializable{
 
+
     /**
-     * thumbnail : 123123123
-     * price : 21313
-     * name : 123
-     * rentCompanyId : 23
-     * id : 92233705168484328137cc40545aaae4a6a9973d0b8df073f0c
-     * category : 123qwe
-     * introduction : 3123123
-     * picture :  https://public.app-storage-node.com/FkddI3oBwyvsLpQF65Q3fO6ZBsvz?attname=icon-phone-s.png
+     * thumbnail : https://public.app-storage-node.com/Fhk4SLfbibPNperGlFwWyJCrGe6Q?attname=11.jpg
+     * price : 0.01
+     * name : 123123
+     * rentCompanyId : 请问恶趣味2
+     * id : 922337051661744925882262c2300314f7d98548d7b01bd1f26
+     * category : 我企鹅我
+     * introduction : <p>213213213</p>
+
+     * picture : https://public.app-storage-node.com/FupIfczEXdHrRoCKlHYpuxoyyt-G?attname=7.jpg,https://public.app-storage-node.com/Fh4x2Ssezdt16lUVGR3k0Yz7QL0W?attname=3.jpg
      */
 
     private String thumbnail;
@@ -29,6 +33,7 @@ public class DeviceBean implements Serializable{
     private String category;
     private String introduction;
     private String picture;
+    private int num = 0;
 
     public String getThumbnail() {
         return thumbnail;
@@ -92,5 +97,13 @@ public class DeviceBean implements Serializable{
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

@@ -8,8 +8,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.pay.bean.PayBean;
-import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
+import com.sj.yeeda.activity.pay.bean.PayListItemBean;
 
 /**
  * 创建时间: on 2018/4/3.
@@ -17,7 +16,7 @@ import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
  * 功能描述:
  */
 
-public class PayRyvAdapter extends RecyclerArrayAdapter<PayBean> {
+public class PayRyvAdapter extends RecyclerArrayAdapter<PayListItemBean> {
     public PayRyvAdapter(Context context) {
         super(context);
     }
@@ -27,7 +26,7 @@ public class PayRyvAdapter extends RecyclerArrayAdapter<PayBean> {
         return new UserCenterRyvHolder(parent);
     }
 
-    private static class UserCenterRyvHolder extends BaseViewHolder<PayBean> {
+    private static class UserCenterRyvHolder extends BaseViewHolder<PayListItemBean> {
 
         private TextView mTextView;
 
@@ -36,7 +35,7 @@ public class PayRyvAdapter extends RecyclerArrayAdapter<PayBean> {
             mTextView = $(R.id.textView);
         }
 
-        public void setData(final PayBean data) {
+        public void setData(final PayListItemBean data) {
             super.setData(data);
             mTextView.setText(data.getName());
             Drawable drawableLeft = getContext().getResources().getDrawable(data.getDrawableLeftId());// 找到资源图片

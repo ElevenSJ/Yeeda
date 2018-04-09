@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#69B841</color>
     <color name="colorAccent">@android:color/transparent</color>
 
+    <color name="divider">#ffd2d2d2</color>
 
     <!--APP公用的一些颜色-->
     <color name="common_bg">#fff7f7f7</color>

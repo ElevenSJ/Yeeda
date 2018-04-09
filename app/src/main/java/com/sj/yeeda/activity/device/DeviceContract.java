@@ -1,5 +1,6 @@
 package com.sj.yeeda.activity.device;
 
+import com.sj.yeeda.activity.device.bean.DeviceBean;
 import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.BaseView;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public interface DeviceContract {
     interface View extends BaseView {
+        void updateDeviceListView(List<DeviceBean> deviceBeanList);
     }
 
     interface Presenter extends BasePresenter {

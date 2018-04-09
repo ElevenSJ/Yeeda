@@ -29,9 +29,14 @@ public class InvoicePresenter implements InvoiceContract.Presenter {
         HttpManager.get(UrlConfig.QUERY_INVOICE_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
-                    List<InvoiceBean> billBeanList = new GsonResponsePasare<List<InvoiceBean>>() {
-                    }.deal(json);
-                    mView.upDateBillData(billBeanList);
+
+            }
+
+            @Override
+            public void onSuccessData(String json) {
+                List<InvoiceBean> billBeanList = new GsonResponsePasare<List<InvoiceBean>>() {
+                }.deal(json);
+                mView.upDateBillData(billBeanList);
             }
 
             @Override
@@ -69,6 +74,12 @@ public class InvoicePresenter implements InvoiceContract.Presenter {
             public void onSuccess(String json) {
                 mView.queryBillData();
             }
+
+            @Override
+            public void onSuccessData(String json) {
+
+            }
+
             @Override
             public void onFailure(String error_code, String error_message) {
             }
@@ -98,6 +109,12 @@ public class InvoicePresenter implements InvoiceContract.Presenter {
             public void onSuccess(String json) {
                 mView.queryBillData();
             }
+
+            @Override
+            public void onSuccessData(String json) {
+
+            }
+
             @Override
             public void onFailure(String error_code, String error_message) {
             }
@@ -113,6 +130,11 @@ public class InvoicePresenter implements InvoiceContract.Presenter {
             @Override
             public void onSuccess(String json) {
                 mView.queryBillData();
+            }
+
+            @Override
+            public void onSuccessData(String json) {
+
             }
 
             @Override

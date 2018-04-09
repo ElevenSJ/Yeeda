@@ -3,6 +3,7 @@ package com.sj.yeeda.activity.venue;
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.venue.bean.VenueBean;
 import com.sj.yeeda.http.Callback;
@@ -29,9 +30,14 @@ public class VenuePresenter implements VenueContract.Presenter {
         HttpManager.get(UrlConfig.QUERY_VENUE_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
-                    List<VenueBean> venueBeanList = new GsonResponsePasare<List<VenueBean>>() {
-                    }.deal(json);
-                    mView.upDateVenueData(venueBeanList);
+                ToastUtils.showShortToast(json);
+            }
+
+            @Override
+            public void onSuccessData(String json) {
+                List<VenueBean> venueBeanList = new GsonResponsePasare<List<VenueBean>>() {
+                }.deal(json);
+                mView.upDateVenueData(venueBeanList);
             }
 
             @Override
@@ -62,6 +68,12 @@ public class VenuePresenter implements VenueContract.Presenter {
             public void onSuccess(String json) {
                 mView.queryVenueData();
             }
+
+            @Override
+            public void onSuccessData(String json) {
+
+            }
+
             @Override
             public void onFailure(String error_code, String error_message) {
             }
@@ -87,6 +99,12 @@ public class VenuePresenter implements VenueContract.Presenter {
             public void onSuccess(String json) {
                 mView.queryVenueData();
             }
+
+            @Override
+            public void onSuccessData(String json) {
+
+            }
+
             @Override
             public void onFailure(String error_code, String error_message) {
             }
@@ -102,6 +120,11 @@ public class VenuePresenter implements VenueContract.Presenter {
             @Override
             public void onSuccess(String json) {
                 mView.queryVenueData();
+            }
+
+            @Override
+            public void onSuccessData(String json) {
+
             }
 
             @Override

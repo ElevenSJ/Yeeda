@@ -1,7 +1,9 @@
 package com.sj.yeeda.activity.solutions.list.bean;
 
-import java.util.List;
+import android.support.annotation.Keep;
 
+import java.util.List;
+@Keep
 public class SolutionList {
     List<SolutionBean> dataList;
 

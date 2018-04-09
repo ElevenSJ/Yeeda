@@ -31,10 +31,10 @@ public abstract class Callback extends HttpCallback<String> {
         Logger.i("返回报文" + baseResponse.getData().toString() +",length:"+baseResponse.getData().toString().length());
         onFinish();
         if (baseResponse.success) {
-            if (baseResponse.getData().toString().equals("\"\"")||baseResponse.getData().toString().length()<=2){
+            if (baseResponse.getData().toString().equals("[]")||baseResponse.getData().toString().equals("\"\"")||baseResponse.getData().toString().length()<=2){
                 onSuccess(baseResponse.message);
             }else{
-                onSuccess(json);
+                onSuccessData(json);
             }
         } else {
             onFailed(baseResponse.code, baseResponse.message);
@@ -55,7 +55,9 @@ public abstract class Callback extends HttpCallback<String> {
         }
     }
 
-    public abstract void onSuccess(String json);
+    public abstract void onSuccess(String message);
+
+    public abstract void onSuccessData(String json);
 
     public abstract void onFailure(String error_code, String error_message);
 

@@ -49,6 +49,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             }
 
             @Override
+            public void onSuccessData(String json) {
+
+            }
+
+            @Override
             public void onFailure(String error_code, String error_message) {
                 mView.refreshCodeTxt(false);
             }
@@ -73,6 +78,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         HttpManager.get(UrlConfig.REGISTER_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
+                ToastUtils.showShortToast(json);
+            }
+
+            @Override
+            public void onSuccessData(String json) {
                 RegisterBean registerBean = new GsonResponsePasare<RegisterBean>() {
                 }.deal(json);
                 String tokenId = registerBean.getTokenId();

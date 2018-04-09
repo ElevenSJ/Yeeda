@@ -2,6 +2,7 @@ package com.sj.yeeda.activity.venue.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Keep;
 
 import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 
@@ -10,7 +11,7 @@ import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
  * 创建人: 孙杰
  * 功能描述:
  */
-
+@Keep
 public class VenueBean implements Parcelable {
     /**
      * uid : 922337051831838886717f129a0ee654742b5bd3f03239b193e

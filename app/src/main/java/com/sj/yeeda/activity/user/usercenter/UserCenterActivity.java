@@ -13,6 +13,8 @@ import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.invoice.InvoiceActivity;
+import com.sj.yeeda.activity.main.MainActivity;
+import com.sj.yeeda.activity.order.OrderActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.updateinfo.UserInfoUpdateActivity;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
@@ -70,7 +72,6 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                ToastUtils.showShortToast(mAdapter.getItem(position).getName());
                 Intent intent = new Intent();
                 switch (position){
                     case 0:
@@ -80,6 +81,8 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
                         break;
                     case 1:
                         //我的订单
+                        intent.setClass(UserCenterActivity.this, OrderActivity.class);
+                        startActivity(intent);
                         break;
                     case 2:
                         //我的开票信息

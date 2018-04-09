@@ -67,6 +67,11 @@ public class UserInfoUpdatePresenter implements  UserInfoUpdateContract.Presente
             }
 
             @Override
+            public void onSuccessData(String json) {
+
+            }
+
+            @Override
             public void onFailure(String error_code, String error_message) {
 
             }

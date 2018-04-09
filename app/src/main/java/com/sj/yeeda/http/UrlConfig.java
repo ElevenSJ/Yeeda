@@ -17,6 +17,7 @@ public class UrlConfig {
     //登录
     public static final String LOGIN_URL = "/appLogin";
     //注销
+
     public static final String LOGIN_OUT_URL = "/appLoginOut";
     //查询个人信息
     public static final String QUERY_USER_URL = "/appQueryUserInfo";
@@ -24,8 +25,12 @@ public class UrlConfig {
     public static final String PARFIT_USER_URL = "/appParfaitUserInfo";
     //修改个人信息
     public static final String UPDATE_USER_URL = "/appUpdateUserInfo";
+
+
     //查询方案列表
     public static final String QUERY_SOLUTIONS_URL = "/appSchemeList";
+    //方案面积类别
+    public static final String QUERY_SOLUTION_AREAS_URL = "/appQuerySchemeArea";
 
     //查询用户开票信息
     public static final String QUERY_INVOICE_URL = "/appQueryUserInvoice";
@@ -48,4 +53,20 @@ public class UrlConfig {
     //查询默认场馆
     public static final String QUERY_DEFAULT_VENUE_URL = "/appQueryUserDefaultVenue";
 
+    //保存订单
+    public static final String SAVE_ORDER_URL = "/appSaveOrder";
+    //查询订单
+    public static final String QUERY_ORDER_URL = "/appQueryOrderList";
+    //支付宝支付获取sign
+    public static final String GET_ALIPAY_SIGN_URL = "/getSignByAlipay";
+    //微信统一下单
+    public static final String GET_WECHAT_ORDER_URL = "/WXunifiedorder";
+
+
+    //微信统一下单
+    public static String WECHAT_APP_ID = "";
+
+
+    //查询租赁设备
+    public static final String QUERY_DEVICES_URL = "/appQueryRentEquipment";
 }

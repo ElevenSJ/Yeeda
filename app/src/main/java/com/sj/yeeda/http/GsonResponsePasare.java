@@ -1,5 +1,7 @@
 package com.sj.yeeda.http;
 
+import android.support.annotation.Keep;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
@@ -12,7 +14,7 @@ import java.lang.reflect.Type;
  * 创建人: 孙杰
  * 功能描述:Gson解析类
  */
-
+@Keep
 public class GsonResponsePasare<T> implements ParameterizedType {
 
     public T deal(String response) {

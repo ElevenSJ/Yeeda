@@ -1,10 +1,13 @@
 package com.sj.yeeda.activity.user.login.bean;
 
+import android.support.annotation.Keep;
+
 /**
  * 创建时间: on 2018/3/31.
  * 创建人: 孙杰
  * 功能描述:
  */
+@Keep
 public class LoginBean {
     private String tokenId;
 

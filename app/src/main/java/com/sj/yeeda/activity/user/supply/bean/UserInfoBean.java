@@ -1,5 +1,7 @@
 package com.sj.yeeda.activity.user.supply.bean;
 
+import android.support.annotation.Keep;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * 创建人: 孙杰
  * 功能描述:
  */
-
+@Keep
 public class UserInfoBean  implements Serializable{
 
     private static final long serialVersionUID=111L;

@@ -58,6 +58,11 @@ public class LoginPresenter implements LoginContract.Presenter {
             }
 
             @Override
+            public void onSuccessData(String json) {
+
+            }
+
+            @Override
             public void onFailure(String error_code, String error_message) {
                 mView.refreshCodeTxt(false);
             }
@@ -88,6 +93,11 @@ public class LoginPresenter implements LoginContract.Presenter {
         HttpManager.get(UrlConfig.LOGIN_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
+                mView.toMainActivity();
+            }
+
+            @Override
+            public void onSuccessData(String json) {
                 LoginBean loginBean = new GsonResponsePasare<LoginBean>() {
                 }.deal(json);
                 String tokenId = loginBean.getTokenId();

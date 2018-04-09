@@ -12,6 +12,7 @@ import com.sj.yeeda.base.BaseView;
  */
 public interface SolutionOrderContract {
     interface View extends BaseView {
+        void toPay(String orderId);
         void updateVenue(VenueBean venueBean);
         void updateInVoice(InvoiceBean invoiceBean);
 
@@ -19,6 +20,8 @@ public interface SolutionOrderContract {
 
     interface Presenter extends BasePresenter {
         void queryDefaultVenue();
+
+        void saveOrder(String schemeId,String venueId,String rentId,String  nums,String  rentMoneys,String showTime,String area,String invoiceId);
 
     }
 }

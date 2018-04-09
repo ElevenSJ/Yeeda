@@ -13,9 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sj.module_lib.glide.ImageUtils;
-import com.sj.module_lib.utils.ToastUtils;
-import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.order.OrderActivity;
 import com.sj.yeeda.activity.solutions.list.SolutionListActivity;
 import com.sj.yeeda.activity.user.login.LoginActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
@@ -114,6 +113,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
             case R.id.bt_design:
                 break;
             case R.id.bt_order:
+                intent.setClass(MainActivity.this, OrderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.bt_service:
                 break;
@@ -129,9 +130,6 @@ public class MainActivity extends BaseActivity<MainPresenter>
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (BuildConfig.DEBUG) {
-            ToastUtils.showShortToast(item.getTitle().toString());
-        }
         Intent intent = new Intent();
         switch (id) {
             case R.id.nav_plan_shop:
@@ -139,6 +137,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
                 startActivity(intent);
                 break;
             case R.id.nav_my_order:
+                intent.setClass(MainActivity.this, OrderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_personal_center:
                 intent.setClass(MainActivity.this, UserCenterActivity.class);

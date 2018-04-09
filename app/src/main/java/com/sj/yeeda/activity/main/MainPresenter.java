@@ -38,6 +38,11 @@ public class MainPresenter implements MainContract.Presenter {
         HttpManager.get(UrlConfig.QUERY_USER_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
+
+            }
+
+            @Override
+            public void onSuccessData(String json) {
                 UserInfoBean userInfoBean = new GsonResponsePasare<UserInfoBean>() {
                 }.deal(json);
                 SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.USER_ID, userInfoBean.getId());
@@ -71,6 +76,12 @@ public class MainPresenter implements MainContract.Presenter {
             public void onSuccess(String s) {
 
             }
+
+            @Override
+            public void onSuccessData(String json) {
+
+            }
+
             @Override
             public void onFailure(String error_code, String error_message) {
 
