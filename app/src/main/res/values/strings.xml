@@ -49,12 +49,8 @@
     <string name="txt_venue_info_name">场馆地址\n场馆联系人\n场馆联系人手机</string>
 
     <!--租赁设备-->
-    <string-array name="device_type_list">
-        <item >全部分类</item>
-        <item >投影设备</item>
-        <item >移动设备</item>
-        <item >电视</item>
-        <item >电脑</item>
-    </string-array>
+
+    <!--我的场馆-->
+    <string name="txt_order_venue_info_name">场馆名称\n场馆地址\n场馆联系人\n场馆联系人手机</string>
 
 </resources>

@@ -1,9 +1,11 @@
 package com.sj.yeeda.activity.order;
 
 import com.jady.retrofitclient.HttpManager;
+import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.order.bean.OrderBean;
+import com.sj.yeeda.activity.order.bean.OrderList;
 import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
@@ -41,10 +43,14 @@ public class OrderPresenter implements OrderContract.Presenter {
         HttpManager.get(UrlConfig.QUERY_ORDER_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
+
             }
 
             @Override
             public void onSuccessData(String json) {
+                OrderList orderList = new GsonResponsePasare<OrderList>(){}.deal(json);
+                Logger.i("订单信息数:"+orderList.getDataList().size());
+                mView.updateOrderList(orderList);
             }
 
             @Override

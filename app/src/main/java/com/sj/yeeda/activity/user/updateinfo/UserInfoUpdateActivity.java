@@ -94,7 +94,7 @@ public class UserInfoUpdateActivity extends TitleBaseActivity<UserInfoUpdatePres
         @Override
         public void upDataUserInfoView (UserInfoBean userInfoBean){
             this.userInfoBean = userInfoBean;
-            ImageUtils.loadImageWithError(userInfoBean.getIcon(), R.mipmap.ic_launcher_round, imgUserHead);
+            ImageUtils.loadImageWithError(userInfoBean.getIcon(), R.drawable.logo_big, imgUserHead);
             edtEmail.setText(userInfoBean.getEmail());
             edtPhone.setText(userInfoBean.getPhone());
             edtBirthday.setText(userInfoBean.getBirthday());

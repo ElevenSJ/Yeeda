@@ -22,22 +22,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    signingConfigs {
-        debug {
-            keyAlias 'sunjie'
-            keyPassword 'sJ121314'
-            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
-            storePassword 'sJ121314'
-        }
-        release {
-            v1SigningEnabled true
-            v2SigningEnabled true
-            keyAlias 'sunjie'
-            keyPassword 'sJ121314'
-            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
-            storePassword 'sJ121314'
-        }
-    }
+//    signingConfigs {
+//        debug {
+//            keyAlias 'sunjie'
+//            keyPassword 'sJ121314'
+//            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
+//            storePassword 'sJ121314'
+//        }
+//        release {
+//            v1SigningEnabled true
+//            v2SigningEnabled true
+//            keyAlias 'sunjie'
+//            keyPassword 'sJ121314'
+//            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
+//            storePassword 'sJ121314'
+//        }
+//    }
     productFlavors {
     }
 }

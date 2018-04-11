@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
+import com.sj.module_lib.glide.ImageUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
@@ -116,7 +117,7 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
     @Override
     public void upDataHeadView(UserInfoBean userInfoBean) {
         if (userInfoBean!=null){
-            imgUserHead.setImageResource(R.mipmap.ic_launcher_round);
+            ImageUtils.loadImageWithError(userInfoBean.getIcon(),R.drawable.logo_big,imgUserHead);
             txtUserName.setText(userInfoBean.getUserName());
         }
     }

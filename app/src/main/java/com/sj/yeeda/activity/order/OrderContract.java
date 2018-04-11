@@ -1,6 +1,7 @@
 package com.sj.yeeda.activity.order;
 
 import com.sj.yeeda.activity.order.bean.OrderBean;
+import com.sj.yeeda.activity.order.bean.OrderList;
 import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.BaseView;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public interface OrderContract {
     interface View extends BaseView {
+        void updateOrderList(OrderList orderList);
     }
 
     interface Presenter extends BasePresenter {

@@ -14,6 +14,7 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.orhanobut.logger.Logger;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.order.bean.OrderBean;
+import com.sj.yeeda.activity.order.bean.OrderList;
 import com.sj.yeeda.base.TitleBaseActivity;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class OrderActivity extends TitleBaseActivity<OrderPresenter> implements OrderContract.View {
+public class OrderActivity extends TitleBaseActivity<OrderContract.Presenter> implements OrderContract.View {
 
 
     @BindView(R.id.ryl_view)
@@ -30,7 +31,7 @@ public class OrderActivity extends TitleBaseActivity<OrderPresenter> implements 
     OrderRyvAdapter mAdapter;
 
     @Override
-    public OrderPresenter getPresenter() {
+    public OrderContract.Presenter getPresenter() {
         if (presenter == null) {
             presenter = new OrderPresenter(this);
         }
@@ -58,4 +59,8 @@ public class OrderActivity extends TitleBaseActivity<OrderPresenter> implements 
 
     }
 
+    @Override
+    public void updateOrderList(OrderList orderList) {
+        mAdapter.addAll(orderList.getDataList());
+    }
 }

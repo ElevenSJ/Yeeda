@@ -2,7 +2,11 @@ package com.sj.yeeda.activity.order.bean;
 
 import android.support.annotation.Keep;
 
+import com.sj.yeeda.activity.solutions.list.bean.SolutionBean;
+import com.sj.yeeda.activity.venue.bean.VenueBean;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 创建时间: on 2018/4/8.
@@ -12,59 +16,100 @@ import java.io.Serializable;
 @Keep
 public class OrderBean implements Serializable{
 
+    String area;
+    String icon;
+    VenueBean venueId;
+    SolutionBean schemeId;
+    String userName;
+    String showTime;
+    String constructorId;
+    List<RentBean> rent;
+    String money;
+    String createTime;
+    String id ;
+    InvoiceBean invoiceId;
+    String memberId;
+    String status;
+    String  phone;
 
-    /**
-     * thumbnail : https://public.app-storage-node.com/Fhk4SLfbibPNperGlFwWyJCrGe6Q?attname=11.jpg
-     * price : 0.01
-     * name : 123123
-     * rentCompanyId : 请问恶趣味2
-     * id : 922337051661744925882262c2300314f7d98548d7b01bd1f26
-     * category : 我企鹅我
-     * introduction : <p>213213213</p>
-
-     * picture : https://public.app-storage-node.com/FupIfczEXdHrRoCKlHYpuxoyyt-G?attname=7.jpg,https://public.app-storage-node.com/Fh4x2Ssezdt16lUVGR3k0Yz7QL0W?attname=3.jpg
-     */
-
-    private String thumbnail;
-    private String price;
-    private String name;
-    private String rentCompanyId;
-    private String id;
-    private String category;
-    private String introduction;
-    private String picture;
-    private int num = 0;
-
-    public String getThumbnail() {
-        return thumbnail;
+    public String getArea() {
+        return area;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setArea(String area) {
+        this.area = area;
     }
 
-    public String getPrice() {
-        return price;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getName() {
-        return name;
+    public VenueBean getVenue() {
+        return venueId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVenueId(VenueBean venueId) {
+        this.venueId = venueId;
     }
 
-    public String getRentCompanyId() {
-        return rentCompanyId;
+    public SolutionBean getScheme() {
+        return schemeId;
     }
 
-    public void setRentCompanyId(String rentCompanyId) {
-        this.rentCompanyId = rentCompanyId;
+    public void setSchemeId(SolutionBean schemeId) {
+        this.schemeId = schemeId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
+    }
+
+    public String getConstructorId() {
+        return constructorId;
+    }
+
+    public void setConstructorId(String constructorId) {
+        this.constructorId = constructorId;
+    }
+
+    public List<RentBean> getRent() {
+        return rent;
+    }
+
+    public void setRent(List<RentBean> rent) {
+        this.rent = rent;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getId() {
@@ -75,35 +120,161 @@ public class OrderBean implements Serializable{
         this.id = id;
     }
 
-    public String getCategory() {
-        return category;
+    public InvoiceBean getInvoice() {
+        return invoiceId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setInvoiceId(InvoiceBean invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getNum() {
-        return num;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    private class RentBean {
+
+        private String rentEquipmentId;
+        private String money;
+        private String orderId;
+        private String num;
+        private String id;
+
+        public String getRentEquipmentId() {
+            return rentEquipmentId;
+        }
+
+        public void setRentEquipmentId(String rentEquipmentId) {
+            this.rentEquipmentId = rentEquipmentId;
+        }
+
+        public String getMoney() {
+            return money;
+        }
+
+        public void setMoney(String money) {
+            this.money = money;
+        }
+
+        public String getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
+
+        public String getNum() {
+            return num;
+        }
+
+        public void setNum(String num) {
+            this.num = num;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+    }
+
+    private class InvoiceBean {
+
+        /**
+         * uid : hz1522506079740hedu
+         * isDefault : 1
+         * address : 1
+         * contact : 1
+         * name : 1
+         * id : 9223370514311474637a5e1b834a1a8489c842ca43480994fa7
+         * contactPhone : 1
+         */
+
+        private String uid;
+        private String isDefault;
+        private String address;
+        private String contact;
+        private String name;
+        private String id;
+        private String contactPhone;
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
+
+        public String getIsDefault() {
+            return isDefault;
+        }
+
+        public void setIsDefault(String isDefault) {
+            this.isDefault = isDefault;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getContact() {
+            return contact;
+        }
+
+        public void setContact(String contact) {
+            this.contact = contact;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getContactPhone() {
+            return contactPhone;
+        }
+
+        public void setContactPhone(String contactPhone) {
+            this.contactPhone = contactPhone;
+        }
     }
 }
