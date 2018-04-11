@@ -271,9 +271,13 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
 //        venueRyvAdapter.add(venueBean);
         this.venueBean = venueBean;
         if (venueBean!=null){
-            cbVenue.setChecked(true);
+            cbVenue.setVisibility(View.VISIBLE);
             venueTitle.setText(venueBean.getName());
             venueInfo.setText(venueBean.getAddress()+"  "+venueBean.getContact()+"  "+venueBean.getContactPhone());
+        }else{
+            invoiceTitle.setText("");
+            invoiceInfo.setText("");
+            cbVenue.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -285,17 +289,15 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
 //        invoiceRyvAdapter.add(invoiceBean);
         this.invoiceBean = invoiceBean;
         if (invoiceBean!=null){
-            cbInvoice.setChecked(true);
+            cbInvoice.setVisibility(View.VISIBLE);
             invoiceTitle.setText(invoiceBean.getTitle());
             invoiceInfo.setText(invoiceBean.getIsVatInvoice().equals("1")?"增值税专用发票":"普通发票");
+        }else{
+            invoiceTitle.setText("");
+            invoiceInfo.setText("");
+            cbInvoice.setVisibility(View.INVISIBLE);
+
         }
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

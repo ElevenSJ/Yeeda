@@ -9,6 +9,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        resConfigs "zh"
     }
     buildTypes {
         release {
@@ -18,26 +19,29 @@ android {
             shrinkResources true
             //Proguard
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    signingConfigs {
-//        debug {
-//            keyAlias 'sunjie'
-//            keyPassword 'sJ121314'
-//            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
-//            storePassword 'sJ121314'
-//        }
-//        release {
-//            v1SigningEnabled true
-//            v2SigningEnabled true
-//            keyAlias 'sunjie'
-//            keyPassword 'sJ121314'
-//            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
-//            storePassword 'sJ121314'
-//        }
-//    }
+    signingConfigs {
+        debug {
+            keyAlias 'sunjie'
+            keyPassword 'sJ121314'
+            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
+            storePassword 'sJ121314'
+        }
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            keyAlias 'sunjie'
+            keyPassword 'sJ121314'
+            storeFile file('C:/Users/Administrator/Desktop/sunjie.keystore.jks')
+            storePassword 'sJ121314'
+        }
+    }
     productFlavors {
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,183 +11,70 @@
         layout="@layout/activity_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentStart="true"
         />
-
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@android:color/holo_red_dark"
-        android:gravity="right|center"
-        android:orientation="vertical"
-        android:paddingEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintStart_toStartOf="parent">
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
 
-        <TextView
-            android:id="@+id/textView16"
-            style="@style/TxtCommonWhiteSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:text="应付金额:" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/holo_red_dark"
+            android:gravity="right|center"
+            android:orientation="vertical"
+            android:paddingEnd="16dp"
+            android:layout_alignParentBottom="true">
 
-        <TextView
-            android:id="@+id/txt_price"
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/TxtCommonWhiteSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:text="应付金额:" />
+
+            <TextView
+                android:id="@+id/txt_price"
+                style="@style/TxtTitleWhiteNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_to_pay"
             style="@style/TxtTitleWhiteNormal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:text="TextView" />
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_red_light"
+            android:gravity="center"
+            android:text="立即支付" />
     </LinearLayout>
+
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:scrollbars="none"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_title">
+        android:layout_below="@id/layout_title"
+        android:layout_above="@id/linearLayout2">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:id="@+id/layout_main"
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/constrainLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                app:layout_constraintStart_toStartOf="@+id/textView25"
-                app:layout_constraintTop_toBottomOf="@+id/textView25">
-
-
-                <android.support.constraint.Guideline
-                    android:id="@+id/guideline9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.3" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="@+id/guideline9"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <RadioButton
-                        android:id="@+id/rdt_invoice_et"
-                        style="@style/TxtCommonBlackNormal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:checked="true"
-                        android:drawableLeft="@drawable/bt_green_radiobt_selector"
-                        android:drawablePadding="8dp"
-                        android:gravity="left|center_vertical"
-                        android:text="电子发票" />
-
-                    <RadioButton
-                        android:id="@+id/rdbt_invoice_paper"
-                        style="@style/TxtCommonBlackNormal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="20dp"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:checked="false"
-                        android:drawableLeft="@drawable/bt_green_radiobt_selector"
-                        android:drawablePadding="8dp"
-                        android:gravity="left|center_vertical"
-                        android:text="纸质发票" />
-                </RadioGroup>
-                <include
-                    android:id="@+id/layout_invoice"
-                    layout="@layout/solution_order_invoice_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/line_invoice"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-                    app:layout_constraintVertical_bias="0.0"
-                    />
-                <!--
-                <com.jude.easyrecyclerview.EasyRecyclerView
-                    android:id="@+id/layout_invoice"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toTopOf="@+id/line_invoice"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:layout_empty="@layout/layout_view_empty"
-                    app:layout_progress="@layout/layout_load_progress"
-                    app:scrollbarStyle="insideOverlay" />
-                    -->
-
-
-
-
-                <View
-                    android:id="@+id/line_invoice"
-                    android:layout_width="0dp"
-                    android:layout_height="1px"
-                    android:layout_marginBottom="16dp"
-                    android:background="@color/gray_AD"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_choose_invoice"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/txt_choose_invoice"
-                    style="@style/TxtCommonBlueNormal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="选择开票信息"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="发票"
-                    app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/radioGroup" />
-            </android.support.constraint.ConstraintLayout>
 
             <TextView
                 android:id="@+id/textView13"
@@ -197,44 +84,18 @@
                 android:layout_marginStart="8dp"
                 android:drawableStart="@drawable/img_venue_gray"
                 android:gravity="center"
-                android:text="选择场馆"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="选择场馆" />
 
-            <TextView
-                android:id="@+id/textView14"
-                style="@style/TxtCommonGraySmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/img_show_gray"
-                android:gravity="center"
-                android:text="展览信息"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/constrainLayout1" />
-
-            <TextView
-                android:id="@+id/textView25"
-                style="@style/TxtCommonGraySmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/img_show_gray"
-                android:gravity="center"
-                android:text="开票信息"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constrainLayout1"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:padding="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13">
-
+                android:padding="8dp">
 
                 <include
                     android:id="@+id/layout_venue"
@@ -242,12 +103,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/line_venue"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line_venue"
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:background="@color/gray_AD"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_choose_venue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_venue" />
 
                 <!--
                 <com.jude.easyrecyclerview.EasyRecyclerView
@@ -266,16 +135,6 @@
                     app:scrollbarStyle="insideOverlay" />
                     -->
 
-                <View
-                    android:id="@+id/line_venue"
-                    android:layout_width="0dp"
-                    android:layout_height="1px"
-                    android:layout_marginBottom="16dp"
-                    android:background="@color/gray_AD"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_choose_venue"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/txt_choose_venue"
@@ -290,18 +149,24 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </android.support.constraint.ConstraintLayout>
-
+            <TextView
+                android:id="@+id/textView14"
+                style="@style/TxtCommonGraySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/img_show_gray"
+                android:gravity="center"
+                android:text="展览信息"
+                android:layout_marginStart="8dp"/>
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/constrainLayout1"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/constrainLayout1"
-                app:layout_constraintTop_toBottomOf="@+id/textView14">
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp">
 
                 <Button
                     android:id="@+id/bt_choose_device"
@@ -330,8 +195,8 @@
                     android:layout_height="32dp"
                     android:layout_marginStart="4dp"
                     android:background="@drawable/bt_gray_selector"
-                    android:gravity="left|center_vertical"
                     android:clickable="true"
+                    android:gravity="left|center_vertical"
                     android:paddingBottom="2dp"
                     android:paddingEnd="4dp"
                     android:paddingStart="4dp"
@@ -471,32 +336,143 @@
                     app:layout_constraintStart_toStartOf="@+id/edt_time_begain"
                     app:layout_constraintTop_toBottomOf="@+id/edt_time_begain" />
             </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView25"
+                style="@style/TxtCommonGraySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableStart="@drawable/img_show_gray"
+                android:gravity="center"
+                android:text="开票信息"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrainLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="发票"
+                    app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/radioGroup" />
 
 
-        </android.support.constraint.ConstraintLayout>
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.3" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rdt_invoice_et"
+                        style="@style/TxtCommonBlackNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableLeft="@drawable/bt_green_radiobt_selector"
+                        android:drawablePadding="8dp"
+                        android:gravity="left|center_vertical"
+                        android:text="电子发票" />
+
+                    <RadioButton
+                        android:id="@+id/rdbt_invoice_paper"
+                        style="@style/TxtCommonBlackNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="false"
+                        android:drawableLeft="@drawable/bt_green_radiobt_selector"
+                        android:drawablePadding="8dp"
+                        android:gravity="left|center_vertical"
+                        android:text="纸质发票" />
+                </RadioGroup>
+
+                <include
+                    android:id="@+id/layout_invoice"
+                    layout="@layout/solution_order_invoice_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/line_invoice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                <!--
+                <com.jude.easyrecyclerview.EasyRecyclerView
+                    android:id="@+id/layout_invoice"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/line_invoice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_empty="@layout/layout_view_empty"
+                    app:layout_progress="@layout/layout_load_progress"
+                    app:scrollbarStyle="insideOverlay" />
+                    -->
+
+                <View
+                    android:id="@+id/line_invoice"
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:background="@color/gray_AD"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_choose_invoice"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_invoice" />
+
+
+                <TextView
+                    android:id="@+id/txt_choose_invoice"
+                    style="@style/TxtCommonBlueNormal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:text="选择开票信息"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/bt_to_pay"
-        style="@style/TxtTitleWhiteNormal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@android:color/holo_red_light"
-        android:gravity="center"
-        android:text="立即支付"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3" />
-
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
