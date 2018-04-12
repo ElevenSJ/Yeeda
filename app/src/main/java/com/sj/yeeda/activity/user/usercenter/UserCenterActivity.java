@@ -30,7 +30,7 @@ import butterknife.BindView;
  * 功能描述:个人中心
  */
 
-public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> implements UserCenterContract.View {
+public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Presenter> implements UserCenterContract.View {
     @BindView(R.id.ryl_view)
     EasyRecyclerView ryvView;
     @BindView(R.id.img_user_head)
@@ -42,8 +42,10 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterPresenter> i
 
 
     @Override
-    public UserCenterPresenter getPresenter() {
-        presenter = new UserCenterPresenter(this);
+    public UserCenterContract.Presenter getPresenter() {
+        if (presenter==null){
+            presenter = new UserCenterPresenter(this);
+        }
         return presenter;
     }
 

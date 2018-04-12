@@ -64,7 +64,7 @@ public class DeviceRyvAdapter extends RecyclerArrayAdapter<DeviceBean> {
                 @Override
                 public void onAmountChange(View view, int amount) {
                     data.setNum(amount);
-                    mActivity.updatePrice(data);
+                    mActivity.updateDevice(data);
                 }
             });
 

@@ -30,6 +30,9 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
 
     List<DeviceBean> alreadyChooseDevice = new ArrayList<>();
 
+    int allNum = 0;
+    Double totalPrice = 0d;
+
     @BindView(R.id.ryl_view)
     EasyRecyclerView rylView;
     @BindView(R.id.txt_device_num)
@@ -93,12 +96,12 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
                     List<String> numList = new ArrayList<>();
                     List<String> rentMoneyList = new ArrayList<>();
 
-                    int allNum = 0;
 
                     @Override
                     public void run() {
                         for (DeviceBean deviceBean : alreadyChooseDevice) {
-                            allNum += deviceBean.getNum();
+                            allNum+=deviceBean.getNum();
+                            totalPrice+=Double.valueOf(deviceBean.getPrice())*deviceBean.getNum();
                             rentIdList.add(deviceBean.getId());
                             numList.add(deviceBean.getNum() + "");
                             rentMoneyList.add(deviceBean.getPrice());
@@ -109,6 +112,7 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
                                 Logger.i("rentId:" + TextUtils.join(",", rentIdList.toArray()) + "\n" + "nums" + TextUtils.join(",", numList.toArray()) + "\n" + "rentMoneys" + TextUtils.join(",", rentMoneyList.toArray()));
                                 Intent intent = new Intent();
                                 intent.putExtra("allNum", allNum);
+                                intent.putExtra("alltotalPriceNum", totalPrice);
                                 intent.putExtra("rentId", TextUtils.join(",", rentIdList.toArray()));
                                 intent.putExtra("nums", TextUtils.join(",", numList.toArray()));
                                 intent.putExtra("rentMoneys", TextUtils.join(",", rentMoneyList.toArray()));
@@ -161,7 +165,7 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
 
     }
 
-    public void updatePrice(DeviceBean deviceBean) {
+    public void updateDevice(DeviceBean deviceBean) {
         if (deviceBean.getNum() == 0) {
             if (alreadyChooseDevice.contains(deviceBean)) {
                 alreadyChooseDevice.remove(deviceBean);
@@ -172,7 +176,13 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
             }
             alreadyChooseDevice.add(deviceBean);
         }
-        txtDeviceNum.setText(String.valueOf(alreadyChooseDevice.size()));
+        allNum = 0;
+        totalPrice = 0d;
+        for (DeviceBean dvBean :alreadyChooseDevice){
+            allNum+=dvBean.getNum();
+            totalPrice+=Double.valueOf(dvBean.getPrice())*dvBean.getNum();
+        }
+        txtDeviceNum.setText(String.valueOf(allNum));
     }
 
 }

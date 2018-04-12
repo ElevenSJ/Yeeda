@@ -1,5 +1,7 @@
 package com.sj.yeeda.activity.solutions.list;
 
+import android.util.ArrayMap;
+
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
@@ -12,7 +14,7 @@ import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
     }
 
     private void getAreas() {
-        Map<String, Object> parameters = new HashMap<>(1);
+        Map<String, Object> parameters = new ArrayMap<>(1);
         parameters.put("token", token);
         HttpManager.get(UrlConfig.QUERY_SOLUTION_AREAS_URL, parameters, new Callback() {
             @Override
@@ -54,6 +56,7 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
 
             @Override
             public void onFailure(String error_code, String error_message) {
+
             }
 
             @Override
@@ -65,7 +68,7 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
 
     @Override
     public void getSolution(String token, String firstIndex, int pageNum) {
-        Map<String, Object> parameters = new HashMap<>(3);
+        Map<String, Object> parameters = new ArrayMap<>(3);
         parameters.put("token", token);
         parameters.put("firstIndex", firstIndex);
         parameters.put("pageNum", pageNum);
@@ -88,6 +91,7 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
 
             @Override
             public void onFailure(String error_code, String error_message) {
+                mView.showSolutionList(null);
             }
 
             @Override

@@ -77,6 +77,7 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
     InvoiceBean invoiceBean;
     String rentId = "";
     String nums = "";
+    Double allRentPrice = 0d;
     String rentMoneys = "";
     @BindView(R.id.cb_invoice)
     CheckBox cbInvoice;
@@ -237,6 +238,7 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
                 case 101:
                     //设备信息
                     if (data.getStringExtra("rentId") != null) {
+                        allRentPrice = data.getDoubleExtra("alltotalPriceNum",0d);
                         rentId = data.getStringExtra("rentId");
                         nums = data.getStringExtra("nums");
                         rentMoneys = data.getStringExtra("rentMoneys");

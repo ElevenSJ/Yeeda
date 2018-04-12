@@ -31,6 +31,8 @@ public class UrlConfig {
     public static final String QUERY_SOLUTIONS_URL = "/appSchemeList";
     //方案面积类别
     public static final String QUERY_SOLUTION_AREAS_URL = "/appQuerySchemeArea";
+    //查询方案详情
+    public static final String QUERY_SOLUTION_DETAIL_URL = "/appSchemeDetail";
 
     //查询用户开票信息
     public static final String QUERY_INVOICE_URL = "/appQueryUserInvoice";

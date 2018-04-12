@@ -187,6 +187,7 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
     @Override
     public void toSolutionDetail(SolutionBean data) {
         Intent intent = new Intent(this, SolutionDetailActivity.class);
+        intent.putExtra("id",data.getId());
         startActivity(intent);
     }
 
@@ -199,8 +200,10 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
 
     @Override
     public void updateAreas(List<SolutionArea> solutionAreaList) {
-        areaDatas.clear();
-        areaDatas.addAll(solutionAreaList);
+        if (solutionAreaList!=null){
+            areaDatas.clear();
+            areaDatas.addAll(solutionAreaList);
+        }
 //        for (SolutionArea solutionArea : solutionAreaList) {
 //            if (!areaDatas.contains(solutionBean.getAreaCategory())) {
 //                areaDatas.add(solutionBean.getAreaCategory());

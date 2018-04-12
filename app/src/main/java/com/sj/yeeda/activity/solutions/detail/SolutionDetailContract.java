@@ -1,5 +1,6 @@
 package com.sj.yeeda.activity.solutions.detail;
 
+import com.sj.yeeda.activity.solutions.detail.bean.SolutionDetailBean;
 import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.BaseView;
 
@@ -11,9 +12,11 @@ import com.sj.yeeda.base.BaseView;
 public interface SolutionDetailContract {
     interface View extends BaseView {
 
+        void updateSolutionDetail(SolutionDetailBean solutionDetailBean);
     }
 
     interface Presenter extends BasePresenter {
+        void getSolutionDetail(String id);
 
     }
 }

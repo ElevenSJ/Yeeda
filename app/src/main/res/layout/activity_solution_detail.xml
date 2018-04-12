@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,4 +16,40 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <com.sj.module_lib.widgets.SlideDetailsLayout
+        android:id="@+id/slidedetails"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:default_panel="behind"
+        app:duration="100"
+        app:layout_constraintBottom_toTopOf="@+id/bt_sure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title"
+        app:layout_constraintVertical_bias="0.0"
+        app:percent="0.4">
+
+        <include
+            android:id="@+id/slidedetails_front"
+            layout="@layout/solution_detail_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <FrameLayout
+            android:id="@+id/slidedetails_behind"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.sj.module_lib.widgets.SlideDetailsLayout>
+
+    <Button
+        android:id="@+id/bt_sure"
+        style="@style/TxtCommonWhiteBig"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@android:color/holo_red_light"
+        android:text="选择此方案"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
