@@ -28,7 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:background="@drawable/bt_half_gray_normal"
         android:gravity="center_vertical"
+        android:paddingBottom="2dp"
+        android:paddingEnd="6dp"
+        android:paddingStart="6dp"
+        android:paddingTop="2dp"
         android:text="订单创建时间"
         app:layout_constraintStart_toStartOf="@+id/txt_order_id"
         app:layout_constraintTop_toBottomOf="@+id/txt_order_id" />
@@ -39,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="未支付"
         app:layout_constraintBottom_toTopOf="@+id/line1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txt_order_id"
@@ -73,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <ImageView
         android:id="@+id/txt_order_solution_icon"
@@ -92,9 +96,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/txt_order_state"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
@@ -108,7 +111,6 @@
         android:layout_marginEnd="4dp"
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/txt_order_state"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_order_solution_name"
@@ -163,7 +165,6 @@
         android:layout_marginEnd="2dp"
         android:layout_marginTop="2dp"
         android:gravity="left|center_vertical"
-        android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/guideline16"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView38"
@@ -177,7 +178,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="2dp"
         android:gravity="left|center_vertical"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/txt_order_state"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/guideline16"
@@ -190,6 +190,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="right"
+        android:lineSpacingMultiplier="1.2"
         android:text="@string/txt_order_venue_info_name"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintTop_toBottomOf="@+id/line2" />
@@ -200,7 +201,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="TextView"
+        android:lineSpacingMultiplier="1.2"
         app:layout_constraintEnd_toEndOf="@+id/txt_order_state"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_order_solution_id"
@@ -265,7 +266,11 @@
             android:layout_height="40dp"
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
+            android:background="@drawable/bt_gray_white_selector"
+            android:drawableStart="@drawable/bt_custom"
             android:gravity="center"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
             android:text="客服"
             app:layout_constraintBottom_toTopOf="@+id/guideline18"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
@@ -278,6 +283,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"
+            android:background="@drawable/bt_red_selector"
+            android:enabled="false"
             android:gravity="center"
             android:text="立即支付"
             app:layout_constraintBottom_toBottomOf="@+id/bt_service"
@@ -313,7 +320,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
-                android:text="TextView" />
+                android:textStyle="bold" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 

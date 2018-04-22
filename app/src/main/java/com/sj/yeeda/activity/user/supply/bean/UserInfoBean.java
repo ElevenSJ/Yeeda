@@ -27,6 +27,7 @@ public class UserInfoBean  implements Serializable{
     private String userName;
     private String sex;
     private String birthday;
+    private String companyName;
     private String phone;
     private String email;
     private String icon;
@@ -87,6 +88,14 @@ public class UserInfoBean  implements Serializable{
         this.icon = icon;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     @Override
     public String toString() {
         return "UserInfoBean{" +
@@ -94,6 +103,7 @@ public class UserInfoBean  implements Serializable{
                 ", userName='" + userName + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birthday='" + birthday + '\'' +
+                ", companyName='" + companyName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", icon='" + icon + '\'' +

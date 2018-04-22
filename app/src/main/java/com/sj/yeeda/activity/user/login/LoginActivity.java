@@ -1,7 +1,10 @@
 package com.sj.yeeda.activity.user.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,10 +12,17 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.DeviceUtils;
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.user.register.RegisterActivity;
 import com.sj.yeeda.base.BaseActivity;
+import com.sj.yeeda.service.IMInitService;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,6 +55,29 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         return R.layout.activity_login;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AndPermission.with(this)
+                .permission(Permission.WRITE_EXTERNAL_STORAGE,
+                        Permission.READ_EXTERNAL_STORAGE,
+                        Permission.READ_PHONE_STATE,
+                        Permission.ACCESS_COARSE_LOCATION,
+                        Permission.CAMERA,
+                        Permission.RECORD_AUDIO)
+                .onGranted(new Action() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        // TODO what to do.
+                    }
+                }).onDenied(new Action() {
+            @Override
+            public void onAction(List<String> permissions) {
+                // TODO what to do
+            }
+        }).start();
+    }
+
     /**
      * 倒计时60秒，一次1秒
      */
@@ -64,7 +97,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @OnClick({R.id.bt_getcode, R.id.bt_login, R.id.tv_register_detail})
     public void onClick(View view) {
-        Logger.i("onClick(View view):"+view.getId());
+        Logger.i("onClick(View view):" + view.getId());
         switch (view.getId()) {
             case R.id.bt_getcode:
                 presenter.getCode(edtPhoneValue.getText().toString().trim());

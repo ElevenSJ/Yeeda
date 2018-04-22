@@ -75,7 +75,7 @@ public class LoginPresenter implements LoginContract.Presenter {
      * @param deviceId
      */
     @Override
-    public void doLogin(String phoneNum, String codeNum, String deviceId) {
+    public void doLogin(final String phoneNum, String codeNum, String deviceId) {
         Logger.d("phoneNum:"+phoneNum+",codeNum:"+codeNum+",deviceId"+deviceId);
         if (TextUtils.isEmpty(phoneNum)||phoneNum.length()!=11){
             ToastUtils.showShortToast("手机号码不正确");
@@ -101,7 +101,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 LoginBean loginBean = new GsonResponsePasare<LoginBean>() {
                 }.deal(json);
                 String tokenId = loginBean.getTokenId();
-                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID,SPFileUtils.IS_LOGIN},new Object[]{tokenId,true});
+                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID,SPFileUtils.IS_LOGIN,SPFileUtils.USER_ACCOUNT},new Object[]{tokenId,true,phoneNum});
                 mView.toMainActivity();
             }
 

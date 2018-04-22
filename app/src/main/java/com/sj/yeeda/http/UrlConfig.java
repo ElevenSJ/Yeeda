@@ -1,10 +1,13 @@
 package com.sj.yeeda.http;
 
+import android.support.annotation.Keep;
+
 /**
  * 创建时间: on 2018/3/31.
  * 创建人: 孙杰
  * 功能描述:请求地址配置
  */
+@Keep
 public class UrlConfig {
     //baseUrl
     public static final String BASE_URL = "http://prj-huizhan.app-service-node.com";
@@ -59,16 +62,24 @@ public class UrlConfig {
     public static final String SAVE_ORDER_URL = "/appSaveOrder";
     //查询订单
     public static final String QUERY_ORDER_URL = "/appQueryOrderList";
+    //查询订单详情
+    public static final String QUERY_ORDER_DETAIL_URL = "/appQueryOrderDetail";
+    //查询订单通知列表
+    public static final String QUERY_ORDER_NEWS_URL = "/appQueryOrderNews";
     //支付宝支付获取sign
     public static final String GET_ALIPAY_SIGN_URL = "/getSignByAlipay";
     //微信统一下单
     public static final String GET_WECHAT_ORDER_URL = "/WXunifiedorder";
 
 
-    //微信统一下单
+    //微信支付appid
     public static String WECHAT_APP_ID = "";
-
 
     //查询租赁设备
     public static final String QUERY_DEVICES_URL = "/appQueryRentEquipment";
+
+    //查询IM账号
+    public static final String QUERY_IM_ACCOUNT_URL = "/getIMCusotmerNumber";
+    //查询IMToken
+    public static final String QUERY_IM_TOKEN_URL = "/getMD5Token";
 }

@@ -67,7 +67,7 @@
 
     <Button
         android:id="@+id/bt_sure"
-        style="@style/TxtCommonWhiteNormal"
+        style="@style/TxtTitleWhiteNormal"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/holo_red_light"

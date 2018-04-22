@@ -8,6 +8,33 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- 容联云通讯-->
+    //接收IM消息的自定义权限
+    <permission
+        android:name="com.sj.yeeda.permission.RECEIVE_MSG"
+        android:protectionLevel="signature" />
+    //使用接收IM消息权限
+    <uses-permission android:name="com.sj.yeeda.permission.RECEIVE_MSG" />
+    //接收来电的自定义权限
+    <permission
+        android:name="com.sj.yeeda.permission.INCOMING_CALL"
+        android:protectionLevel="signature" />
+    //使用接收来电权限
+    <uses-permission android:name="com.sj.yeeda.permission.INCOMING_CALL" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    //允许一个程序获取信息有关当前或最近运行的任务，一个缩略的任务状态，是否活动等等
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    //允许程序录制音频
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    //允许应用程序修改全局声音设置的权限
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    //允许使用PowerManager的WakeLocks在进程休眠时能够后台保持
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    //允许请求访问使用照相设备(如果使用视频通话则必选配置)
+    <uses-permission android:name="android.permission.CAMERA" />
+    //允许访问振动设备
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="true"
@@ -17,7 +44,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.welcome.SplashActivity"
             android:noHistory="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -43,34 +70,31 @@
             android:name=".activity.main.MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoTitle" />
-        <activity
-            android:name=".activity.user.usercenter.UserCenterActivity"
-            android:theme="@style/AppTheme.NoTitle" />
-        <activity
-            android:name=".activity.solutions.list.SolutionListActivity" />
-        <activity
-            android:name=".activity.invoice.InvoiceActivity" />
-        <activity
-            android:name=".activity.solutions.order.SolutionOrderActivity"/>
-        <activity
-            android:name=".activity.solutions.detail.SolutionDetailActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".activity.pay.PayActivity"/>
-        <activity
-            android:name=".activity.device.DeviceActivity" />
-        <activity
-            android:name=".activity.order.OrderActivity" />
 
-        <activity
-            android:name=".activity.venue.VenueActivity"
-            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.user.updateinfo.UserInfoUpdateActivity"
             android:theme="@style/AppTheme.NoTitle"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
 
+        <activity
+            android:name=".activity.user.usercenter.UserCenterActivity"
+            android:theme="@style/AppTheme.NoTitle"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
 
+
+        <activity android:name=".activity.solutions.list.SolutionListActivity" />
+        <activity android:name=".activity.invoice.InvoiceActivity" />
+        <activity android:name=".activity.solutions.order.SolutionOrderActivity" />
+        <activity android:name=".activity.solutions.detail.SolutionDetailActivity" />
+        <activity android:name=".activity.pay.PayActivity" />
+        <activity android:name=".activity.device.DeviceActivity" />
+        <activity android:name=".activity.order.list.OrderActivity" />
+        <activity android:name=".activity.venue.VenueActivity" />
+        <activity android:name=".activity.order.detail.OrderDetailActivity" />
+        <activity android:name=".activity.message.MessageActivity" />
+        <activity android:name=".activity.setting.SettingActivity" />
+        <activity android:name=".activity.service.ServiceCustomActivity" />
+        <activity android:name=".activity.photo.BrowserImageActivity" />
         <!--支付宝配置信息-->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
@@ -90,6 +114,78 @@
             android:name="net.sourceforge.simcpux.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
+
+        <!-- 极光推送 绑定别名service-->
+        <service android:name=".service.JPushAliasService" />
+        <!-- 容联IM初始化service-->
+        <service android:name=".service.IMInitService" />
+
+
+        <!-- 极光推送 消息接受receiver-->
+        <receiver
+            android:name=".receiver.JPushReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+
+                <category android:name="com.sj.yeeda" />
+            </intent-filter>
+        </receiver>
+
+
+        <!-- 容联云通讯 -->
+        // SDK核心服务配置
+        <service
+            android:name="com.yuntongxun.ecsdk.ECClientService"
+            android:enabled="true"
+            android:process=":push" />
+        // 提高sdk服务存活率（v5.2.2r以后版本提供）
+        <service
+            android:name="com.yuntongxun.ecsdk.ECClientService$InnerService"
+            android:enabled="true"
+            android:process=":push" />
+        // 以下两项为SDK内部处理项，其中booter.Alarm在v5.1.9r以后版本提供
+        <receiver
+            android:name="com.yuntongxun.ecsdk.booter.CCPReceivers$AlarmReceiver"
+            android:process=":push" />
+        <receiver
+            android:name="com.yuntongxun.ecsdk.booter.Alarm"
+            android:exported="false"
+            android:process=":push" />
+        // SDK网络改变广播
+        <receiver
+            android:name="com.yuntongxun.ecsdk.booter.CCPReceivers$ConnectionReceiver"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        // SDK广播通知配置（开机广播）// 可选广播、如果应用想做开机重启，可以实现该广播通知即可
+        <receiver
+            android:name="com.yuntongxun.ecsdk.booter.CCPReceivers$BootReceiver"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        // 声明自定义通知的广播接收器（需要替换包名，详见注意事项）
+        <receiver
+            android:name=".receiver.YuntxNotifyReceiver"
+            android:exported="false">
+            <intent-filter>
+                // 接收push消息
+                // action匹配规则{packageName + ".action" + "功能"}
+                <action android:name="com.yuntongxun.ecdemo.action.VOIP_CALL" />
+                <action android:name="com.yuntongxun.ecdemo.action.MESSAGE" />
+                <action android:name="com.yuntongxun.ecdemo.action.NOTIFICATION_CLICK" />
+                <action android:name="com.yuntongxun.ecdemo.action.PERSON_VERSION" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

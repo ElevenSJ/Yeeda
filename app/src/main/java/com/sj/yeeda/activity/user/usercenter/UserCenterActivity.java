@@ -14,8 +14,8 @@ import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.invoice.InvoiceActivity;
-import com.sj.yeeda.activity.main.MainActivity;
-import com.sj.yeeda.activity.order.OrderActivity;
+import com.sj.yeeda.activity.order.list.OrderActivity;
+import com.sj.yeeda.activity.setting.SettingActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
 import com.sj.yeeda.activity.user.updateinfo.UserInfoUpdateActivity;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
@@ -40,7 +40,7 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Pre
 
     UserRyvAdapter mAdapter;
 
-
+    UserInfoBean userInfoBean;
     @Override
     public UserCenterContract.Presenter getPresenter() {
         if (presenter==null){
@@ -102,6 +102,9 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Pre
                         break;
                     case 5:
                         //设置
+                        intent.setClass(UserCenterActivity.this, SettingActivity.class);
+                        intent.putExtra("data",userInfoBean);
+                        startActivity(intent);
                         break;
                         default:
                 }
@@ -118,8 +121,9 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Pre
 
     @Override
     public void upDataHeadView(UserInfoBean userInfoBean) {
+        this.userInfoBean = userInfoBean;
         if (userInfoBean!=null){
-            ImageUtils.loadImageWithError(userInfoBean.getIcon(),R.drawable.logo_big,imgUserHead);
+            ImageUtils.loadImageWithError(userInfoBean.getIcon(),R.drawable.logo,imgUserHead);
             txtUserName.setText(userInfoBean.getUserName());
         }
     }

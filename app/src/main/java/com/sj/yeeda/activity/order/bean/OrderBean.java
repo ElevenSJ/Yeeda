@@ -152,54 +152,7 @@ public class OrderBean implements Serializable{
         this.phone = phone;
     }
 
-    private class RentBean {
 
-        private String rentEquipmentId;
-        private String money;
-        private String orderId;
-        private String num;
-        private String id;
-
-        public String getRentEquipmentId() {
-            return rentEquipmentId;
-        }
-
-        public void setRentEquipmentId(String rentEquipmentId) {
-            this.rentEquipmentId = rentEquipmentId;
-        }
-
-        public String getMoney() {
-            return money;
-        }
-
-        public void setMoney(String money) {
-            this.money = money;
-        }
-
-        public String getOrderId() {
-            return orderId;
-        }
-
-        public void setOrderId(String orderId) {
-            this.orderId = orderId;
-        }
-
-        public String getNum() {
-            return num;
-        }
-
-        public void setNum(String num) {
-            this.num = num;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-    }
 
     private class InvoiceBean {
 

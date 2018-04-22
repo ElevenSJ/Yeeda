@@ -2,6 +2,7 @@ package com.sj.module_lib.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.ArrayMap;
 
 import com.orhanobut.logger.Logger;
 
@@ -20,7 +21,7 @@ public class SPUtils {
     private static volatile SPUtils spUtils;
 
 
-    private Map<String,SharedPreferences> sharedPreferences = new HashMap<>();
+    private Map<String, SharedPreferences> sharedPreferences = new ArrayMap<>();
 
     /*
      * 保存手机里面的名字
@@ -28,12 +29,12 @@ public class SPUtils {
     private SharedPreferences.Editor editor;
 
     public static SPUtils getInstance() {
-        if(mContext == null) {
+        if (mContext == null) {
             Logger.e("SharedPreferences please call the method of init() first");
         }
-        if(spUtils == null) {
-            synchronized(SPUtils.class) {
-                if(spUtils == null) {
+        if (spUtils == null) {
+            synchronized (SPUtils.class) {
+                if (spUtils == null) {
                     spUtils = new SPUtils();
                 }
             }
@@ -41,21 +42,22 @@ public class SPUtils {
         return spUtils;
     }
 
-    public static void init(Context context){
+    public static void init(Context context) {
         mContext = context.getApplicationContext();
     }
-    public SPUtils edit(String FILE_NAME){
-        if(mContext == null) {
+
+    public SPUtils edit(String FILE_NAME) {
+        if (mContext == null) {
             Logger.e("SharedPreferences please call the method of init() first");
             return spUtils;
         }
-        if(sharedPreferences.containsKey(FILE_NAME)){
+        if (sharedPreferences.containsKey(FILE_NAME)) {
             editor = sharedPreferences.get(FILE_NAME).edit();
-        }else{
+        } else {
             SharedPreferences sp = mContext.getSharedPreferences(FILE_NAME,
                     Context.MODE_PRIVATE);
-            sharedPreferences.put(FILE_NAME,sp);
-        editor = sp.edit();
+            sharedPreferences.put(FILE_NAME, sp);
+            editor = sp.edit();
         }
         editor.commit();
         return spUtils;
@@ -65,7 +67,7 @@ public class SPUtils {
      * 存储同步commit
      */
     public void commit(String key, Object object) {
-        if(editor == null) {
+        if (editor == null) {
             Logger.e("SharedPreferences please call the method of edit()");
             return;
         }
@@ -89,7 +91,7 @@ public class SPUtils {
      * 存储异步commit
      */
     public void apply(String key, Object object) {
-        if(editor == null) {
+        if (editor == null) {
             Logger.e("SharedPreferences please call the method of edit()");
             return;
         }
@@ -108,15 +110,16 @@ public class SPUtils {
         }
         editor.apply();
     }
+
     /**
      * 存储同步commit
      */
     public void commit(String[] keys, Object[] objects) {
-        if(editor == null) {
+        if (editor == null) {
             Logger.e("SharedPreferences please call the method of edit()");
             return;
         }
-        if(keys.length!=objects.length) {
+        if (keys.length != objects.length) {
             Logger.e("key - value not map  each other");
             return;
         }
@@ -124,7 +127,7 @@ public class SPUtils {
             if (objects[i] instanceof String) {
                 editor.putString(keys[i], (String) objects[i]);
             } else if (objects[i] instanceof Integer) {
-                editor.putInt(keys[i], (Integer)  objects[i]);
+                editor.putInt(keys[i], (Integer) objects[i]);
             } else if (objects[i] instanceof Boolean) {
                 editor.putBoolean(keys[i], (Boolean) objects[i]);
             } else if (objects[i] instanceof Float) {
@@ -142,11 +145,11 @@ public class SPUtils {
      * 存储异步apply
      */
     public void apply(String[] keys, Object[] objects) {
-        if(editor == null) {
+        if (editor == null) {
             Logger.e("SharedPreferences please call the method of edit()");
             return;
         }
-        if(keys.length!=objects.length) {
+        if (keys.length != objects.length) {
             Logger.e("key - value not map  each other");
             return;
         }
@@ -154,7 +157,7 @@ public class SPUtils {
             if (objects[i] instanceof String) {
                 editor.putString(keys[i], (String) objects[i]);
             } else if (objects[i] instanceof Integer) {
-                editor.putInt(keys[i], (Integer)  objects[i]);
+                editor.putInt(keys[i], (Integer) objects[i]);
             } else if (objects[i] instanceof Boolean) {
                 editor.putBoolean(keys[i], (Boolean) objects[i]);
             } else if (objects[i] instanceof Float) {
@@ -171,8 +174,8 @@ public class SPUtils {
     /**
      * 获取保存的数据
      */
-    public Object getSharedPreference(String FILE_NAME,String key, Object defaultObject) {
-        if (!sharedPreferences.containsKey(FILE_NAME)){
+    public Object getSharedPreference(String FILE_NAME, String key, Object defaultObject) {
+        if (!sharedPreferences.containsKey(FILE_NAME)) {
             Logger.e("SharedPreferences please call the method of edit()");
             return null;
         }
@@ -194,24 +197,31 @@ public class SPUtils {
     /**
      * 移除某个key值已经对应的值
      */
-    public void remove(String key) {
-        editor.remove(key);
-        editor.commit();
+    public void remove(String FILE_NAME, String key) {
+        if (!sharedPreferences.containsKey(FILE_NAME)) {
+            return;
+        }
+        sharedPreferences.get(FILE_NAME).edit().remove(key);
+        sharedPreferences.get(FILE_NAME).edit().commit();
     }
 
     /**
      * 清除所有数据
      */
     public void clear() {
-        editor.clear();
-        editor.commit();
+        for (Map.Entry<String, SharedPreferences> entry : sharedPreferences.entrySet()) {
+            SharedPreferences.Editor editor = entry.getValue().edit();
+            editor.clear();
+            editor.commit();
+
+        }
     }
 
     /**
      * 查询某个key是否存在
      */
-    public Boolean contain(String FILE_NAME,String key) {
-        if (sharedPreferences.containsKey(FILE_NAME)){
+    public Boolean contain(String FILE_NAME, String key) {
+        if (sharedPreferences.containsKey(FILE_NAME)) {
             return false;
         }
         return sharedPreferences.get(FILE_NAME).contains(key);
@@ -221,7 +231,7 @@ public class SPUtils {
      * 返回所有的键值对
      */
     public Map<String, ?> getAll(String FILE_NAME) {
-        if (sharedPreferences.containsKey(FILE_NAME)){
+        if (sharedPreferences.containsKey(FILE_NAME)) {
             return null;
         }
         return sharedPreferences.get(FILE_NAME).getAll();

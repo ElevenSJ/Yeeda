@@ -2,6 +2,7 @@ package com.sj.yeeda.base;
 
 import android.app.Application;
 
+import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.BuildConfig;
@@ -9,6 +10,7 @@ import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.module_lib.utils.Utils;
 import com.sj.yeeda.Utils.SPFileUtils;
+import com.sj.yeeda.http.UrlConfig;
 
 
 /**
@@ -30,5 +32,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         sInstance = this;
         Utils.init(sInstance);
+        HttpManager.init(this.getApplicationContext(), UrlConfig.BASE_URL);
     }
 }

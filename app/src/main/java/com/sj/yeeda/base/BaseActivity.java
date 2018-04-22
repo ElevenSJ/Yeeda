@@ -31,8 +31,8 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements BaseV
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
         ButterKnife.bind(this);
-        initView();
         presenter = getPresenter();
+        initView();
         try {
             ((BasePresenter)presenter).start();
         } catch (Exception e) {
@@ -67,6 +67,13 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements BaseV
         }
     }
 
+    public boolean isProgressShowing() {
+        if (progressDialog != null) {
+            return progressDialog.isShowing();
+        }else{
+            return false;
+        }
+    }
     public abstract T getPresenter();
 
     public abstract int getContentView();

@@ -53,4 +53,43 @@
     <!--我的场馆-->
     <string name="txt_order_venue_info_name">场馆名称\n场馆地址\n场馆联系人\n场馆联系人手机</string>
 
+
+    <!--订单详情-->
+    <string name="txt_order_detail_invoice_name">发票\n发票类型\n收货人\n收货人联系方式\n收货地址</string>
+    <string name="txt_order_detail_venue_name">场馆名称\n场馆地址\n场馆联系人\n场馆联系人手机\n施工方联系人\n施工方联系人手机</string>
+
+
+    <!-- Request permission start -->
+    <string name="rationale_record_voice">This app needs access microphone to record voice.</string>
+    <string name="rationale_photo">This app needs access photos.</string>
+    <string name="rationale_camera">This app needs access camera.</string>
+    <!-- Request permission end -->
+
+
+    <string-array name="messages_array">
+        <item>How are you</item>
+        <item>Fine. And you?</item>
+        <item>Me, too. Is there any news today?</item>
+        <item>Yep! I got a news here: boom! Tomorrow is the end of The Walking Dead!</item>
+        <item>Are you kidding me?</item>
+        <item>Absolutely not!</item>
+        <item>Jesus, that\'s crazy</item>
+        <item>I thought no one would gonna to make it</item>
+        <item>That\'s cruel, I don\'t like it, maybe there is a favourable turn</item>
+        <item>Hope so</item>
+    </string-array>
+
+    <string-array name="conversation">
+        <item>test</item>
+        <item>History message 1</item>
+        <item>History message 2</item>
+        <item>History message 3</item>
+        <item>History message 4</item>
+        <item>History message 5</item>
+        <item>History message 6</item>
+        <item>History message 7</item>
+        <item>History message 8</item>
+        <item>History message 9</item>
+        <item>History message 10</item>
+    </string-array>
 </resources>

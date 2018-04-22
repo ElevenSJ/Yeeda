@@ -19,6 +19,7 @@ public class InvoiceBean implements Parcelable{
      * account : 123
      * email : 213
      * expressAddress : 213
+     * "isDefault": "0",
      */
 
     private String uid;

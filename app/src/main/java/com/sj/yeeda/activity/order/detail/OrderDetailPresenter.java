@@ -1,0 +1,58 @@
+package com.sj.yeeda.activity.order.detail;
+
+import android.util.ArrayMap;
+
+import com.jady.retrofitclient.HttpManager;
+import com.orhanobut.logger.Logger;
+import com.sj.module_lib.utils.SPUtils;
+import com.sj.yeeda.Utils.SPFileUtils;
+import com.sj.yeeda.activity.order.bean.OrderDetailBean;
+import com.sj.yeeda.activity.order.bean.OrderList;
+import com.sj.yeeda.http.Callback;
+import com.sj.yeeda.http.GsonResponsePasare;
+import com.sj.yeeda.http.UrlConfig;
+
+import java.util.Map;
+
+/**
+ * 创建时间: on 2018/4/14.
+ * 创建人: 孙杰
+ * 功能描述:
+ */
+public class OrderDetailPresenter implements OrderDetailContract.Presenter{
+    OrderDetailContract.View mView;
+
+    String token;
+    public OrderDetailPresenter(OrderDetailContract.View view) {
+        mView = view;
+    }
+
+    @Override
+    public void start() {
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
+    }
+
+    @Override
+    public void getOrderDetail(String id) {
+        Map<String, Object> parameters = new ArrayMap<>(2);
+        parameters.put("token", token);
+        parameters.put("id", id);
+        HttpManager.get(UrlConfig.QUERY_ORDER_DETAIL_URL, parameters, new Callback() {
+            @Override
+            public void onSuccess(String json) {
+
+            }
+
+            @Override
+            public void onSuccessData(String json) {
+                OrderDetailBean orderDetailBean = new GsonResponsePasare<OrderDetailBean>(){}.deal(json);
+                mView.updateOrderDetailView(orderDetailBean);
+            }
+
+            @Override
+            public void onFailure(String error_code, String error_message) {
+            }
+
+        });
+    }
+}

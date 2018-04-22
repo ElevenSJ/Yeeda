@@ -53,6 +53,22 @@ public class DateUtils {
         }
         return time;
     }
+    /**
+     * 获取时间HH:mm:ss
+     *
+     * @return
+     */
+    public static String getCurrentTime(String pattern) {
+        String time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        String date = sdf.format(new Date());
+        //"\\s"以空格截断
+        String[] split = date.split("\\s");
+        if (split.length > 1) {
+            time = split[1];
+        }
+        return time;
+    }
 
     /**
      * 获取当前时间的年月日时分秒

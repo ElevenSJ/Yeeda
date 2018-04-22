@@ -44,7 +44,7 @@ public class SolutionDetailBean {
     }
 
     @Keep
-    private class ImageBena {
+    public static class ImageBena {
         /**
          * createtime : 2018-04-11 20:12:13
          * imgPath : https://public.app-storage-node.com/Fn97dfMsyanmS25S0qL_TDP77aot?attname=6.png

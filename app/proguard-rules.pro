@@ -50,6 +50,15 @@
 
 -keep @android.support.annotation.Keep class * {*;}
 
+#极光推送
+-dontoptimize
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
 
 # 所有View的子类及其子类的get、set方法都不进行混淆
 -keep public class * extends android.view.View{
@@ -211,3 +220,11 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
+
+#容联云通讯
+-keep class com.yuntongxun.ecsdk.** {*; }
+
+#imui
+-keep class cn.jiguang.imui.** { *; }
+#
+-dontwarn com.yanzhenjie.permission.**

@@ -1,8 +1,8 @@
 package com.sj.yeeda.base;
 
+import android.support.annotation.Keep;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,14 +19,14 @@ import butterknife.OnClick;
  * 创建人: 孙杰
  * 功能描述:
  */
-
+@Keep
 public abstract class TitleBaseActivity<T> extends BaseActivity<T> {
 
     @Nullable
     @BindView(R.id.img_title_right)
     ImageView imgTitleRight;
     @Nullable
-    @BindView(R.id.txt_title)
+    @BindView(R.id.txt_message_title)
     TextView txtTitle;
     @Nullable
     @BindView(R.id.layout_title)

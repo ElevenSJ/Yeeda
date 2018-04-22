@@ -7,10 +7,8 @@ import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
-import com.sj.yeeda.activity.user.othertask.UserInfoSaveTask;
-import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
+import com.sj.yeeda.othertask.UserInfoSaveTask;
 import com.sj.yeeda.http.Callback;
-import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 
 import java.util.HashMap;

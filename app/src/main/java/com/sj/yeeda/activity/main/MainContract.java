@@ -20,5 +20,6 @@ public interface MainContract {
         void getUserInfo();
         void loginOut();
 
+        void initIM();
     }
 }

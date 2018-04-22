@@ -1,6 +1,7 @@
 package com.sj.yeeda.http;
 
 import android.content.Intent;
+import android.support.annotation.Keep;
 
 import com.google.gson.Gson;
 import com.jady.retrofitclient.HttpManager;
@@ -23,6 +24,7 @@ import java.util.Map;
  * 创建人: 孙杰
  * 功能描述:请求回调基类
  */
+@Keep
 public abstract class Callback extends HttpCallback<String> {
     @Override
     public void onResolve(String json) {

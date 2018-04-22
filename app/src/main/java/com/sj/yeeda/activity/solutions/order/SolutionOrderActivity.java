@@ -272,6 +272,8 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
 //        }
 //        venueRyvAdapter.add(venueBean);
         this.venueBean = venueBean;
+        cbVenue.setClickable(false);
+        cbVenue.setChecked(true);
         if (venueBean!=null){
             cbVenue.setVisibility(View.VISIBLE);
             venueTitle.setText(venueBean.getName());
@@ -290,6 +292,8 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
 //        }
 //        invoiceRyvAdapter.add(invoiceBean);
         this.invoiceBean = invoiceBean;
+        cbInvoice.setChecked(true);
+        cbInvoice.setClickable(false);
         if (invoiceBean!=null){
             cbInvoice.setVisibility(View.VISIBLE);
             invoiceTitle.setText(invoiceBean.getTitle());

@@ -1,6 +1,7 @@
 package com.sj.yeeda.activity.solutions.detail;
 
-import android.os.Build;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -15,46 +16,51 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.sj.module_lib.glide.ImageUtils;
-import com.sj.module_lib.widgets.SlideDetailsLayout;
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.solutions.adapter.ViewPageImageAdapter;
 import com.sj.yeeda.activity.solutions.detail.bean.SolutionDetailBean;
+import com.sj.yeeda.activity.solutions.order.SolutionOrderActivity;
 import com.sj.yeeda.base.TitleBaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailContract.Presenter> implements SolutionDetailContract.View {
-    @BindView(R.id.slidedetails_front)
-    FrameLayout slidedetailsFront;
-    @BindView(R.id.slidedetails_behind)
-    FrameLayout slidedetailsBehind;
-    @BindView(R.id.slidedetails)
-    SlideDetailsLayout slidedetails;
     @BindView(R.id.bt_sure)
     Button btSure;
 
     String id;
 
     WebView webView;
+    @BindView(R.id.slidedetails_behind)
+    FrameLayout slidedetailsBehind;
 
-//    @BindView(R.id.viewPager)
-//    ViewPager viewPager;
-//    @BindView(R.id.txt_img_num)
-//    TextView txtImgNum;
-//    @BindView(R.id.txt_designer_value)
-//    TextView txtDesignerValue;
-//    @BindView(R.id.txt_solutian_name)
-//    TextView txtSolutianName;
-//    @BindView(R.id.txt_installation)
-//    TextView txtInstallation;
-//    @BindView(R.id.txt_solution_info)
-//    TextView txtSolutionInfo;
-//    @BindView(R.id.img_designer_icon)
-//    ImageView imgDesignerIcon;
-//    @BindView(R.id.ratingBar)
-//    RatingBar ratingBar;
-//    @BindView(R.id.txt_solution_price)
-//    TextView txtSolutionPrice;
+    SolutionDetailBean solutionDetailBean;
+    @BindView(R.id.viewPager)
+    ViewPager viewPager;
+    @BindView(R.id.txt_img_num)
+    TextView txtImgNum;
+    @BindView(R.id.txt_designer_value)
+    TextView txtDesignerValue;
+    @BindView(R.id.txt_solutian_name)
+    TextView txtSolutianName;
+    @BindView(R.id.txt_installation)
+    TextView txtInstallation;
+    @BindView(R.id.txt_solution_info)
+    TextView txtSolutionInfo;
+    @BindView(R.id.img_designer_icon)
+    ImageView imgDesignerIcon;
+    @BindView(R.id.txt_designer_name)
+    TextView txtDesignerName;
+    @BindView(R.id.ratingBar)
+    RatingBar ratingBar;
+    @BindView(R.id.txt_solution_price_name)
+    TextView txtSolutionPriceName;
+    @BindView(R.id.txt_solution_price)
+    TextView txtSolutionPrice;
+
+    ViewPageImageAdapter imageAdapter;
 
     @Override
     public SolutionDetailContract.Presenter getPresenter() {
@@ -76,15 +82,32 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
         getPresenter().getSolutionDetail(id);
     }
 
+
     @Override
     public void initView() {
         super.initView();
         setTitleTxt("方案详情");
         setTitleBg();
 
-        View detailView = getLayoutInflater().inflate(R.layout.solution_detail_info_layout, null);
-        ButterKnife.bind(this, detailView);
-        slidedetailsFront.addView(detailView);
+        imageAdapter = new ViewPageImageAdapter(this);
+        // 更新下标
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+
+            @Override
+            public void onPageSelected(int arg0) {
+                txtImgNum.setText((arg0+1)+"/"+solutionDetailBean.getImgs().size()+"");
+            }
+
+        });
+        viewPager.setAdapter(imageAdapter);
 
 
         webView = new WebView(this);
@@ -92,9 +115,7 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
         final WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
-        settings.setBuiltInZoomControls(true);
         settings.setUseWideViewPort(true);
-        settings.setDomStorageEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -103,36 +124,48 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
                 return true;
             }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR_MR1) {
-            new Object() {
-                public void setLoadWithOverviewMode(boolean overview) {
-                    settings.setLoadWithOverviewMode(overview);
-                }
-            }.setLoadWithOverviewMode(true);
-        }
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+    }
+
+    @OnClick(R.id.bt_sure)
+    public void onViewClick(View view) {
+        if (solutionDetailBean != null) {
+            Intent intent = new Intent(this, SolutionOrderActivity.class);
+            intent.putExtra("data", solutionDetailBean.getScheme());
+            startActivity(intent);
+        } else {
+            ToastUtils.showShortToast("未获取到方案详情");
+        }
     }
 
 
     @Override
     public void updateSolutionDetail(final SolutionDetailBean solutionDetailBean) {
+        this.solutionDetailBean = solutionDetailBean;
         if (solutionDetailBean != null) {
-//            txtImgNum.setText(solutionDetailBean.getImgs().size());
-//            if (solutionDetailBean.getScheme() != null) {
-//                txtDesignerValue.setText(solutionDetailBean.getScheme().getUserName());
-//                txtSolutianName.setText(solutionDetailBean.getScheme().getSchemeName());
-//                txtSolutionInfo.setText("id:" + solutionDetailBean.getScheme().getId() + " | " + "面积:" + solutionDetailBean.getScheme().getAreaCategory());
-//                txtInstallation.setText(solutionDetailBean.getScheme().getInstallation());
-//                ImageUtils.loadImageWithError(solutionDetailBean.getScheme().getIcon(), R.drawable.img_personal_center_circle, imgDesignerIcon);
-//                txtSolutionPrice.setText(solutionDetailBean.getScheme().getSchemePrice());
-//            }
-//            getWindow().getDecorView().post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    webView.loadUrl(solutionDetailBean.getScheme().getDetailed());
-//
-//                }
-//            });
+            btSure.setEnabled(true);
+            getWindow().getDecorView().post(new Runnable() {
+                @Override
+                public void run() {
+                    webView.loadUrl(solutionDetailBean.getScheme().getDetailed());
+
+                }
+            });
+            imageAdapter.setData(solutionDetailBean.getImgs());
+            txtImgNum.setText(solutionDetailBean.getImgs().size()>0?"1/"+solutionDetailBean.getImgs().size():""+solutionDetailBean.getImgs().size());
+            if (solutionDetailBean.getScheme() != null) {
+                Drawable drawableLeft = getResources().getDrawable(solutionDetailBean.getUser().getSex().equals("0")?R.drawable.img_female:R.drawable.img_male);// 找到资源图片
+                drawableLeft.setBounds(0, 0, drawableLeft.getMinimumWidth(), drawableLeft.getMinimumHeight());
+                txtDesignerValue.setCompoundDrawables(drawableLeft, null, null, null);// 设置到控件中
+                txtDesignerValue.setText(solutionDetailBean.getUser().getUserName());
+                txtSolutianName.setText(solutionDetailBean.getScheme().getSchemeName());
+                txtSolutionInfo.setText("id:" + solutionDetailBean.getScheme().getId() + " | " + "面积:" + solutionDetailBean.getScheme().getAreaCategory());
+                txtInstallation.setText(solutionDetailBean.getScheme().getInstallation());
+                ImageUtils.loadImageWithError(solutionDetailBean.getScheme().getIcon(), R.drawable.img_personal_center_circle, imgDesignerIcon);
+                txtSolutionPrice.setText("¥" + solutionDetailBean.getScheme().getSchemePrice());
+            }
+            ratingBar.setRating(30);
+
         }
     }
 }
