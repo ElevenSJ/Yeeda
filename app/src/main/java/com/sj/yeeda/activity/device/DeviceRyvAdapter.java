@@ -58,7 +58,7 @@ public class DeviceRyvAdapter extends RecyclerArrayAdapter<DeviceBean> {
             txtCompany.setText(data.getRentCompanyId());
             txtPrice.setText("¥" + data.getPrice());
             ImageUtils.loadImageWithError(data.getThumbnail(), R.drawable.logo, imgIcon);
-
+            amountView.setAmount(data.getNum());
             amountView.setGoods_storage(5000);
             amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
                 @Override

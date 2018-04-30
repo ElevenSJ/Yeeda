@@ -15,5 +15,6 @@ public interface OrderContract {
     }
 
     interface Presenter extends BasePresenter {
+        void getOrders(String fistIndex,int pageNum);
     }
 }

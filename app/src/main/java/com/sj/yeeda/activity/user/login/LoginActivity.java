@@ -1,6 +1,9 @@
 package com.sj.yeeda.activity.user.login;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.PersistableBundle;
@@ -21,6 +24,12 @@ import com.sj.yeeda.service.IMInitService;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+import com.yuntongxun.ecsdk.ECInitParams;
+import com.yuntongxun.ecsdk.SdkErrorCode;
+import com.yuntongxun.plugin.common.AppMgr;
+import com.yuntongxun.plugin.common.SDKCoreHelper;
+import com.yuntongxun.plugin.greendao3.helper.DaoHelper;
+import com.yuntongxun.plugin.im.dao.helper.IMDao;
 
 import java.util.List;
 
@@ -32,7 +41,7 @@ import butterknife.OnClick;
  * 创建人: 孙杰
  * 功能描述:登录页
  */
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
+public class LoginActivity extends BaseActivity<LoginContract.Presenter> implements LoginContract.View {
     @BindView(R.id.edt_phone_value)
     EditText edtPhoneValue;
     @BindView(R.id.edt_code_value)
@@ -45,8 +54,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     TextView tvRegisterDetail;
 
     @Override
-    public LoginPresenter getPresenter() {
-        presenter = new LoginPresenter(this);
+    public LoginContract.Presenter getPresenter() {
+        if (presenter==null) {
+            presenter = new LoginPresenter(this);
+        }
         return presenter;
     }
 
@@ -76,6 +87,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 // TODO what to do
             }
         }).start();
+
     }
 
     /**
@@ -100,10 +112,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         Logger.i("onClick(View view):" + view.getId());
         switch (view.getId()) {
             case R.id.bt_getcode:
-                presenter.getCode(edtPhoneValue.getText().toString().trim());
+                getPresenter().getCode(edtPhoneValue.getText().toString().trim());
                 break;
             case R.id.bt_login:
-                presenter.doLogin(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim(), DeviceUtils.getUniqueId(this));
+                getPresenter().doLogin(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim(), DeviceUtils.getUniqueId(this));
                 break;
             case R.id.tv_register_detail:
                 Intent register = new Intent(LoginActivity.this, RegisterActivity.class);

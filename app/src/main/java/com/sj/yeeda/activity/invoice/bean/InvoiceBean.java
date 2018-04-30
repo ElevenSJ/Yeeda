@@ -20,6 +20,9 @@ public class InvoiceBean implements Parcelable{
      * email : 213
      * expressAddress : 213
      * "isDefault": "0",
+     *  companyName  公司名
+     contact   联系人
+     contactPhone  联系人号码
      */
 
     private String uid;
@@ -33,8 +36,10 @@ public class InvoiceBean implements Parcelable{
     private String account;
     private String email;
     private String expressAddress;
-
     private String isDefault;
+    private String companyName;
+    private String contact;
+    private String contactPhone;
 
     private InvoiceBean(){
 
@@ -52,6 +57,10 @@ public class InvoiceBean implements Parcelable{
         this.email = builder.email;
         this.expressAddress = builder.expressAddress;
         this.isDefault = builder.isDefault;
+        this.companyName = builder.companyName;
+        this.contact = builder.contact;
+        this.contactPhone = builder.contactPhone;
+
     }
 
     public String getUid() {
@@ -150,6 +159,30 @@ public class InvoiceBean implements Parcelable{
         this.isDefault = isDefault;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
     /**
      * 这里默认返回0即可
      */
@@ -174,6 +207,9 @@ public class InvoiceBean implements Parcelable{
         dest.writeString(email);
         dest.writeString(expressAddress);
         dest.writeString(isDefault);
+        dest.writeString(companyName);
+        dest.writeString(contact);
+        dest.writeString(contactPhone);
 
     }
     public InvoiceBean(Parcel source) {
@@ -189,6 +225,9 @@ public class InvoiceBean implements Parcelable{
         email=source.readString();
         expressAddress=source.readString();
         isDefault=source.readString();
+        companyName=source.readString();
+        contact=source.readString();
+        contactPhone=source.readString();
     }
     public static final Creator<InvoiceBean> CREATOR = new Creator<InvoiceBean>() {
 
@@ -219,6 +258,9 @@ public class InvoiceBean implements Parcelable{
         private String email;
         private String expressAddress;
         private String isDefault = "0";
+        private String companyName;
+        private String contact;
+        private String contactPhone;
 
         public Builder uid(String uid) {
             this.uid = uid;
@@ -279,6 +321,21 @@ public class InvoiceBean implements Parcelable{
             this.isDefault = isDefault;
             return this;
         }
+        public Builder companyName(String companyName) {
+            this.companyName = companyName;
+            return this;
+        }
+
+        public Builder contact(String contact) {
+            this.contact = contact;
+            return this;
+        }
+
+        public Builder contactPhone(String contactPhone) {
+            this.contactPhone = contactPhone;
+            return this;
+        }
+
 
         public InvoiceBean build() {
             return new InvoiceBean(this);

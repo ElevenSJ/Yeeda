@@ -19,6 +19,7 @@ public class SPFileUtils {
     public static String IS_LOGIN = "isLogin";
 
     public static String IS_SET_JPUSH_ALIAS = "isSetALias";
+    public static String IM_IS_CONNECTED = "im_is_connected";
 
 
     //IM账号数据SP文件名
@@ -26,5 +27,5 @@ public class SPFileUtils {
     public static String IM_TOKEN_ID = "im_tokenID";
     public static String KEFU_ID = "kefuID";
     public static String TEZHAN_ID = "tezhanID";
-    public static String DINGDAN_LOGIN = "dingdanID";
+    public static String DINGDAN_ID = "dingdanID";
 }

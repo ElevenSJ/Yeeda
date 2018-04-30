@@ -39,10 +39,11 @@
         android:id="@+id/edt_name_value"
         style="@style/TxtCommonWhiteNormal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
         android:background="@null"
+        android:cursorVisible="true"
         android:ems="11"
         android:gravity="left|center_vertical|fill_vertical"
         android:hint="@string/txt_supply_name_hint"
@@ -62,19 +63,21 @@
         android:layout_marginStart="16dp"
         android:text="@string/txt_supply_name"
         app:layout_constraintBottom_toBottomOf="@+id/edt_name_value"
-        app:layout_constraintStart_toStartOf="@+id/line_venue" />
+        app:layout_constraintStart_toStartOf="@+id/line_venue"
+        app:layout_constraintTop_toTopOf="@+id/edt_name_value" />
 
     <TextView
         android:id="@+id/tv_code_name"
         style="@style/TxtCommonWhiteNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/txt_supply_sex"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="@+id/tv_phone_name"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tv_phone_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_phone_name" />
+        app:layout_constraintTop_toBottomOf="@+id/line_venue"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
 
     <Button
         android:id="@+id/bt_login"
@@ -127,7 +130,7 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"

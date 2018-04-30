@@ -21,6 +21,8 @@ public class VenuePresenter implements VenueContract.Presenter {
     String token;
     public VenuePresenter(VenueContract.View view){
         mView = view;
+        userId = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.USER_ID, "");
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
     }
     @Override
     public void getVenueInfo() {
@@ -135,8 +137,6 @@ public class VenuePresenter implements VenueContract.Presenter {
 
     @Override
     public void start() {
-        userId = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.USER_ID, "");
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
         getVenueInfo();
     }
 }

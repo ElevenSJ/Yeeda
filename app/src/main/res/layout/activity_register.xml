@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -38,10 +39,11 @@
         android:id="@+id/edt_phone_value"
         style="@style/TxtCommonWhiteNormal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
         android:background="@null"
+        android:cursorVisible="true"
         android:ems="11"
         android:gravity="left|center_vertical|fill_vertical"
         android:hint="@string/txt_phone_hint"
@@ -59,15 +61,17 @@
         android:layout_marginStart="16dp"
         android:text="@string/txt_phone"
         app:layout_constraintBottom_toBottomOf="@+id/edt_phone_value"
-        app:layout_constraintStart_toStartOf="@+id/line_venue" />
+        app:layout_constraintStart_toStartOf="@+id/line_venue"
+        app:layout_constraintTop_toTopOf="@+id/edt_phone_value" />
 
     <EditText
         android:id="@+id/edt_code_value"
         style="@style/TxtCommonWhiteNormal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@null"
+        android:cursorVisible="true"
         android:digits="1234567890qazwsxedcrfvtgbyhnujmikolpQAZWSXEDCRFVTGBYHNUJMIKOLP"
         android:ems="11"
         android:gravity="left|center_vertical"
@@ -85,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_code"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_code_value"
         app:layout_constraintEnd_toEndOf="@+id/tv_phone_name"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tv_phone_name"
@@ -96,15 +101,15 @@
         android:layout_width="75dp"
         android:layout_height="30dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="4dp"
         android:background="@drawable/bt_fillet_selector"
         android:ems="11"
         android:gravity="center"
         android:paddingHorizontal="4dp"
         android:paddingVertical="2dp"
         android:text="@string/txt_get_code"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_code_value"
         app:layout_constraintEnd_toEndOf="@+id/line_venue"
-        app:layout_constraintTop_toBottomOf="@+id/line_venue" />
+        app:layout_constraintTop_toTopOf="@+id/edt_code_value" />
 
     <ImageView
         android:id="@+id/img_logo"
@@ -134,6 +139,23 @@
         app:layout_constraintStart_toStartOf="@+id/line_venue"
         app:layout_constraintTop_toBottomOf="@+id/edt_code_value" />
 
+    <CheckBox
+        android:id="@+id/rdbt_agree"
+        style="@style/TxtHintCommonWhiteNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:drawableLeft="@drawable/bt_green_radiobt_selector"
+        android:drawablePadding="18dp"
+        android:gravity="left|center_vertical"
+        android:text="同意"
+        app:layout_constraintStart_toStartOf="@+id/bt_register"
+        app:layout_constraintTop_toBottomOf="@+id/bt_register" />
+
     <TextView
         android:id="@+id/tv_toLogin"
         style="@style/TxtCommonWhiteSmall"
@@ -150,8 +172,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_register"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintTop_toBottomOf="@+id/rdbt_agree"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txt_register_html"
+        style="@style/TxtCommonWhiteSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="《艺搭环保软件注册协议》"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/rdbt_agree"
+        app:layout_constraintStart_toEndOf="@+id/rdbt_agree"
+        app:layout_constraintTop_toTopOf="@+id/rdbt_agree" />
 
 
 </android.support.constraint.ConstraintLayout>

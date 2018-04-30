@@ -13,24 +13,28 @@ import java.io.Serializable;
 public class UserInfoBean  implements Serializable{
 
     private static final long serialVersionUID=111L;
+
+
     /**
-     * id : 922337051831838886717f129a0ee654742b5bd3f03239b193e
-     * userName : 999
+     * id : hz1522502127400fChs
+     * userName : 15605198042
      * sex : 1
-     * birthday : 1989-10-12
-     * phone : 15985814330
-     * email : 999999@qq.com
-     * icon : null
+     * companyName :
+     * phone : 15605198042
+     * email : 123456
+     * icon :
+     * type : 0（普通会员） 1（设计师）  2（加盟方）
      */
 
     private String id;
     private String userName;
     private String sex;
-    private String birthday;
     private String companyName;
     private String phone;
     private String email;
     private String icon;
+    private String type;
+    private String birthday;
 
     public String getId() {
         return id;
@@ -56,12 +60,12 @@ public class UserInfoBean  implements Serializable{
         this.sex = sex;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getPhone() {
@@ -88,25 +92,19 @@ public class UserInfoBean  implements Serializable{
         this.icon = icon;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getType() {
+        return type;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfoBean{" +
-                "id='" + id + '\'' +
-                ", userName='" + userName + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", icon='" + icon + '\'' +
-                '}';
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

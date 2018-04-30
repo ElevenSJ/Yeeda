@@ -24,12 +24,12 @@ public class SolutionOrderPresent implements SolutionOrderContract.Presenter {
 
     public SolutionOrderPresent(SolutionOrderContract.View view) {
         mView = view;
+        userId = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.USER_ID, "");
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
     }
 
     @Override
     public void start() {
-        userId = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.USER_ID, "");
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
         queryDefaultVenue();
     }
 
@@ -82,7 +82,7 @@ public class SolutionOrderPresent implements SolutionOrderContract.Presenter {
             public void onSuccessData(String json) {
                 OrderResultBean orderResultBean = new GsonResponsePasare<OrderResultBean>() {
                 }.deal(json);
-                mView.toPay(orderResultBean.getId());
+                mView.toPay(orderResultBean.getId(),orderResultBean.getMoney());
             }
 
             @Override

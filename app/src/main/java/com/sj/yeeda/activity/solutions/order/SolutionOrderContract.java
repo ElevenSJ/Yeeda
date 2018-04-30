@@ -12,7 +12,7 @@ import com.sj.yeeda.base.BaseView;
  */
 public interface SolutionOrderContract {
     interface View extends BaseView {
-        void toPay(String orderId);
+        void toPay(String orderId,String allPrice);
         void updateVenue(VenueBean venueBean);
         void updateInVoice(InvoiceBean invoiceBean);
 

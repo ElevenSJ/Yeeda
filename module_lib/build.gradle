@@ -10,7 +10,14 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+//        ndk {
+//            //选择要添加的对应cpu类型的.so库。
+////            abiFilters  'armeabi-v7a', 'arm64-v8a'
+//            abiFilters "armeabi", "armeabi-v7a"
+//            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+//        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,7 +34,7 @@ dependencies {
     //日志
     api 'com.orhanobut:logger:2.2.0'
     //图片加载
-//    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    api 'com.github.bumptech.glide:glide:3.8.0'
     //网络
     implementation 'com.squareup.okhttp3:okhttp:3.8.0'
     //implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -35,8 +42,9 @@ dependencies {
     //implementation 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 
     //IMUI
-    api 'cn.jiguang.imui:messagelist:0.7.2'
-    api 'cn.jiguang.imui:chatinput:0.7.3'//已经依赖了glide:3.8.0
+//    api 'cn.jiguang.imui:messagelist:0.7.2'
+//    api 'cn.jiguang.imui:chatinput:0.7.3'//已经依赖了glide:3.8.0
 
     api 'com.yanzhenjie:permission:2.0.0-rc4'
+
 }

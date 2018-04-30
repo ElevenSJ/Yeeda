@@ -191,6 +191,7 @@
 
                 <TextView
                     android:id="@+id/edt_time_end"
+                    style="@style/TxtCommonBlackNormal"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="4dp"
@@ -208,6 +209,7 @@
 
                 <TextView
                     android:id="@+id/edt_time_begain"
+                    style="@style/TxtCommonBlackNormal"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="4dp"
@@ -224,6 +226,7 @@
 
                 <EditText
                     android:id="@+id/edt_area"
+                    style="@style/TxtCommonBlackNormal"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="8dp"
@@ -311,7 +314,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="已选设备"
+                    android:text="已选设备 0"
                     app:layout_constraintBottom_toBottomOf="@+id/bt_choose_device"
                     app:layout_constraintStart_toStartOf="@+id/guideline7"
                     app:layout_constraintTop_toTopOf="@+id/bt_choose_device" />
@@ -361,6 +364,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="发票"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="parent"
@@ -382,6 +386,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/guideline9"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -423,7 +428,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/line_invoice"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintTop_toTopOf="parent"/>
                 <!--
                 <com.jude.easyrecyclerview.EasyRecyclerView
                     android:id="@+id/layout_invoice"

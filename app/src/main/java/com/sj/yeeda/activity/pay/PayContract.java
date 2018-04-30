@@ -1,7 +1,7 @@
 package com.sj.yeeda.activity.pay;
 
 import com.sj.yeeda.activity.pay.bean.PayListItemBean;
-import com.sj.yeeda.activity.pay.wechat.WechatOrderBean;
+import com.sj.yeeda.wxapi.WechatOrderBean;
 import com.sj.yeeda.base.BasePresenter;
 import com.sj.yeeda.base.BaseView;
 

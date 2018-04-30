@@ -12,7 +12,7 @@
         layout="@layout/activity_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+<!--
     <cn.jiguang.imui.messages.ptr.PullToRefreshLayout
         android:id="@+id/pull_to_refresh_layout"
         android:layout_width="match_parent"
@@ -56,5 +56,5 @@
         android:layout_alignParentBottom="true"
         app:showSelectAlbum="true" />
 
-
+-->
 </com.sj.yeeda.widgets.ChatView>

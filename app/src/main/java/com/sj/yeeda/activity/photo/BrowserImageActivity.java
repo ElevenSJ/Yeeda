@@ -19,7 +19,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.jiguang.imui.commons.BitmapLoader;
 
 
 public class BrowserImageActivity extends Activity {
@@ -54,27 +53,27 @@ public class BrowserImageActivity extends Activity {
         String msgId = getIntent().getStringExtra("msgId");
         int position = mMsgIdList.indexOf(msgId);
         String path = mPathList.get(position);
-        if (path != null) {
-            Bitmap bitmap = mCache.get(path);
-            if (bitmap != null) {
-                photoView.setImageBitmap(bitmap);
-            } else {
-                File file = new File(path);
-                if (file.exists()) {
-                    bitmap = BitmapLoader.getBitmapFromFile(path, mWidth, mHeight);
-                    if (bitmap != null) {
-                        photoView.setImageBitmap(bitmap);
-                        mCache.put(path, bitmap);
-                    } else {
-                        photoView.setImageResource(R.drawable.aurora_picture_not_found);
-                    }
-                } else {
-                    photoView.setImageResource(R.drawable.aurora_picture_not_found);
-                }
-            }
-        } else {
-            photoView.setImageResource(R.drawable.aurora_picture_not_found);
-        }
+//        if (path != null) {
+//            Bitmap bitmap = mCache.get(path);
+//            if (bitmap != null) {
+//                photoView.setImageBitmap(bitmap);
+//            } else {
+//                File file = new File(path);
+//                if (file.exists()) {
+//                    bitmap = BitmapLoader.getBitmapFromFile(path, mWidth, mHeight);
+//                    if (bitmap != null) {
+//                        photoView.setImageBitmap(bitmap);
+//                        mCache.put(path, bitmap);
+//                    } else {
+//                        photoView.setImageResource(R.drawable.aurora_picture_not_found);
+//                    }
+//                } else {
+//                    photoView.setImageResource(R.drawable.aurora_picture_not_found);
+//                }
+//            }
+//        } else {
+//            photoView.setImageResource(R.drawable.aurora_picture_not_found);
+//        }
         mViewPager.setCurrentItem(position);
     }
 
@@ -95,27 +94,27 @@ public class BrowserImageActivity extends Activity {
             photoView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             photoView.setTag(position);
             String path = mPathList.get(position);
-            if (path != null) {
-                Bitmap bitmap = mCache.get(path);
-                if (bitmap != null) {
-                    photoView.setImageBitmap(bitmap);
-                } else {
-                    File file = new File(path);
-                    if (file.exists()) {
-                        bitmap = BitmapLoader.getBitmapFromFile(path, mWidth, mHeight);
-                        if (bitmap != null) {
-                            photoView.setImageBitmap(bitmap);
-                            mCache.put(path, bitmap);
-                        } else {
-                            photoView.setImageResource(R.drawable.aurora_picture_not_found);
-                        }
-                    } else {
-                        photoView.setImageResource(R.drawable.aurora_picture_not_found);
-                    }
-                }
-            } else {
-                photoView.setImageResource(R.drawable.aurora_picture_not_found);
-            }
+//            if (path != null) {
+//                Bitmap bitmap = mCache.get(path);
+//                if (bitmap != null) {
+//                    photoView.setImageBitmap(bitmap);
+//                } else {
+//                    File file = new File(path);
+//                    if (file.exists()) {
+//                        bitmap = BitmapLoader.getBitmapFromFile(path, mWidth, mHeight);
+//                        if (bitmap != null) {
+//                            photoView.setImageBitmap(bitmap);
+//                            mCache.put(path, bitmap);
+//                        } else {
+//                            photoView.setImageResource(R.drawable.aurora_picture_not_found);
+//                        }
+//                    } else {
+//                        photoView.setImageResource(R.drawable.aurora_picture_not_found);
+//                    }
+//                }
+//            } else {
+//                photoView.setImageResource(R.drawable.aurora_picture_not_found);
+//            }
             container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             return photoView;
         }

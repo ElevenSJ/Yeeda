@@ -8,9 +8,12 @@ import com.sj.module_lib.utils.SPUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.order.bean.OrderDetailBean;
 import com.sj.yeeda.activity.order.bean.OrderList;
+import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
+import com.sj.yeeda.base.BaseView;
 import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
+import com.sj.yeeda.othertask.UserInfoGetTask;
 
 import java.util.Map;
 
@@ -19,21 +22,24 @@ import java.util.Map;
  * 创建人: 孙杰
  * 功能描述:
  */
-public class OrderDetailPresenter implements OrderDetailContract.Presenter{
+public class OrderDetailPresenter implements OrderDetailContract.Presenter {
     OrderDetailContract.View mView;
 
     String token;
+
     public OrderDetailPresenter(OrderDetailContract.View view) {
         mView = view;
-    }
-
-    @Override
-    public void start() {
         token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
     }
 
     @Override
+    public void start() {
+
+    }
+
+    @Override
     public void getOrderDetail(String id) {
+        mView.showProgress();
         Map<String, Object> parameters = new ArrayMap<>(2);
         parameters.put("token", token);
         parameters.put("id", id);
@@ -45,14 +51,26 @@ public class OrderDetailPresenter implements OrderDetailContract.Presenter{
 
             @Override
             public void onSuccessData(String json) {
-                OrderDetailBean orderDetailBean = new GsonResponsePasare<OrderDetailBean>(){}.deal(json);
-                mView.updateOrderDetailView(orderDetailBean);
+                final OrderDetailBean orderDetailBean = new GsonResponsePasare<OrderDetailBean>() {
+                }.deal(json);
+                new UserInfoGetTask() {
+                    @Override
+                    protected void onPostExecute(UserInfoBean userInfoBean) {
+                        super.onPostExecute(userInfoBean);
+                        mView.updateOrderDetailView(userInfoBean==null?"":userInfoBean.getType(), orderDetailBean);
+                    }
+                }.execute();
             }
 
             @Override
             public void onFailure(String error_code, String error_message) {
             }
 
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                mView.dismissProgress();
+            }
         });
     }
 }

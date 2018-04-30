@@ -2,6 +2,7 @@ package com.sj.yeeda.http;
 
 import android.support.annotation.Keep;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
@@ -20,7 +21,8 @@ public class GsonResponsePasare<T> implements ParameterizedType {
     public T deal(String response) {
         Type gsonType = this;
 
-        BaseResponse<T> commonResponse = new Gson().fromJson(response, gsonType);
+//        BaseResponse<T> commonResponse = new Gson().fromJson(response, gsonType);
+        BaseResponse<T> commonResponse = JSON.parseObject(response, gsonType);
         Logger.i("Data is : " + commonResponse.data + " Class Type is : " + commonResponse.data.getClass().toString());
         return commonResponse.data;
     }

@@ -38,14 +38,14 @@ public class VenueDialog extends Dialog {
     private boolean isCancelable = false;
     private boolean isCanceledOnTouchOutside = false;
 
-    private VenuePresenter present;
+    private VenueContract.Presenter present;
     private VenueBean venueBean;
 
     public VenueDialog(Context context) {
         this(context, R.style.Transparentdialog);
     }
 
-    public VenueDialog(Context context, VenuePresenter basePresenter) {
+    public VenueDialog(Context context, VenueContract.Presenter basePresenter) {
         this(context, R.style.Transparentdialog);
         this.present = basePresenter;
     }

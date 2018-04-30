@@ -37,7 +37,7 @@ import butterknife.BindView;
  * 功能描述:
  */
 
-public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> implements SolutionContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnMoreListener, RecyclerArrayAdapter.OnNoMoreListener {
+public class SolutionListActivity extends TitleBaseActivity<SolutionContract.Presenter> implements SolutionContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnMoreListener {
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -50,9 +50,9 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
     //所有的面积数据
     List<SolutionArea> areaDatas = new ArrayList<>();
     //所有筛选中选中的面积数据
-    Set<Integer> areaChooseIndex = new HashSet<>();
+//    Set<Integer> areaChooseIndex = new HashSet<>();
     //所有方案数据
-    List<SolutionBean> allSolutions = new ArrayList<>();
+//    List<SolutionBean> allSolutions = new ArrayList<>();
 
     boolean isFistGetData = true;
 
@@ -61,7 +61,7 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
 
 
     @Override
-    public SolutionsPresenter getPresenter() {
+    public SolutionContract.Presenter getPresenter() {
         if (presenter == null) {
             presenter = new SolutionsPresenter(this);
         }
@@ -89,12 +89,12 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
         DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.gray_e0), 1, 0, 0);
         dividerDecoration.setDrawLastItem(false);
         rylView.addItemDecoration(dividerDecoration);
-        mAdapter = new SolutionListAdapter(this,this);
-//        mAdapter.setMore(R.layout.layout_load_more, this);
-//        mAdapter.setNoMore(R.layout.layout_load_no_more);
+        mAdapter = new SolutionListAdapter(this, this);
+        mAdapter.setMore(R.layout.layout_load_more, this);
+        mAdapter.setNoMore(R.layout.layout_load_no_more);
         rylView.setAdapterWithProgress(mAdapter);
         rylView.setRefreshListener(this);
-        areaDatas.add(new SolutionArea("0","全部"));
+        areaDatas.add(new SolutionArea("0", "全部"));
     }
 
 
@@ -111,10 +111,6 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
                 textView.setText(areaDatas.get(i).getAreaCategory());
             }
         }
-        /**默认选择第一项itemSelected = 0 **/
-        TabLayout.Tab tab = tabLayout.getTabAt(itemSelected);
-        tab.select();
-
         /**计算滑动的偏移量**/
         final int width = (int) (getOffsetWidth(itemSelected) * getResources().getDisplayMetrics().density);
         tabLayout.post(new Runnable() {
@@ -123,13 +119,11 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
                 tabLayout.scrollTo(width, 0);
             }
         });
-
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 itemSelected = tab.getPosition();
-                mAdapter.clear();
-                checkTabSelect();
+                onRefresh();
             }
 
             @Override
@@ -140,6 +134,10 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        /**默认选择第一项itemSelected = 0 **/
+        TabLayout.Tab tab = tabLayout.getTabAt(itemSelected);
+        tab.select();
     }
 
     /**
@@ -153,33 +151,20 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
         return str.length() * 14 + index * 12;
     }
 
-    void checkTabSelect() {
-        if (itemSelected == 0) {
-            mAdapter.addAll(allSolutions);
-        } else {
-            //筛选临时数据
-            List<SolutionBean> tmpSolutions = new ArrayList<>();
-            for (SolutionBean bean : allSolutions) {
-                if (bean.getAreaCategory().equals(areaDatas.get(itemSelected).getAreaCategory())) {
-                    tmpSolutions.add(bean);
-                }
-            }
-            mAdapter.addAll(tmpSolutions);
-        }
-    }
-
     @Override
     public void showSolutionList(SolutionList solutionList) {
-        rylView.setRefreshing(false);
         if (solutionList != null && solutionList.getDataList() != null) {
             if (isFistGetData) {
-                allSolutions.clear();
                 mAdapter.clear();
             }
-            allSolutions.addAll(solutionList.getDataList());
-            checkTabSelect();
+            if (solutionList.getDataList().isEmpty()) {
+                mAdapter.stopMore();
+            } else {
+                mAdapter.addAll(solutionList.getDataList());
+            }
+
         } else {
-            mAdapter.clear();
+            mAdapter.pauseMore();
         }
         isFistGetData = false;
     }
@@ -187,21 +172,21 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
     @Override
     public void toSolutionDetail(SolutionBean data) {
         Intent intent = new Intent(this, SolutionDetailActivity.class);
-        intent.putExtra("id",data.getId());
+        intent.putExtra("id", data.getId());
         startActivity(intent);
     }
 
     @Override
     public void toSolutionOrder(SolutionBean data) {
         Intent intent = new Intent(this, SolutionOrderActivity.class);
-        intent.putExtra("data",data);
+        intent.putExtra("data", data);
         startActivity(intent);
     }
 
     @Override
     public void updateAreas(List<SolutionArea> solutionAreaList) {
-        if (solutionAreaList!=null){
-            areaDatas.clear();
+        areaDatas.clear();
+        if (solutionAreaList != null&&!solutionAreaList.isEmpty()) {
             areaDatas.addAll(solutionAreaList);
         }
 //        for (SolutionArea solutionArea : solutionAreaList) {
@@ -218,14 +203,15 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
 //                return Integer.valueOf(o1.substring(0, o1.indexOf("-")))-Integer.valueOf(o2.substring(0, o2.indexOf("-")));
 //            }
 //        });
-        areaDatas.add(0, new SolutionArea("0","全部"));
+        areaDatas.add(0, new SolutionArea("0", "全部"));
         addTabLayout();
+        onRefresh();
     }
 
     @Override
     public void onRefresh() {
         isFistGetData = true;
-        presenter.getSolution((String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, ""), "0", 10);
+        getPresenter().getSolution("", areaDatas.get(itemSelected).getAreaCategory(), 10);
 
     }
 
@@ -236,18 +222,7 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionsPresenter> 
 
     @Override
     public void onMoreClick() {
-        isFistGetData = false;
-        presenter.getSolution((String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, ""), allSolutions.size() > 0 ? allSolutions.get(allSolutions.size() - 1).getId() : "0", 10);
+        getPresenter().getSolution(mAdapter.getCount() > 0 ? mAdapter.getItem(mAdapter.getCount() - 1).getId(): "", areaDatas.get(itemSelected).getAreaCategory(), 10);
     }
 
-    @Override
-    public void onNoMoreShow() {
-
-    }
-
-    @Override
-    public void onNoMoreClick() {
-        isFistGetData = false;
-        presenter.getSolution((String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, ""), allSolutions.size() > 0 ? allSolutions.get(allSolutions.size() - 1).getId() : "0", 10);
-    }
 }

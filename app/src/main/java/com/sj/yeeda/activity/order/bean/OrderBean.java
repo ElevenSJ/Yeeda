@@ -23,7 +23,7 @@ public class OrderBean implements Serializable{
     String userName;
     String showTime;
     String constructorId;
-    List<RentBean> rent;
+    List<OrderRentBean> rent;
     String money;
     String createTime;
     String id ;
@@ -88,11 +88,11 @@ public class OrderBean implements Serializable{
         this.constructorId = constructorId;
     }
 
-    public List<RentBean> getRent() {
+    public List<OrderRentBean> getRent() {
         return rent;
     }
 
-    public void setRent(List<RentBean> rent) {
+    public void setRent(List<OrderRentBean> rent) {
         this.rent = rent;
     }
 

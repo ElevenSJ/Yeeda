@@ -1,5 +1,6 @@
 package com.sj.yeeda.activity.solutions.list;
 
+import android.text.TextUtils;
 import android.util.ArrayMap;
 
 import com.jady.retrofitclient.HttpManager;
@@ -29,13 +30,12 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
 
     public SolutionsPresenter(SolutionContract.View view) {
         mView = view;
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID,"");
     }
 
     String token;
     @Override
     public void start() {
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID,"");
-        getSolution(token,"0",20);
         getAreas();
     }
 
@@ -49,14 +49,14 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
 
             @Override
             public void onSuccessData(String json) {
-                List<SolutionArea> solutionAreaList = new GsonResponsePasare< List<SolutionArea>>() {
+                List<SolutionArea> solutionAreaList = new GsonResponsePasare<List<SolutionArea>>() {
                 }.deal(json);
                 mView.updateAreas(solutionAreaList);
             }
 
             @Override
             public void onFailure(String error_code, String error_message) {
-
+                mView.updateAreas(null);
             }
 
             @Override
@@ -67,10 +67,11 @@ public class SolutionsPresenter implements SolutionContract.Presenter {
     }
 
     @Override
-    public void getSolution(String token, String firstIndex, int pageNum) {
-        Map<String, Object> parameters = new ArrayMap<>(3);
+    public void getSolution(String firstIndex, String areaCategory ,int pageNum) {
+        Map<String, Object> parameters = new ArrayMap<>(4);
         parameters.put("token", token);
         parameters.put("firstIndex", firstIndex);
+        parameters.put("areaCategory", (TextUtils.isEmpty(areaCategory)||areaCategory.equals("全部"))?"":areaCategory);
         parameters.put("pageNum", pageNum);
         HttpManager.get(UrlConfig.QUERY_SOLUTIONS_URL, parameters, new Callback() {
             @Override

@@ -31,10 +31,12 @@
             <TextView
                 android:id="@+id/txt_invoice_info"
                 style="@style/TxtCommonBlackSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:lineSpacingMultiplier="1.2"
+                app:layout_constraintEnd_toStartOf="@+id/txt_order_state"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline15"
                 app:layout_constraintTop_toTopOf="@+id/txt_invoice_name" />
 
@@ -70,7 +72,7 @@
             <TextView
                 android:id="@+id/txt_rent_company"
                 style="@style/TxtCommonBlackSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:lineSpacingMultiplier="1.2"
@@ -82,7 +84,7 @@
             <TextView
                 android:id="@+id/txt_rent_num"
                 style="@style/TxtCommonBlackSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
                 android:gravity="left"
@@ -95,7 +97,7 @@
             <TextView
                 android:id="@+id/txt_rent_price"
                 style="@style/TxtCommonRedSmall"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
                 android:gravity="left"
@@ -108,7 +110,7 @@
             <TextView
                 android:id="@+id/txt_rent_names"
                 style="@style/TxtCommonGraySmall"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="right"
@@ -185,7 +187,7 @@
             <TextView
                 android:id="@+id/txt_order_id"
                 style="@style/TxtCommonBlackNormal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="16dp"
@@ -267,7 +269,7 @@
             <TextView
                 android:id="@+id/txt_order_solution_name"
                 style="@style/TxtCommonBlackNormal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_marginStart="8dp"
@@ -280,11 +282,12 @@
             <TextView
                 android:id="@+id/txt_order_solution_id"
                 style="@style/TxtCommonGraySmall"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
+                android:singleLine="false"
                 app:layout_constraintEnd_toEndOf="@+id/txt_order_state"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/txt_order_solution_name"
@@ -334,7 +337,7 @@
             <TextView
                 android:id="@+id/txt_designer_name"
                 style="@style/TxtCommonBlackNormal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
                 android:layout_marginTop="2dp"
@@ -347,7 +350,7 @@
             <TextView
                 android:id="@+id/txt_designer_phone"
                 style="@style/TxtCommonBlackNormal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="2dp"
@@ -356,6 +359,57 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/guideline16"
                 app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+            <LinearLayout
+                android:id="@+id/layout_attachment"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line2">
+
+                <TextView
+                    android:id="@+id/img_goujian"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:drawableTop="@drawable/img_install"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:clickable="true"
+                    style="@style/TxtCommonGraySmall"
+                    android:gravity="center_horizontal"
+                    android:text="构件表"/>
+
+                <TextView
+                    android:id="@+id/img_attchment"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:drawableTop="@drawable/img_install"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    style="@style/TxtCommonGraySmall"
+                    android:gravity="center_horizontal"
+                    android:text="附件表"/>
+
+
+                <TextView
+                    android:id="@+id/img_install"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:drawableTop="@drawable/img_install"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_horizontal"
+                    style="@style/TxtCommonGraySmall"
+                    android:text="安装说明"/>
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView13"
@@ -370,7 +424,7 @@
                 android:text="场馆 / 施工"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line2" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_attachment" />
 
             <TextView
                 android:id="@+id/txt_venue_name"

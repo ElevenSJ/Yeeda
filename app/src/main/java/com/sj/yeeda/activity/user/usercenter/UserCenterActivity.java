@@ -10,10 +10,13 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sj.module_lib.glide.ImageUtils;
+import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.BuildConfig;
 import com.sj.yeeda.R;
+import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.invoice.InvoiceActivity;
+import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.order.list.OrderActivity;
 import com.sj.yeeda.activity.setting.SettingActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
@@ -21,6 +24,8 @@ import com.sj.yeeda.activity.user.updateinfo.UserInfoUpdateActivity;
 import com.sj.yeeda.activity.user.usercenter.bean.UserCenterRyvItem;
 import com.sj.yeeda.activity.venue.VenueActivity;
 import com.sj.yeeda.base.TitleBaseActivity;
+import com.sj.yeeda.im.IMManagerImpl;
+import com.yuntongxun.plugin.im.manager.IMPluginManager;
 
 import butterknife.BindView;
 
@@ -99,6 +104,7 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Pre
                         break;
                     case 4:
                         //联系客服
+                        IMManagerImpl.startChatting(UserCenterActivity.this,(String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_IM_ACCOUNT, SPFileUtils.KEFU_ID, ""));
                         break;
                     case 5:
                         //设置

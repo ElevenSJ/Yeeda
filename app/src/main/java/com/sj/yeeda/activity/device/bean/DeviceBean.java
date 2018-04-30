@@ -35,6 +35,10 @@ public class DeviceBean implements Serializable{
     private String picture;
     private int num = 0;
 
+    private DeviceBean(){
+
+    }
+
     public String getThumbnail() {
         return thumbnail;
     }

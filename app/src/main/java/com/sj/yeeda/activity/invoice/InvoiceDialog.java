@@ -11,8 +11,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 
@@ -49,17 +49,23 @@ public class InvoiceDialog extends Dialog {
     RadioGroup radioGroup;
     @BindView(R.id.edt_bill_head)
     EditText edtBillHead;
+    @BindView(R.id.edt_bill_company)
+    EditText edtBillCompany;
+    @BindView(R.id.edt_bill_connect_phone)
+    EditText edtBillConnectPhone;
+    @BindView(R.id.edt_bill_connect)
+    EditText edtBillConnect;
     private boolean isCancelable = false;
     private boolean isCanceledOnTouchOutside = false;
 
-    private InvoicePresenter present;
+    private InvoiceContract.Presenter present;
     private InvoiceBean billBean;
 
     public InvoiceDialog(Context context) {
         this(context, R.style.Transparentdialog);
     }
 
-    public InvoiceDialog(Context context, InvoicePresenter basePresenter) {
+    public InvoiceDialog(Context context, InvoiceContract.Presenter basePresenter) {
         this(context, R.style.Transparentdialog);
         this.present = basePresenter;
     }
@@ -91,6 +97,9 @@ public class InvoiceDialog extends Dialog {
     public void show(InvoiceBean billBean) {
         this.show();
         this.billBean = billBean;
+        edtBillCompany.setText(billBean.getCompanyName());
+        edtBillConnectPhone.setText(billBean.getContactPhone());
+        edtBillConnect.setText(billBean.getContact());
         edtBillBoxAddress.setText(billBean.getExpressAddress());
         edtBillEmail.setText(billBean.getEmail());
         edtBillBankNum.setText(billBean.getAccount());
@@ -133,6 +142,10 @@ public class InvoiceDialog extends Dialog {
         int id = view.getId();
         switch (id) {
             case R.id.txt_add:
+                if (!checkNeedEdt()){
+                    ToastUtils.showShortToast("有必填项未填写");
+                    return;
+                }
                 if (billBean != null) {
                     present.edtBillInfo(new InvoiceBean.Builder().phone(edtBillTel.getText().toString())
                             .expressAddress(edtBillBoxAddress.getText().toString())
@@ -145,6 +158,9 @@ public class InvoiceDialog extends Dialog {
                             .title(edtBillHead.getText().toString())
                             .uid(billBean.getUid())
                             .workAddress(edtBillCompanyAddress.getText().toString())
+                            .contact(edtBillConnect.getText().toString())
+                            .contactPhone(edtBillConnectPhone.getText().toString())
+                            .companyName(edtBillCompany.getText().toString())
                             .build());
                 } else {
                     present.addBillInfo(new InvoiceBean.Builder().phone(edtBillTel.getText().toString())
@@ -156,6 +172,9 @@ public class InvoiceDialog extends Dialog {
                             .tariff(edtBillNum.getText().toString())
                             .title(edtBillHead.getText().toString())
                             .workAddress(edtBillCompanyAddress.getText().toString())
+                            .contact(edtBillConnect.getText().toString())
+                            .contactPhone(edtBillConnectPhone.getText().toString())
+                            .companyName(edtBillCompany.getText().toString())
                             .build());
                 }
                 break;
@@ -166,6 +185,28 @@ public class InvoiceDialog extends Dialog {
         }
     }
 
+    private boolean checkNeedEdt() {
+        boolean allNeed = true;
+        if (TextUtils.isEmpty(edtBillHead.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillNum.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillCompanyAddress.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillTel.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillBankName.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillBankNum.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillEmail.getText().toString())){
+            allNeed = false;
+        }else if(TextUtils.isEmpty(edtBillBoxAddress.getText().toString())){
+            allNeed = false;
+        }
+        return allNeed;
+    }
+
     @Override
     public void dismiss() {
         clear();
@@ -174,6 +215,9 @@ public class InvoiceDialog extends Dialog {
 
     private void clear() {
         billBean = null;
+        edtBillCompany.setText("");
+        edtBillConnectPhone.setText("");
+        edtBillConnect.setText("");
         edtBillBoxAddress.setText("");
         edtBillEmail.setText("");
         edtBillBankNum.setText("");

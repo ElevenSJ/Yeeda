@@ -1,16 +1,11 @@
 package com.sj.yeeda.activity.pay;
 
-import android.os.Message;
-import android.util.Log;
-
-import com.alipay.sdk.app.PayTask;
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.ToastUtils;
-import com.sj.module_lib.utils.Utils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.pay.bean.PayListItemBean;
-import com.sj.yeeda.activity.pay.wechat.WechatOrderBean;
+import com.sj.yeeda.wxapi.WechatOrderBean;
 import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
@@ -18,19 +13,16 @@ import com.sj.yeeda.http.UrlConfig;
 import java.util.HashMap;
 import java.util.Map;
 
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class PayPresent implements PayContract.Presenter{
     PayContract.View mView;
     PayListItemBean[] items = new PayListItemBean[2];
     public PayPresent( PayContract.View  view) {
         mView = view;
+        items[0] = new PayListItemBean("微信支付",0 ,R.drawable.img_pay_wechat, R.drawable.img_right_arrow);
+        items[1] = new PayListItemBean("支付宝支付",1, R.drawable.img_pay_alipay, R.drawable.img_right_arrow);
     }
     @Override
     public void start() {
-        items[0] = new PayListItemBean("微信支付",0 ,R.drawable.img_pay_wechat, R.drawable.img_right_arrow);
-        items[1] = new PayListItemBean("支付宝支付",1, R.drawable.img_pay_alipay, R.drawable.img_right_arrow);
-
         mView.upDataItemView( items);
     }
     /**
@@ -50,7 +42,6 @@ public class PayPresent implements PayContract.Presenter{
             @Override
             public void onSuccess(String json) {
                 ToastUtils.showShortToast(json);
-
             }
 
             @Override

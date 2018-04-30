@@ -21,12 +21,12 @@ public class SolutionDetailPresent implements SolutionDetailContract.Presenter {
 
     public SolutionDetailPresent(SolutionDetailContract.View view) {
         this.mView = view;
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID,"");
     }
 
     String token;
     @Override
     public void start() {
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID,"");
     }
 
     @Override

@@ -26,7 +26,7 @@ public interface SolutionContract {
 
     interface Presenter extends BasePresenter {
 
-        void getSolution(String token,String firstIndex,int pageNum);
+        void getSolution(String firstIndex,String areaCategory ,int pageNum);
 
     }
 }

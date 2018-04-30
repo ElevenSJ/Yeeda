@@ -13,6 +13,10 @@ public class SolutionArea {
     String id;
     String areaCategory;
 
+    private SolutionArea(){
+
+    }
+
     public SolutionArea(String id, String areaCategory) {
         this.id = id;
         this.areaCategory = areaCategory;

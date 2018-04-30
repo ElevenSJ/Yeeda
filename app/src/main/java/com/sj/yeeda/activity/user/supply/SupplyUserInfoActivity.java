@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * 创建人: 孙杰
  * 功能描述:
  */
-public class SupplyUserInfoActivity extends BaseActivity<SupplyUserInfoPresenter> implements SupplyUserInfoContract.View {
+public class SupplyUserInfoActivity extends BaseActivity<SupplyUserInfoContract.Presenter> implements SupplyUserInfoContract.View {
     @BindView(R.id.edt_name_value)
     EditText edtNameValue;
     @BindView(R.id.bt_login)
@@ -37,8 +37,10 @@ public class SupplyUserInfoActivity extends BaseActivity<SupplyUserInfoPresenter
     }
 
     @Override
-    public SupplyUserInfoPresenter getPresenter() {
-        presenter = new SupplyUserInfoPresenter(this);
+    public SupplyUserInfoContract.Presenter getPresenter() {
+        if (presenter == null) {
+            presenter = new SupplyUserInfoPresenter(this);
+        }
         return presenter;
     }
 
@@ -57,7 +59,7 @@ public class SupplyUserInfoActivity extends BaseActivity<SupplyUserInfoPresenter
 
     @OnClick(R.id.bt_login)
     public void onViewClicked() {
-        String sex = radioGroup.getCheckedRadioButtonId()!=R.id.rdbt_male?"0":"1";
-        presenter.supplyInfo(phoneNun,edtNameValue.getText().toString().trim(),sex);
+        String sex = radioGroup.getCheckedRadioButtonId() != R.id.rdbt_male ? "0" : "1";
+        presenter.supplyInfo(phoneNun, edtNameValue.getText().toString().trim(), sex);
     }
 }

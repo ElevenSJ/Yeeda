@@ -2,9 +2,6 @@ package com.sj.yeeda.activity.order.bean;
 
 import android.support.annotation.Keep;
 
-import com.sj.yeeda.activity.device.bean.DeviceBean;
-import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
-import com.sj.yeeda.activity.solutions.list.bean.SolutionBean;
 import com.sj.yeeda.activity.venue.bean.VenueBean;
 
 import java.util.List;
@@ -17,11 +14,13 @@ import java.util.List;
 @Keep
 public class OrderDetailBean {
     VenueBean venue;
-    DesignerBean Designer;
-    SolutionBean scheme;
+    OrderDesignerBean Designer;
+    OrderSolutionBean scheme;
+    List<OrderSolutionBuildBean> build;
     Constructor Constructor;
-    InvoiceBean invoice;
-    List<RentBean> rent;
+    OrderInvoiceBean invoice;
+    List<OrderRentBean> rent;
+    List<OrderAccessoryBean> accessory;
     Order order;
 
     public VenueBean getVenue() {
@@ -32,43 +31,43 @@ public class OrderDetailBean {
         this.venue = venue;
     }
 
-    public DesignerBean getDesigner() {
+    public OrderDesignerBean getDesigner() {
         return Designer;
     }
 
-    public void setDesigner(DesignerBean designer) {
+    public void setDesigner(OrderDesignerBean designer) {
         Designer = designer;
     }
 
-    public SolutionBean getScheme() {
+    public OrderSolutionBean getScheme() {
         return scheme;
     }
 
-    public void setScheme(SolutionBean scheme) {
+    public void setScheme(OrderSolutionBean scheme) {
         this.scheme = scheme;
     }
 
-    public com.sj.yeeda.activity.order.bean.Constructor getConstructor() {
+    public Constructor getConstructor() {
         return Constructor;
     }
 
-    public void setConstructor(com.sj.yeeda.activity.order.bean.Constructor constructor) {
+    public void setConstructor(Constructor constructor) {
         Constructor = constructor;
     }
 
-    public InvoiceBean getInvoice() {
+    public OrderInvoiceBean getInvoice() {
         return invoice;
     }
 
-    public void setInvoice(InvoiceBean invoice) {
+    public void setInvoice(OrderInvoiceBean invoice) {
         this.invoice = invoice;
     }
 
-    public List<RentBean> getRent() {
+    public List<OrderRentBean> getRent() {
         return rent;
     }
 
-    public void setRent(List<RentBean> rent) {
+    public void setRent(List<OrderRentBean> rent) {
         this.rent = rent;
     }
 
@@ -80,6 +79,22 @@ public class OrderDetailBean {
         this.order = order;
     }
 
+    public List<OrderSolutionBuildBean> getBuild() {
+        return build;
+    }
+
+    public void setBuild(List<OrderSolutionBuildBean> build) {
+        this.build = build;
+    }
+
+    public List<OrderAccessoryBean> getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(List<OrderAccessoryBean> accessory) {
+        this.accessory = accessory;
+    }
+
     @Keep
     public class Order {
         String area;
@@ -87,7 +102,6 @@ public class OrderDetailBean {
         String createTime;
         String showTime;
         String venueId;
-        String constructorId;
         String invoiceId;
         String schemeId;
         String id;
@@ -132,14 +146,6 @@ public class OrderDetailBean {
 
         public void setVenueId(String venueId) {
             this.venueId = venueId;
-        }
-
-        public String getConstructorId() {
-            return constructorId;
-        }
-
-        public void setConstructorId(String constructorId) {
-            this.constructorId = constructorId;
         }
 
         public String getInvoiceId() {

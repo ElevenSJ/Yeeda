@@ -2,6 +2,7 @@ package com.sj.yeeda.activity.solutions.detail;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.sj.module_lib.glide.ImageUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
+import com.sj.yeeda.Utils.FileUtils;
 import com.sj.yeeda.activity.solutions.adapter.ViewPageImageAdapter;
 import com.sj.yeeda.activity.solutions.detail.bean.SolutionDetailBean;
 import com.sj.yeeda.activity.solutions.order.SolutionOrderActivity;
@@ -32,7 +34,7 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
 
     String id;
 
-    WebView webView;
+    WebView webview;
     @BindView(R.id.slidedetails_behind)
     FrameLayout slidedetailsBehind;
 
@@ -103,28 +105,60 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
 
             @Override
             public void onPageSelected(int arg0) {
-                txtImgNum.setText((arg0+1)+"/"+solutionDetailBean.getImgs().size()+"");
+                txtImgNum.setText((arg0 + 1) + "/" + solutionDetailBean.getImgs().size() + "");
             }
 
         });
         viewPager.setAdapter(imageAdapter);
 
 
-        webView = new WebView(this);
-        slidedetailsBehind.addView(webView);
-        final WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(true);
-        settings.setUseWideViewPort(true);
-        webView.setWebViewClient(new WebViewClient() {
-
+        webview = new WebView(this);
+        slidedetailsBehind.addView(webview);
+//        final WebSettings settings = webView.getSettings();
+//        settings.setJavaScriptEnabled(true);
+//        settings.setSupportZoom(true);
+//        settings.setUseWideViewPort(true);
+//        webView.setWebViewClient(new WebViewClient() {
+//
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
+//        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        WebSettings settings = webview.getSettings();
+        settings.setJavaScriptEnabled(true);//启用js
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);//js和android交互
+        settings.setAppCachePath(FileUtils.CACHE_NET); //设置缓存的指定路径
+        settings.setAllowFileAccess(true); // 允许访问文件
+        settings.setAppCacheEnabled(true); //设置H5的缓存打开,默认关闭
+        settings.setUseWideViewPort(true);//设置webview自适应屏幕大小
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);//设置，可能的话使所有列的宽度不超过屏幕宽度
+        settings.setLoadWithOverviewMode(true);//设置webview自适应屏幕大小
+        settings.setDomStorageEnabled(true);//设置可以使用localStorage
+        settings.setSupportZoom(false);//关闭zoom按钮
+        settings.setBuiltInZoomControls(false);//关闭zoom
+        //设置webView里字体大小
+        settings.setTextZoom(100);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            webview.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+        webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
-                return true;
+                return false;
+            }
+
+            @Override
+            public void onLoadResource(WebView view, String url) {
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
             }
         });
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
     }
 
     @OnClick(R.id.bt_sure)
@@ -147,14 +181,20 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
             getWindow().getDecorView().post(new Runnable() {
                 @Override
                 public void run() {
-                    webView.loadUrl(solutionDetailBean.getScheme().getDetailed());
+                    webview.loadUrl(solutionDetailBean.getScheme().getDetailed());
 
                 }
             });
             imageAdapter.setData(solutionDetailBean.getImgs());
-            txtImgNum.setText(solutionDetailBean.getImgs().size()>0?"1/"+solutionDetailBean.getImgs().size():""+solutionDetailBean.getImgs().size());
+            if (solutionDetailBean.getImgs().size() == 0) {
+                txtImgNum.setVisibility(View.GONE);
+            } else {
+                txtImgNum.setVisibility(View.VISIBLE);
+                txtImgNum.setText("1/" + solutionDetailBean.getImgs().size());
+            }
+
             if (solutionDetailBean.getScheme() != null) {
-                Drawable drawableLeft = getResources().getDrawable(solutionDetailBean.getUser().getSex().equals("0")?R.drawable.img_female:R.drawable.img_male);// 找到资源图片
+                Drawable drawableLeft = getResources().getDrawable(solutionDetailBean.getUser().getSex().equals("0") ? R.drawable.img_female : R.drawable.img_male);// 找到资源图片
                 drawableLeft.setBounds(0, 0, drawableLeft.getMinimumWidth(), drawableLeft.getMinimumHeight());
                 txtDesignerValue.setCompoundDrawables(drawableLeft, null, null, null);// 设置到控件中
                 txtDesignerValue.setText(solutionDetailBean.getUser().getUserName());
@@ -167,5 +207,11 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
             ratingBar.setRating(30);
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webview.destroy();
     }
 }

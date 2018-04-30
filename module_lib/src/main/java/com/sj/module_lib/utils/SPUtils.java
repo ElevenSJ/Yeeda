@@ -204,6 +204,19 @@ public class SPUtils {
         sharedPreferences.get(FILE_NAME).edit().remove(key);
         sharedPreferences.get(FILE_NAME).edit().commit();
     }
+    /**
+     * 移除某个key值已经对应的值
+     */
+    public void clear(String FILE_NAME) {
+        for (Map.Entry<String, SharedPreferences> entry : sharedPreferences.entrySet()) {
+            if (!entry.getKey().equals(FILE_NAME)) {
+                continue;
+            }
+            SharedPreferences.Editor editor = entry.getValue().edit();
+            editor.clear();
+            editor.commit();
+        }
+    }
 
     /**
      * 清除所有数据
@@ -213,7 +226,6 @@ public class SPUtils {
             SharedPreferences.Editor editor = entry.getValue().edit();
             editor.clear();
             editor.commit();
-
         }
     }
 

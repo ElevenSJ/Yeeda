@@ -47,6 +47,11 @@
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.** {*;}
+-keep class com.sj.yeeda.** {*;}
+-keep class com.tencent.** {*;}
+-keep class org.greenrobot.** {*;}
+-keep class com.alibaba.** {*;}
+
 
 -keep @android.support.annotation.Keep class * {*;}
 
@@ -223,6 +228,7 @@
 
 #容联云通讯
 -keep class com.yuntongxun.ecsdk.** {*; }
+-keep class com.yuntongxun.plugin.** {*;}
 
 #imui
 -keep class cn.jiguang.imui.** { *; }

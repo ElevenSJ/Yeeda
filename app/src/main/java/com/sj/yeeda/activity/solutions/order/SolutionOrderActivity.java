@@ -32,7 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresent> implements SolutionOrderContract.View {
+public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderContract.Presenter > implements SolutionOrderContract.View {
     @BindView(R.id.rdt_invoice_et)
     RadioButton rdtInvoiceEt;
     @BindView(R.id.rdbt_invoice_paper)
@@ -93,8 +93,10 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
     TextView venueInfo;
 
     @Override
-    public SolutionOrderPresent getPresenter() {
-        presenter = new SolutionOrderPresent(this);
+    public SolutionOrderContract.Presenter getPresenter() {
+        if (presenter == null) {
+            presenter = new SolutionOrderPresent(this);
+        }
         return presenter;
     }
 
@@ -151,7 +153,7 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
         Intent intent = new Intent();
         switch (id) {
             case R.id.bt_to_pay:
-                if (venueBean== null) {
+                if (venueBean == null) {
                     ToastUtils.showShortToast("请选择场馆");
                     return;
                 }
@@ -167,20 +169,22 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
                     ToastUtils.showShortToast("请输入展台面积");
                     return;
                 }
-                if (TextUtils.isEmpty(rentId)) {
-                    ToastUtils.showShortToast("请选择租赁设备");
-                    return;
-                }
-                if (invoiceBean == null) {
-                    ToastUtils.showShortToast("请选择开票信息");
-                    return;
-                }
+//                if (TextUtils.isEmpty(rentId)) {
+//                    ToastUtils.showShortToast("请选择租赁设备");
+//                    return;
+//                }
+//                if (invoiceBean == null) {
+//                    ToastUtils.showShortToast("请选择开票信息");
+//                    return;
+//                }
                 //支付
-                presenter.saveOrder(data.getId(),venueBean.getId(), rentId, nums, rentMoneys, edtTimeBegain.getText().toString() + "至" + edtTimeEnd.getText().toString(), edtArea.getText().toString(), invoiceBean.getId());
+                presenter.saveOrder(data.getId(), venueBean.getId(), rentId, nums, rentMoneys, edtTimeBegain.getText().toString() + "至" + edtTimeEnd.getText().toString(), edtArea.getText().toString(), invoiceBean != null ? invoiceBean.getId() : "");
                 break;
             case R.id.bt_choose_device:
                 //选择租赁设备
                 intent.setClass(this, DeviceActivity.class);
+                intent.putExtra("rentId", rentId);
+                intent.putExtra("nums", nums);
                 startActivityForResult(intent, 101);
                 break;
             case R.id.txt_choose_invoice:
@@ -238,11 +242,12 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
                 case 101:
                     //设备信息
                     if (data.getStringExtra("rentId") != null) {
-                        allRentPrice = data.getDoubleExtra("alltotalPriceNum",0d);
+                        allRentPrice = data.getDoubleExtra("alltotalPriceNum", 0d);
                         rentId = data.getStringExtra("rentId");
                         nums = data.getStringExtra("nums");
                         rentMoneys = data.getStringExtra("rentMoneys");
                         txtDeviceNum.setText("已选设备" + data.getIntExtra("allNum", 0));
+                        txtPrice.setText("¥" + (Double.valueOf(SolutionOrderActivity.this.data.getSchemePrice()) + allRentPrice));
                     }
                     break;
                 case 102:
@@ -252,17 +257,21 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
                         updateInVoice(invoiceBean);
                     }
                     break;
+                case 103:
+                    finish();
+                    break;
                 default:
             }
         }
     }
 
     @Override
-    public void toPay(String orderId) {
+    public void toPay(String orderId, String allPrice) {
         Intent intent = new Intent();
         intent.setClass(this, PayActivity.class);
         intent.putExtra("orderId", orderId);
-        startActivity(intent);
+        intent.putExtra("allPrice", allPrice);
+        startActivityForResult(intent, 103);
     }
 
     @Override
@@ -274,11 +283,11 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
         this.venueBean = venueBean;
         cbVenue.setClickable(false);
         cbVenue.setChecked(true);
-        if (venueBean!=null){
+        if (venueBean != null) {
             cbVenue.setVisibility(View.VISIBLE);
             venueTitle.setText(venueBean.getName());
-            venueInfo.setText(venueBean.getAddress()+"  "+venueBean.getContact()+"  "+venueBean.getContactPhone());
-        }else{
+            venueInfo.setText(venueBean.getAddress() + "  " + venueBean.getContact() + "  " + venueBean.getContactPhone());
+        } else {
             invoiceTitle.setText("");
             invoiceInfo.setText("");
             cbVenue.setVisibility(View.INVISIBLE);
@@ -294,11 +303,11 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderPresen
         this.invoiceBean = invoiceBean;
         cbInvoice.setChecked(true);
         cbInvoice.setClickable(false);
-        if (invoiceBean!=null){
+        if (invoiceBean != null) {
             cbInvoice.setVisibility(View.VISIBLE);
             invoiceTitle.setText(invoiceBean.getTitle());
-            invoiceInfo.setText(invoiceBean.getIsVatInvoice().equals("1")?"增值税专用发票":"普通发票");
-        }else{
+            invoiceInfo.setText(invoiceBean.getIsVatInvoice().equals("1") ? "增值税专用发票" : "普通发票");
+        } else {
             invoiceTitle.setText("");
             invoiceInfo.setText("");
             cbInvoice.setVisibility(View.INVISIBLE);

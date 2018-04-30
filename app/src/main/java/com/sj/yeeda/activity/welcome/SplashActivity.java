@@ -12,6 +12,8 @@ import com.orhanobut.logger.Logger;
 import com.sj.module_lib.BuildConfig;
 import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
+import com.sj.module_lib.utils.Utils;
+import com.sj.yeeda.Utils.FileUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.user.login.LoginActivity;
@@ -39,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
         JPushInterface.setDebugMode(BuildConfig.DEBUG); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
 
-        ToastUtils.init(false);
+        FileUtils.init();
         SPUtils.init(this);
         SPUtils.getInstance().edit(SPFileUtils.FILE_USER);
         SPUtils.getInstance().edit(SPFileUtils.FILE_IM_ACCOUNT);

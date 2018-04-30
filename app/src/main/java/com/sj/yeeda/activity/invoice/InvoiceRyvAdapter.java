@@ -61,18 +61,16 @@ public class InvoiceRyvAdapter extends RecyclerArrayAdapter<InvoiceBean> {
             rdtBillHead.setChecked(rdtBillHead != null && rdtBillHead.equals("1"));
             rdtBillHead.setText("抬头：" + data.getTitle());
             txtBillType.setText(data.getIsVatInvoice().equals("0") ? "普通发票" : "增值税专用发票");
-            txtBillInfo.setText(data.getTariff() + "\n" + data.getWorkAddress() + "\n" + data.getPhone() + "\n" + data.getBank() + "\n" + data.getAccount() + "\n" + data.getEmail() + "\n" + data.getExpressAddress());
+            txtBillInfo.setText(data.getTariff() + "\n" + data.getWorkAddress() + "\n" + data.getPhone() + "\n" + data.getBank() + "\n" + data.getAccount() + "\n" + data.getEmail() + "\n" + data.getExpressAddress()+ "\n" + data.getContact()+ "\n" + data.getContactPhone()+ "\n" + data.getCompanyName());
             imgEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.showShortToast(view.getId() + "");
                     activity.editInvoice(data);
                 }
             });
             imgDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.showShortToast(view.getId() + "");
                     activity.delInvoice(data);
                 }
             });

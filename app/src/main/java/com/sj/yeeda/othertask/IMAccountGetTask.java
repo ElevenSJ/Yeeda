@@ -30,7 +30,7 @@ public class IMAccountGetTask extends AsyncTask<String, String, Boolean> {
                 public void onSuccessData(String json) {
                     IMAccountBean imAccountBean = new GsonResponsePasare<IMAccountBean>() {
                     }.deal(json);
-                    SPUtils.getInstance().edit(SPFileUtils.FILE_IM_ACCOUNT).apply(new String[]{SPFileUtils.KEFU_ID, SPFileUtils.TEZHAN_ID, SPFileUtils.DINGDAN_LOGIN}, new String[]{imAccountBean.getKefu(), imAccountBean.getTezhan(), imAccountBean.getKefu()});
+                    SPUtils.getInstance().edit(SPFileUtils.FILE_IM_ACCOUNT).apply(new String[]{SPFileUtils.KEFU_ID, SPFileUtils.TEZHAN_ID, SPFileUtils.DINGDAN_ID}, new String[]{imAccountBean.getKefu(), imAccountBean.getTezhan(), imAccountBean.getDingdan()});
                 }
 
                 @Override

@@ -12,7 +12,7 @@
 
     <TextView
         android:text="@string/more_loading"
-        android:textSize="15sp"
+        style="@style/TxtCommonGrayNormal"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:layout_width="wrap_content"

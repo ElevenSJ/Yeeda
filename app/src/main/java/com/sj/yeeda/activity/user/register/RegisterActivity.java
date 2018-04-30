@@ -1,17 +1,21 @@
 package com.sj.yeeda.activity.user.register;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.user.supply.SupplyUserInfoActivity;
 import com.sj.yeeda.base.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -19,7 +23,7 @@ import butterknife.OnClick;
  * 创建人: 孙杰
  * 功能描述:注册页
  */
-public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterContract.View {
+public class RegisterActivity extends BaseActivity<RegisterContract.Presenter> implements RegisterContract.View {
     @BindView(R.id.edt_phone_value)
     EditText edtPhoneValue;
     @BindView(R.id.edt_code_value)
@@ -30,12 +34,17 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     Button btRegister;
     @BindView(R.id.tv_toLogin)
     TextView tvToLogin;
-
-    /** 倒计时60秒，一次1秒 */
-    CountDownTimer timer = new CountDownTimer(60*1000, 1000) {
+    @BindView(R.id.rdbt_agree)
+    CheckBox rdbtAgree;
+    @BindView(R.id.txt_register_html)
+    TextView txtRegisterHtml;
+    /**
+     * 倒计时60秒，一次1秒
+     */
+    CountDownTimer timer = new CountDownTimer(60 * 1000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            btGetcode.setText(millisUntilFinished/1000+"秒");
+            btGetcode.setText(millisUntilFinished / 1000 + "秒");
             btGetcode.setEnabled(false);
         }
 
@@ -46,9 +55,13 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         }
     };
 
+
+
     @Override
-    public RegisterPresenter getPresenter() {
-        presenter = new RegisterPresenter(this);
+    public RegisterContract.Presenter getPresenter() {
+        if (presenter == null){
+            presenter = new RegisterPresenter(this);
+        }
         return presenter;
     }
 
@@ -57,17 +70,26 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         return R.layout.activity_register;
     }
 
-    @OnClick({R.id.bt_getcode, R.id.bt_register, R.id.tv_toLogin})
+    @OnClick({R.id.bt_getcode, R.id.bt_register, R.id.tv_toLogin,R.id.txt_register_html})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_getcode:
-                presenter.getCode(edtPhoneValue.getText().toString().trim());
+                getPresenter().getCode(edtPhoneValue.getText().toString().trim());
                 break;
             case R.id.bt_register:
-                presenter.doRegister(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim());
+                if (rdbtAgree.isChecked()) {
+                    getPresenter().doRegister(edtPhoneValue.getText().toString().trim(), edtCodeValue.getText().toString().trim());
+                } else {
+                    ToastUtils.showShortToast("请查看艺搭环保软件注册协议，并同意");
+                }
                 break;
             case R.id.tv_toLogin:
                 finish();
+                break;
+            case R.id.txt_register_html:
+                Intent intent = new Intent(this,RegisterHtmlActivity.class);
+                intent.putExtra("url","https://prj-huizhan.app-service-node.com/appRegistrationAgreement");
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -78,15 +100,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @Override
     public void toSupplyUserInfoActivity() {
         Intent supplyUserInfo = new Intent(RegisterActivity.this, SupplyUserInfoActivity.class);
-        supplyUserInfo.putExtra("phoneNum",edtPhoneValue.getText().toString().trim());
+        supplyUserInfo.putExtra("phoneNum", edtPhoneValue.getText().toString().trim());
         startActivity(supplyUserInfo);
     }
 
     @Override
     public void refreshCodeTxt(boolean refresh) {
-        if (refresh){
+        if (refresh) {
             timer.start();
-        }else{
+        } else {
             timer.onFinish();
         }
     }
@@ -96,4 +118,5 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         super.onDestroy();
         timer.cancel();
     }
+
 }

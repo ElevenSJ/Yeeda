@@ -8,11 +8,6 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.sj.yeeda.R;
-import com.sj.yeeda.activity.invoice.InvoiceContract;
-import com.sj.yeeda.activity.invoice.InvoiceDialog;
-import com.sj.yeeda.activity.invoice.InvoicePresenter;
-import com.sj.yeeda.activity.invoice.InvoiceRyvAdapter;
-import com.sj.yeeda.activity.invoice.bean.InvoiceBean;
 import com.sj.yeeda.activity.venue.bean.VenueBean;
 import com.sj.yeeda.base.TitleBaseActivity;
 
@@ -21,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class VenueActivity extends TitleBaseActivity<VenuePresenter> implements VenueContract.View {
+public class VenueActivity extends TitleBaseActivity<VenueContract.Presenter> implements VenueContract.View {
     @BindView(R.id.ryl_view)
     EasyRecyclerView rylView;
     @BindView(R.id.txt_add_bill)
@@ -50,7 +45,7 @@ public class VenueActivity extends TitleBaseActivity<VenuePresenter> implements 
     }
 
     @Override
-    public VenuePresenter getPresenter() {
+    public VenueContract.Presenter getPresenter() {
         if (presenter==null){
             presenter = new VenuePresenter(this);
         }

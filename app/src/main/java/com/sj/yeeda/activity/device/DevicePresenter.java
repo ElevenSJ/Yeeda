@@ -1,16 +1,15 @@
 package com.sj.yeeda.activity.device;
 
+import android.util.ArrayMap;
+
 import com.jady.retrofitclient.HttpManager;
 import com.sj.module_lib.utils.SPUtils;
-import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.device.bean.DeviceBean;
-import com.sj.yeeda.activity.venue.bean.VenueBean;
 import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,16 +26,17 @@ public class DevicePresenter implements DeviceContract.Presenter {
 
     public DevicePresenter(DeviceContract.View view) {
         mView = view;
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
     }
 
     @Override
     public void start() {
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
+        mView.showProgress();
         getDevices();
     }
 
     private void getDevices() {
-        Map<String, Object> parameters = new HashMap<>(1);
+        Map<String, Object> parameters = new ArrayMap<>(1);
         parameters.put("token", token);
         HttpManager.get(UrlConfig.QUERY_DEVICES_URL, parameters, new Callback() {
             @Override
@@ -53,7 +53,6 @@ public class DevicePresenter implements DeviceContract.Presenter {
             @Override
             public void onFailure(String error_code, String error_message) {
             }
-
             @Override
             public boolean enableShowToast() {
                 return false;

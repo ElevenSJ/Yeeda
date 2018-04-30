@@ -95,6 +95,7 @@
         <activity android:name=".activity.setting.SettingActivity" />
         <activity android:name=".activity.service.ServiceCustomActivity" />
         <activity android:name=".activity.photo.BrowserImageActivity" />
+        <activity android:name=".activity.user.register.RegisterHtmlActivity" />
         <!--支付宝配置信息-->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
@@ -111,9 +112,10 @@
 
         <!-- 微信支付配置-->
         <activity
-            android:name="net.sourceforge.simcpux.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.Transparent"/>
 
         <!-- 极光推送 绑定别名service-->
         <service android:name=".service.JPushAliasService" />
@@ -139,14 +141,6 @@
 
 
         <!-- 容联云通讯 -->
-        // SDK核心服务配置
-        <service
-            android:name="com.yuntongxun.ecsdk.ECClientService"
-            android:enabled="true"
-            android:process=":push" />
-        // 提高sdk服务存活率（v5.2.2r以后版本提供）
-        <service
-            android:name="com.yuntongxun.ecsdk.ECClientService$InnerService"
             android:enabled="true"
             android:process=":push" />
         // 以下两项为SDK内部处理项，其中booter.Alarm在v5.1.9r以后版本提供
@@ -174,18 +168,6 @@
             </intent-filter>
         </receiver>
         // 声明自定义通知的广播接收器（需要替换包名，详见注意事项）
-        <receiver
-            android:name=".receiver.YuntxNotifyReceiver"
-            android:exported="false">
-            <intent-filter>
-                // 接收push消息
-                // action匹配规则{packageName + ".action" + "功能"}
-                <action android:name="com.yuntongxun.ecdemo.action.VOIP_CALL" />
-                <action android:name="com.yuntongxun.ecdemo.action.MESSAGE" />
-                <action android:name="com.yuntongxun.ecdemo.action.NOTIFICATION_CLICK" />
-                <action android:name="com.yuntongxun.ecdemo.action.PERSON_VERSION" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

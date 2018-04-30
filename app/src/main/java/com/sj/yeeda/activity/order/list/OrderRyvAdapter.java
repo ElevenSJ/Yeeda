@@ -1,5 +1,6 @@
 package com.sj.yeeda.activity.order.list;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -11,11 +12,18 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.sj.module_lib.glide.ImageUtils;
+import com.sj.module_lib.utils.SPUtils;
 import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
+import com.sj.yeeda.Utils.SPFileUtils;
+import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.order.bean.OrderBean;
 import com.sj.yeeda.activity.order.detail.OrderDetailActivity;
 import com.sj.yeeda.activity.pay.PayActivity;
+import com.sj.yeeda.activity.service.ServiceCustomActivity;
+import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
+import com.sj.yeeda.im.IMManagerImpl;
+import com.yuntongxun.plugin.im.manager.IMPluginManager;
 
 /**
  * 创建时间: on 2018/4/3.
@@ -24,7 +32,7 @@ import com.sj.yeeda.activity.pay.PayActivity;
  */
 
 public class OrderRyvAdapter extends RecyclerArrayAdapter<OrderBean> {
-    Context context;
+    static Context context;
 
     public OrderRyvAdapter(Context context) {
         super(context);
@@ -76,30 +84,37 @@ public class OrderRyvAdapter extends RecyclerArrayAdapter<OrderBean> {
             super.setData(data);
             txtOrderId.setText("No." + data.getId());
             txtOrderTime.setText(data.getCreateTime());
-            txtOrderState.setText(data.getStatus().equals("0") ? "未支付":"已支付");
+            txtOrderState.setText(data.getStatus().equals("0") ? "未支付" : "已支付");
             btToPay.setEnabled(data.getStatus().equals("0"));
+//            btToPay.setEnabled(true);
             txtDesignerPhone.setText(data.getPhone());
             txtOrderPrice.setText("¥" + data.getMoney());
             txtOrderDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(),OrderDetailActivity.class);
-                    intent.putExtra("id",data.getId());
+                    Intent intent = new Intent(view.getContext(), OrderDetailActivity.class);
+                    intent.putExtra("id", data.getId());
                     view.getContext().startActivity(intent);
                 }
             });
             btService.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.showShortToast("有事找客服");
+//                    Intent intent = new Intent();
+//                    intent.setClass( view.getContext(), ServiceCustomActivity.class);
+//                    intent.putExtra("connectedId",(String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_IM_ACCOUNT,SPFileUtils.DINGDAN_ID,""));
+//                    view.getContext(). startActivity(intent);
+                    IMManagerImpl.getInstance().setOrderId(data.getId());
+                    IMManagerImpl.startChatting(view.getContext(),(String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_IM_ACCOUNT, SPFileUtils.DINGDAN_ID, ""));
                 }
             });
             btToPay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(),PayActivity.class);
-                    intent.putExtra("orderId",data.getId());
-                    view.getContext().startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), PayActivity.class);
+                    intent.putExtra("orderId", data.getId());
+                    intent.putExtra("allPrice", data.getMoney());
+                    ((Activity)context).startActivityForResult(intent,101);
                 }
             });
             if (data.getScheme() != null) {

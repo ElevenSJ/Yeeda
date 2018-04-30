@@ -12,7 +12,7 @@ import com.sj.yeeda.base.BaseView;
 public interface OrderDetailContract {
 
     interface View extends BaseView {
-        void updateOrderDetailView(OrderDetailBean orderDetailBean);
+        void updateOrderDetailView(String type,OrderDetailBean orderDetailBean);
     }
 
     interface Presenter extends BasePresenter {

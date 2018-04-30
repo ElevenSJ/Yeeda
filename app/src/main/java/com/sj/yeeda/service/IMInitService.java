@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.sj.module_lib.utils.Utils;
-import com.sj.yeeda.im.SDKCoreHelper;
-import com.sj.yeeda.othertask.IMTokenGetTask;
 
 /**
  * 创建时间: on 2018/4/18.
@@ -24,7 +22,7 @@ public class IMInitService extends IntentService{
 //            @Override
 //            protected void onPostExecute(Boolean aBoolean) {
 //                super.onPostExecute(aBoolean);
-                SDKCoreHelper.getInstance().init(Utils.getContext());
+//                SDKCoreHelper.getInstance().init(Utils.getContext());
 //            }
 //        }.execute("IMTokenGetTask");
     }

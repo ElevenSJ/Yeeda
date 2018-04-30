@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class InvoiceActivity extends TitleBaseActivity<InvoicePresenter> implements InvoiceContract.View {
+public class InvoiceActivity extends TitleBaseActivity<InvoiceContract.Presenter> implements InvoiceContract.View {
     @BindView(R.id.ryl_view)
     EasyRecyclerView rylView;
     @BindView(R.id.txt_add_bill)
@@ -44,7 +44,7 @@ public class InvoiceActivity extends TitleBaseActivity<InvoicePresenter> impleme
     }
 
     @Override
-    public InvoicePresenter getPresenter() {
+    public InvoiceContract.Presenter getPresenter() {
         if (presenter==null){
             presenter = new InvoicePresenter(this);
         }
@@ -74,7 +74,7 @@ public class InvoiceActivity extends TitleBaseActivity<InvoicePresenter> impleme
     @OnClick(R.id.txt_add_bill)
     void addBillClick(View view){
         if (addBillDialog == null){
-            addBillDialog = new InvoiceDialog(this,presenter);
+            addBillDialog = new InvoiceDialog(this,getPresenter());
         }
         addBillDialog.show();
     }
@@ -83,7 +83,7 @@ public class InvoiceActivity extends TitleBaseActivity<InvoicePresenter> impleme
     }
     void editInvoice(InvoiceBean invoiceBean){
         if (addBillDialog == null){
-            addBillDialog = new InvoiceDialog(this,presenter);
+            addBillDialog = new InvoiceDialog(this,getPresenter());
         }
         addBillDialog.show(invoiceBean);
     }

@@ -14,6 +14,8 @@ import com.sj.yeeda.http.Callback;
 import com.sj.yeeda.http.GsonResponsePasare;
 import com.sj.yeeda.http.UrlConfig;
 import com.sj.yeeda.activity.user.login.bean.LoginBean;
+import com.yuntongxun.plugin.common.ClientUser;
+import com.yuntongxun.plugin.common.SDKCoreHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +41,11 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     /**
-     *
      * @param phoneNum
      */
     @Override
     public void getCode(String phoneNum) {
-        if (TextUtils.isEmpty(phoneNum)||phoneNum.length()!=11){
+        if (TextUtils.isEmpty(phoneNum) || phoneNum.length() != 11) {
             ToastUtils.showShortToast("手机号码不正确");
             return;
         }
@@ -76,12 +77,12 @@ public class LoginPresenter implements LoginContract.Presenter {
      */
     @Override
     public void doLogin(final String phoneNum, String codeNum, String deviceId) {
-        Logger.d("phoneNum:"+phoneNum+",codeNum:"+codeNum+",deviceId"+deviceId);
-        if (TextUtils.isEmpty(phoneNum)||phoneNum.length()!=11){
+        Logger.d("phoneNum:" + phoneNum + ",codeNum:" + codeNum + ",deviceId" + deviceId);
+        if (TextUtils.isEmpty(phoneNum) || phoneNum.length() != 11) {
             ToastUtils.showShortToast("手机号码不正确");
             return;
         }
-        if (TextUtils.isEmpty(codeNum)){
+        if (TextUtils.isEmpty(codeNum)) {
             ToastUtils.showShortToast("请输入验证码");
             return;
         }
@@ -101,7 +102,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 LoginBean loginBean = new GsonResponsePasare<LoginBean>() {
                 }.deal(json);
                 String tokenId = loginBean.getTokenId();
-                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID,SPFileUtils.IS_LOGIN,SPFileUtils.USER_ACCOUNT},new Object[]{tokenId,true,phoneNum});
+                SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(new String[]{SPFileUtils.TOKEN_ID, SPFileUtils.IS_LOGIN, SPFileUtils.USER_ACCOUNT}, new Object[]{tokenId, true, phoneNum});
                 mView.toMainActivity();
             }
 

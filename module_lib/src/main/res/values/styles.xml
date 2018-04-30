@@ -35,6 +35,11 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TxtCommonWhiteBig">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="TxtCommonWhiteNormal">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
@@ -50,6 +55,11 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="TxtCommonWhiteHuge">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <style name="TxtHintCommonWhiteNormal">
         <item name="android:textColor">@color/common_hint_text</item>
         <item name="android:textSize">12sp</item>
@@ -60,24 +70,70 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TxtCommonBlackBig">
+        <item name="android:textColor">@color/black_alpha60</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
     <style name="TxtCommonBlackNormal">
         <item name="android:textColor">@color/black_alpha60</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TxtCommonGraySmall">
-        <item name="android:textColor">@color/gray_66</item>
+    <style name="TxtCommonBlackSmall">
+        <item name="android:textColor">@color/black_alpha60</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TxtCommonGrayNormal">
-        <item name="android:textColor">@color/gray_66</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="TxtCommonGrayLitter">
-        <item name="android:textColor">@color/gray_66</item>
+    <style name="TxtCommonBlackLitter">
+        <item name="android:textColor">@color/black_alpha60</item>
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="TxtCommonGraySmall">
+        <item name="android:textColor">@color/black_alpha40</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TxtCommonGrayBig">
+        <item name="android:textColor">@color/black_alpha40</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TxtCommonGrayLitter">
+        <item name="android:textColor">@color/black_alpha40</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="TxtCommonRedNormal">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TxtCommonRedBig">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TxtCommonRedSmall">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+    <style name="TxtCommonGrayNormal">
+        <item name="android:textColor">@color/black_alpha40</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TxtCommonBlueBig">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TxtCommonBlueNormal">
+        <item name="android:textColor">@android:color/holo_blue_light</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

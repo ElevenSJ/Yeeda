@@ -27,10 +27,16 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AppTheme.Transparent" parent="AppTheme.NoTitle">
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
     <style name="CustomDialog" parent="Theme.AppCompat.Dialog">
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="colorAccent">#ff69B841</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
 
@@ -112,17 +118,17 @@
     </style>
 
     <style name="TxtCommonGraySmall">
-        <item name="android:textColor">@color/black_alpha20</item>
+        <item name="android:textColor">@color/black_alpha40</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TxtCommonGrayBig">
-        <item name="android:textColor">@color/black_alpha20</item>
+        <item name="android:textColor">@color/black_alpha40</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TxtCommonGrayLitter">
-        <item name="android:textColor">@color/black_alpha20</item>
+        <item name="android:textColor">@color/black_alpha40</item>
         <item name="android:textSize">10sp</item>
     </style>
 
@@ -143,7 +149,7 @@
 
 
     <style name="TxtCommonGrayNormal">
-        <item name="android:textColor">@color/black_alpha20</item>
+        <item name="android:textColor">@color/black_alpha40</item>
         <item name="android:textSize">14sp</item>
     </style>
 

@@ -1,8 +1,13 @@
 package com.sj.yeeda.activity.pay;
 
-import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 
@@ -12,11 +17,10 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.ToastUtils;
-import com.sj.module_lib.utils.Utils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.pay.alipay.PayResult;
 import com.sj.yeeda.activity.pay.bean.PayListItemBean;
-import com.sj.yeeda.activity.pay.wechat.WechatOrderBean;
+import com.sj.yeeda.wxapi.WechatOrderBean;
 import com.sj.yeeda.base.TitleBaseActivity;
 import com.sj.yeeda.http.UrlConfig;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -28,22 +32,45 @@ import java.util.Map;
 
 import butterknife.BindView;
 
-public class PayActivity extends TitleBaseActivity<PayPresent> implements PayContract.View {
+public class PayActivity extends TitleBaseActivity<PayContract.Presenter> implements PayContract.View {
+
+    public static final String PAY_SUCCESS = "com.sj.yeeda.activity.pay.PAY_SUCCESS";
+    public static final String PAY_FAIL = "com.sj.yeeda.activity.pay.PAY_FAIL";
+    public static final String PAY_CANCLE = "com.sj.yeeda.activity.pay.PAY_CANCLE";
     @BindView(R.id.ryl_view)
     EasyRecyclerView rylView;
 
     PayRyvAdapter mAdapter;
 
     String orderId;
+    String allPrice;
 
     Handler mHandler = new ResultHandler(this);
+
+    private BroadcastReceiver mPayReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (PAY_SUCCESS.equals(intent.getAction())) {
+                //支付成功
+                onSuccessBack();
+            } else if (PAY_FAIL.equals(intent.getAction())) {
+                //支付失败
+                ToastUtils.showShortToast("支付失败");
+            } else if (PAY_CANCLE.equals(intent.getAction())) {
+                //支付取消
+                ToastUtils.showShortToast("取消支付");
+            }
+        }
+    };
 
     //支付宝支付flag
     private static final int SDK_PAY_FLAG = 1;
 
     @Override
-    public PayPresent getPresenter() {
-        presenter = new PayPresent(this);
+    public PayContract.Presenter getPresenter() {
+        if (presenter == null) {
+            presenter = new PayPresent(this);
+        }
         return presenter;
     }
 
@@ -58,6 +85,7 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
         setTitleTxt("支付");
         setTitleBg();
         orderId = getIntent().getStringExtra("orderId");
+        allPrice = getIntent().getStringExtra("allPrice");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rylView.setLayoutManager(layoutManager);
         DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.gray_AD), 1, 16, 16);
@@ -71,16 +99,15 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
                     ToastUtils.showShortToast("未获取到订单id");
                     return;
                 }
-                ToastUtils.showShortToast(mAdapter.getItem(position).getName());
                 int type = mAdapter.getItem(position).getType();
                 switch (type) {
                     case 0:
                         //微信支付
-                        getPresenter().getWechatOrder("orderId", "1", "测试商品支付");
+                        getPresenter().getWechatOrder(orderId, ((int)(Double.valueOf(allPrice)*100))+"", "商品订单号：" + orderId);
                         break;
                     case 1:
                         //支付宝支付
-                        getPresenter().getAlipayOrder("orderId", "0.01");
+                        getPresenter().getAlipayOrder(orderId, allPrice);
                         break;
                     default:
                 }
@@ -88,6 +115,16 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
             }
         });
         rylView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(PAY_SUCCESS);
+        intentFilter.addAction(PAY_FAIL);
+        intentFilter.addAction(PAY_CANCLE);
+        registerReceiver(mPayReceiver, intentFilter);
     }
 
     @Override
@@ -119,6 +156,7 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
     @Override
     public void doWechatPay(WechatOrderBean wechatOrderBean) {
         UrlConfig.WECHAT_APP_ID = wechatOrderBean.getAppId();
+
         final IWXAPI msgApi = WXAPIFactory.createWXAPI(this, null);
         msgApi.registerApp(UrlConfig.WECHAT_APP_ID);
 
@@ -130,11 +168,18 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
         request.nonceStr = wechatOrderBean.getNoncestr();
         request.timeStamp = wechatOrderBean.getTimestamp();
         request.sign = wechatOrderBean.getSign();
-        msgApi.sendReq(request);
+        if (request.checkArgs()){
+            msgApi.sendReq(request);
+        }else{
+            ToastUtils.showShortToast("参数异常");
+        }
+//        Intent intent = new Intent(this, WXPayEntryActivity.class);
+//        intent.putExtra("data", wechatOrderBean);
+//        startActivity(intent);
 
     }
 
-    static class ResultHandler extends Handler {
+    class ResultHandler extends Handler {
         WeakReference<PayActivity> mActivity;
 
         public ResultHandler(PayActivity activity) {
@@ -157,6 +202,7 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         ToastUtils.showShortToast("支付成功");
+                        onSuccessBack();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         ToastUtils.showShortToast("支付失败");
@@ -166,10 +212,21 @@ public class PayActivity extends TitleBaseActivity<PayPresent> implements PayCon
                     break;
             }
         }
+
+
+    }
+
+    private void onSuccessBack() {
+        setResult(RESULT_OK);
+        finish();
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 注销广播
+        unregisterReceiver(mPayReceiver);
     }
+
 }

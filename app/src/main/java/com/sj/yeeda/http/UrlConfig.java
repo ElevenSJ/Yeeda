@@ -11,6 +11,7 @@ import android.support.annotation.Keep;
 public class UrlConfig {
     //baseUrl
     public static final String BASE_URL = "http://prj-huizhan.app-service-node.com";
+//    public static final String BASE_URL = "http://yeedaa.com/";
 
 
     //获取验证码

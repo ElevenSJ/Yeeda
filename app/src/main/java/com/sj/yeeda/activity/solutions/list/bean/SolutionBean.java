@@ -43,6 +43,7 @@ public class SolutionBean implements Serializable{
     private String id;
     private String accessoryStr;
     private String createName;
+    private String status;
 
     public String getSchemePrice() {
         return schemePrice;
@@ -172,6 +173,14 @@ public class SolutionBean implements Serializable{
         this.createName = createName;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "SolutionBean{" +
@@ -191,6 +200,7 @@ public class SolutionBean implements Serializable{
                 ", id='" + id + '\'' +
                 ", accessoryStr='" + accessoryStr + '\'' +
                 ", createName='" + createName + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

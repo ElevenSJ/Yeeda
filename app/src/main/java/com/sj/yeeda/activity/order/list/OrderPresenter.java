@@ -26,15 +26,15 @@ public class OrderPresenter implements OrderContract.Presenter {
 
     public OrderPresenter(OrderContract.View view) {
         mView = view;
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
     }
 
     @Override
     public void start() {
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
         getOrders("",10);
     }
 
-    private void getOrders(String firstIndex,int pageNum) {
+    public void getOrders(String firstIndex,int pageNum) {
         Map<String, Object> parameters = new ArrayMap<>(3);
         parameters.put("token", token);
         parameters.put("firstIndex", firstIndex);

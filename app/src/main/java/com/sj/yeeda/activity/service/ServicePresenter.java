@@ -1,7 +1,6 @@
 package com.sj.yeeda.activity.service;
 
 import com.orhanobut.logger.Logger;
-import com.sj.yeeda.im.SDKCoreHelper;
 import com.sj.yeeda.othertask.IMInitTask;
 import com.yuntongxun.ecsdk.ECDevice;
 
@@ -22,16 +21,16 @@ public class ServicePresenter implements ServiceContract.Presenter {
     }
 
     public void initIM() {
-        new IMInitTask(){
-            @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-                if(SDKCoreHelper.getConnectState()== ECDevice.ECConnectState.CONNECT_SUCCESS){
-                    Logger.i("ServiceCustomActivity... IM已连接上");
-                    mView.dismissProgress();
-                    mView.initMessageAdapter();
-                }
-            }
-        }.execute("IMInitTask");
+//        new IMInitTask(){
+//            @Override
+//            protected void onPostExecute(Boolean aBoolean) {
+//                super.onPostExecute(aBoolean);
+//                if(SDKCoreHelper.getConnectState()== ECDevice.ECConnectState.CONNECT_SUCCESS){
+//                    Logger.i("ServiceCustomActivity... IM已连接上");
+//                    mView.dismissProgress();
+//                    mView.initMessageAdapter();
+//                }
+//            }
+//        }.execute("IMInitTask");
     }
 }

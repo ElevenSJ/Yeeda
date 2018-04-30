@@ -25,7 +25,7 @@ import butterknife.OnClick;
  * 功能描述:
  */
 
-public class UserInfoUpdateActivity extends TitleBaseActivity<UserInfoUpdatePresenter> implements UserInfoUpdateContract.View {
+public class UserInfoUpdateActivity extends TitleBaseActivity<UserInfoUpdateContract.Presenter> implements UserInfoUpdateContract.View {
     @BindView(R.id.img_user_head)
     ImageView imgUserHead;
     @BindView(R.id.bt_modify)
@@ -48,7 +48,7 @@ public class UserInfoUpdateActivity extends TitleBaseActivity<UserInfoUpdatePres
     UserInfoBean userInfoBean;
 
     @Override
-    public UserInfoUpdatePresenter getPresenter() {
+    public UserInfoUpdateContract.Presenter getPresenter() {
         if (presenter == null) {
             presenter = new UserInfoUpdatePresenter(this);
         }

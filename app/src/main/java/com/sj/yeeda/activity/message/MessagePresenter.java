@@ -26,10 +26,11 @@ public class MessagePresenter implements MessageContract.Presenter{
     String token;
     public MessagePresenter(MessageContract.View view){
         mView = view;
+        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
     }
     @Override
     public void start() {
-        token = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.TOKEN_ID, "");
+
     }
 
     @Override

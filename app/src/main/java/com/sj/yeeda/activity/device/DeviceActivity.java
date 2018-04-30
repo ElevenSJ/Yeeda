@@ -2,6 +2,7 @@ package com.sj.yeeda.activity.device;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implements DeviceContract.View {
+public class DeviceActivity extends TitleBaseActivity<DeviceContract.Presenter> implements DeviceContract.View {
 
     List<DeviceBean> deviceBeanList;
 
@@ -42,8 +43,16 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
 
     DeviceRyvAdapter mAdapter;
 
+    List<String> rentIdList = new ArrayList<>();
+    List<String> numList = new ArrayList<>();
+    List<String> rentMoneyList = new ArrayList<>();
+    List<String> stringList = new ArrayList<>();
+
+    String rentId ="";
+    String nums="";
+
     @Override
-    public DevicePresenter getPresenter() {
+    public DeviceContract.Presenter getPresenter() {
         if (presenter == null) {
             presenter = new DevicePresenter(this);
         }
@@ -85,6 +94,12 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
         });
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        rentId = getIntent().getStringExtra("rentId");
+        nums = getIntent().getStringExtra("nums");
+    }
 
     @OnClick(R.id.bt_sure)
     public void onClickView(View view) {
@@ -92,15 +107,10 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
         switch (id) {
             case R.id.bt_sure:
                 new Thread(new Runnable() {
-                    List<String> rentIdList = new ArrayList<>();
-                    List<String> numList = new ArrayList<>();
-                    List<String> rentMoneyList = new ArrayList<>();
-
 
                     @Override
                     public void run() {
                         for (DeviceBean deviceBean : alreadyChooseDevice) {
-                            allNum+=deviceBean.getNum();
                             totalPrice+=Double.valueOf(deviceBean.getPrice())*deviceBean.getNum();
                             rentIdList.add(deviceBean.getId());
                             numList.add(deviceBean.getNum() + "");
@@ -146,22 +156,48 @@ public class DeviceActivity extends TitleBaseActivity<DevicePresenter> implement
     }
 
     @Override
-    public void updateDeviceListView(List<DeviceBean> deviceBeanList) {
-        this.deviceBeanList = new ArrayList<>(deviceBeanList.size());
-        this.deviceBeanList.addAll(deviceBeanList);
-        updateDeviceTypes(deviceBeanList);
-    }
+    public void updateDeviceListView(final List<DeviceBean> deviceList) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DeviceActivity.this.deviceBeanList = new ArrayList<>(deviceList.size());
+                DeviceActivity.this.deviceBeanList.addAll(deviceList);
+                stringList.clear();
+                stringList.add("全部");
+                allNum = 0;
+                totalPrice = 0d;
+                for (DeviceBean deviceBean : deviceBeanList) {
+                    if (!TextUtils.isEmpty(rentId)){
+                        String [] rentArray = rentId.split(",");
+                        String [] numArray = nums.split(",");
+                        for (int i = 0,length = rentArray.length;i<length;i++){
+                            if (deviceBean.getId().equals(rentArray[i])){
+                                deviceBean.setNum(Integer.valueOf(numArray[i]));
+                                rentIdList.add(rentArray[i]);
+                                numList.add(numArray[i]);
+                                rentMoneyList.add(deviceBean.getPrice());
+                                alreadyChooseDevice.add(deviceBean);
 
-    private void updateDeviceTypes(List<DeviceBean> deviceBeanList) {
-        List<String> stringList = new ArrayList<>();
-        stringList.add("全部");
-        for (DeviceBean deviceBean : deviceBeanList) {
-            if (!stringList.contains(deviceBean.getCategory())) {
-                stringList.add(deviceBean.getCategory());
+                                allNum+=deviceBean.getNum();
+                                totalPrice+=Double.valueOf(deviceBean.getPrice())*deviceBean.getNum();
+                            }
+                        }
+                    }
+                    if (!stringList.contains(deviceBean.getCategory())) {
+                        stringList.add(deviceBean.getCategory());
+                    }
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismissProgress();
+                        txtDeviceNum.setText(String.valueOf(allNum));
+                        ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(DeviceActivity.this, android.R.layout.simple_spinner_dropdown_item, stringList);
+                        spinnerType.setAdapter(spinnerAdapter);
+                    }
+                });
             }
-        }
-        ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, stringList);
-        spinnerType.setAdapter(spinnerAdapter);
+        }).start();
 
     }
 
