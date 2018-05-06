@@ -46,6 +46,7 @@ public class MessageActivity extends TitleBaseActivity<MessageContract.Presenter
         super.initView();
         setTitleTxt("提醒通知");
         setTitleBg();
+        setImgTitleRight(false,null);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rylView.setLayoutManager(layoutManager);

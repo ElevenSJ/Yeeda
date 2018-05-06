@@ -17,6 +17,7 @@ import com.sj.yeeda.R;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.activity.invoice.InvoiceActivity;
 import com.sj.yeeda.activity.main.MainActivity;
+import com.sj.yeeda.activity.message.MessageActivity;
 import com.sj.yeeda.activity.order.list.OrderActivity;
 import com.sj.yeeda.activity.setting.SettingActivity;
 import com.sj.yeeda.activity.user.supply.bean.UserInfoBean;
@@ -62,15 +63,6 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Pre
     @Override
     public void initView() {
         setTitleTxt(this.getString(R.string.txt_user_center_title));
-        setImgTitleRight(true, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (BuildConfig.DEBUG){
-                    ToastUtils.showShortToast("联系客服");
-                }
-
-            }
-        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         ryvView.setLayoutManager(layoutManager);
         DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.gray_AD), 1, 16, 16);

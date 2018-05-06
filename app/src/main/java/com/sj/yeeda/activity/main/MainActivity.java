@@ -172,7 +172,12 @@ public class MainActivity extends BaseActivity<MainContract.Presenter>
     protected void onDestroy() {
         super.onDestroy();
         // 注销广播
-        unregisterReceiver(mSDKNotifyReceiver);
+        try{
+            unregisterReceiver(mSDKNotifyReceiver);
+        }catch ( Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override

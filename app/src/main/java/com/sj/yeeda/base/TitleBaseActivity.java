@@ -1,5 +1,6 @@
 package com.sj.yeeda.base;
 
+import android.content.Intent;
 import android.support.annotation.Keep;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.sj.yeeda.R;
+import com.sj.yeeda.activity.message.MessageActivity;
+import com.sj.yeeda.activity.user.usercenter.UserCenterActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -59,5 +62,11 @@ public abstract class TitleBaseActivity<T> extends BaseActivity<T> {
     @OnClick(R.id.img_title_back)
     public void onTitleBackClick() {
         finish();
+    }
+
+    @OnClick(R.id.img_title_right)
+    public void onTitleRightClick() {
+        Intent intent = new Intent(this, MessageActivity.class);
+        startActivity(intent);
     }
 }

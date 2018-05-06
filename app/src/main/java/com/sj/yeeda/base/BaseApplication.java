@@ -62,6 +62,7 @@ public class BaseApplication extends Application {
                 .notifyIcon(R.mipmap.ic_launcher)
                 .topBarBackgroundColorRecource(R.color.colorPrimaryDark)
                 .topBarTitleColorResource(R.color.white)
+                .showMsgState(true)
                 .topBarLeftImageDrawableResource(R.drawable.img_title_back)
                 .topBarSingleImageDrawableResource(R.color.colorPrimaryDark)
                 .build();

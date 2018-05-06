@@ -91,7 +91,9 @@
         <activity android:name=".activity.order.list.OrderActivity" />
         <activity android:name=".activity.venue.VenueActivity" />
         <activity android:name=".activity.order.detail.OrderDetailActivity" />
-        <activity android:name=".activity.message.MessageActivity" />
+        <activity
+            android:name=".activity.message.MessageActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".activity.setting.SettingActivity" />
         <activity android:name=".activity.service.ServiceCustomActivity" />
         <activity android:name=".activity.photo.BrowserImageActivity" />
@@ -115,7 +117,7 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.Transparent"/>
+            android:theme="@style/AppTheme.Transparent" />
 
         <!-- 极光推送 绑定别名service-->
         <service android:name=".service.JPushAliasService" />
@@ -141,8 +143,8 @@
 
 
         <!-- 容联云通讯 -->
-            android:enabled="true"
-            android:process=":push" />
+        android:enabled="true"
+        android:process=":push" />
         // 以下两项为SDK内部处理项，其中booter.Alarm在v5.1.9r以后版本提供
         <receiver
             android:name="com.yuntongxun.ecsdk.booter.CCPReceivers$AlarmReceiver"

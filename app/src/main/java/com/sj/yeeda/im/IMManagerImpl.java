@@ -9,7 +9,10 @@ import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.http.UrlConfig;
 import com.yuntongxun.ecsdk.ECMessage;
+import com.yuntongxun.ecsdk.ECMessageBody;
 import com.yuntongxun.ecsdk.im.ECTextMessageBody;
+import com.yuntongxun.ecsdk.im.ECUserStateMessageBody;
+import com.yuntongxun.plugin.common.AppMgr;
 import com.yuntongxun.plugin.common.common.utils.LogUtil;
 import com.yuntongxun.plugin.im.dao.dbtools.DBECMessageTools;
 import com.yuntongxun.plugin.im.manager.IMPluginManager;
@@ -19,6 +22,7 @@ import com.yuntongxun.plugin.im.manager.port.OnMessagePreproccessListener;
 import com.yuntongxun.plugin.im.manager.port.OnNotificationClickListener;
 import com.yuntongxun.plugin.im.manager.port.OnReturnIdsCallback;
 import com.yuntongxun.plugin.im.manager.port.OnReturnIdsClickListener;
+import com.yuntongxun.plugin.im.ui.chatting.model.IMChattingHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,38 +81,31 @@ public class IMManagerImpl implements OnReturnIdsClickListener, OnIMBindViewList
         String name = "";
         if (!TextUtils.isEmpty(userId)) {
             if (userId.equals((String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_IM_ACCOUNT, SPFileUtils.KEFU_ID, ""))) {
-                name = "客服服务";
+                name = "客户服务";
+//                sendMsg(userId,name,false);
             } else if (userId.equals((String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_IM_ACCOUNT, SPFileUtils.TEZHAN_ID, ""))) {
                 name = "特展设计";
+                sendMsg(userId,name,true);
             } else if (userId.equals((String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_IM_ACCOUNT, SPFileUtils.DINGDAN_ID, ""))) {
                 name = "订单客服";
-                sendOrderMsg(userId, UrlConfig.BASE_URL+"/webQueryOrderDetail?oid="+orderId);
+                sendMsg(userId, UrlConfig.BASE_URL+"/webQueryOrderDetail?oid="+orderId,true);
             }
         }
         return name;
     }
 
-    private void sendOrderMsg(String contactId,String msg) {
-        ECMessage mDrafMessage = DBECMessageTools.getInstance().getDrafMessage(contactId);
-        if(TextUtils.isEmpty(msg.trim())) {
-            if(mDrafMessage != null) {
-                LogUtil.d("RongXin.ChattingFragment", "del mDrafMessage " + mDrafMessage.getMsgId());
-                DBECMessageTools.getInstance().delMessage(mDrafMessage.getMsgId());
-                mDrafMessage = null;
+    private void sendMsg(String contactId,String text,boolean insertDb) {
+        if(text != null) {
+            ECMessage msg = ECMessage.createECMessage(ECMessage.Type.TXT);
+            msg.setTo(contactId);
+            msg.setSessionId(contactId);
+            Object msgBody = new ECTextMessageBody(text.toString());
+            msg.setBody((ECMessageBody)msgBody);
+            try {
+                IMChattingHelper.getInstance().sendECMessage(msg, insertDb);
+            } catch (Exception var9) {
+                var9.printStackTrace();
             }
-        } else {
-            if (mDrafMessage == null) {
-                mDrafMessage = ECMessage.createECMessage(ECMessage.Type.TXT);
-                mDrafMessage.setMsgId("darft_" + System.currentTimeMillis());
-            }
-
-            mDrafMessage.setTo(contactId);
-            mDrafMessage.setSessionId(contactId);
-            mDrafMessage.setDirection(ECMessage.Direction.DRAFT);
-            mDrafMessage.setMsgStatus(ECMessage.MessageStatus.SUCCESS);
-            ECTextMessageBody msgBody = new ECTextMessageBody(msg);
-            mDrafMessage.setBody(msgBody);
-            DBECMessageTools.getInstance().insert(mDrafMessage, true);
         }
     }
 
