@@ -77,9 +77,9 @@ public class MainActivity extends BaseActivity<MainContract.Presenter>
             } else if (SDKCoreHelper.ACTION_SDK_CONNECT.equals(intent.getAction())) {
                 if (SDKCoreHelper.isLoginSuccess(intent)) {
                     Logger.e("登入成功");
-                    SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.IM_IS_CONNECTED, 0);
                     // 初始化IM数据库
                     DaoHelper.init(MainActivity.this, new IMDao());
+                    SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.IM_IS_CONNECTED, 0);
                 } else {
                     int error = intent.getIntExtra("error", 0);
                     if (error == SdkErrorCode.CONNECTING) {
@@ -88,6 +88,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter>
                     SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.IM_IS_CONNECTED,-1);
                     Logger.e("登入失败[" + error + "]");
                 }
+                dismissProgress();
             }
         }
     };

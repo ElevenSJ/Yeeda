@@ -71,7 +71,7 @@ public class SolutionListAdapter extends RecyclerArrayAdapter<SolutionBean> {
             ImageUtils.loadImageView(data.getIcon(),imgDesignerIcon);
             txtDesignerName.setText("设计师："+data.getUserName());
             ratingBar.setStepSize(3f);
-            txtSolutionPrice.setText("¥"+data.getSchemePrice());
+//            txtSolutionPrice.setText("¥"+data.getSchemePrice());
             btSolutionDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

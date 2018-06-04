@@ -202,7 +202,7 @@ public class SolutionDetailActivity extends TitleBaseActivity<SolutionDetailCont
                 txtSolutionInfo.setText("id:" + solutionDetailBean.getScheme().getId() + " | " + "面积:" + solutionDetailBean.getScheme().getAreaCategory());
                 txtInstallation.setText(solutionDetailBean.getScheme().getInstallation());
                 ImageUtils.loadImageWithError(solutionDetailBean.getScheme().getIcon(), R.drawable.img_personal_center_circle, imgDesignerIcon);
-                txtSolutionPrice.setText("¥" + solutionDetailBean.getScheme().getSchemePrice());
+//                txtSolutionPrice.setText("¥" + solutionDetailBean.getScheme().getSchemePrice());
             }
             ratingBar.setRating(30);
 

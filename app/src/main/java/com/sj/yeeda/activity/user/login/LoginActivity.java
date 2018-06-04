@@ -1,12 +1,8 @@
 package com.sj.yeeda.activity.user.login;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -15,21 +11,13 @@ import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.DeviceUtils;
-import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.R;
 import com.sj.yeeda.activity.main.MainActivity;
 import com.sj.yeeda.activity.user.register.RegisterActivity;
 import com.sj.yeeda.base.BaseActivity;
-import com.sj.yeeda.service.IMInitService;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
-import com.yuntongxun.ecsdk.ECInitParams;
-import com.yuntongxun.ecsdk.SdkErrorCode;
-import com.yuntongxun.plugin.common.AppMgr;
-import com.yuntongxun.plugin.common.SDKCoreHelper;
-import com.yuntongxun.plugin.greendao3.helper.DaoHelper;
-import com.yuntongxun.plugin.im.dao.helper.IMDao;
 
 import java.util.List;
 

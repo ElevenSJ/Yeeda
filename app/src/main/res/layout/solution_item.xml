@@ -129,9 +129,10 @@
         style="@style/TxtCommonRedBig"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
         android:layout_marginTop="4dp"
         android:singleLine="true"
-        android:text="TextView"
+        android:text="隐藏"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txt_solution_price_name"
         app:layout_constraintTop_toBottomOf="@+id/txt_solution_price_name" />

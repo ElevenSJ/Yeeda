@@ -115,6 +115,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void initIM() {
+        mView.showProgress();
         String userPhone = (String) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.USER_ACCOUNT, "");
         if (AppMgr.getClientUser() != null) {
             Logger.i("SDK auto connect...");
