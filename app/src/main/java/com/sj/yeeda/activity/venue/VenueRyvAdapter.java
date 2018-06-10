@@ -62,14 +62,12 @@ public class VenueRyvAdapter extends RecyclerArrayAdapter<VenueBean> {
             imgDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.showShortToast(view.getId() + "");
                     activity.delVenue(data);
                 }
             });
             imgEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ToastUtils.showShortToast(view.getId() + "");
                     activity.editVenue(data);
                 }
             });

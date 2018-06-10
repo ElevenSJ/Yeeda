@@ -178,7 +178,7 @@ public class SolutionOrderActivity extends TitleBaseActivity<SolutionOrderContra
 //                    return;
 //                }
                 //支付
-                presenter.saveOrder(data.getId(), venueBean.getId(), rentId, nums, rentMoneys, edtTimeBegain.getText().toString() + "至" + edtTimeEnd.getText().toString(), edtArea.getText().toString(), invoiceBean != null ? invoiceBean.getId() : "");
+                presenter.saveOrder(txtPrice.getText().toString().replace("¥",""),data.getId(), venueBean.getId(), rentId, nums, rentMoneys, edtTimeBegain.getText().toString() + "至" + edtTimeEnd.getText().toString(), edtArea.getText().toString(), invoiceBean != null ? invoiceBean.getId() : "");
                 break;
             case R.id.bt_choose_device:
                 //选择租赁设备

@@ -203,6 +203,7 @@ public class MainActivity extends BaseActivity<MainContract.Presenter>
         switch (id) {
             case R.id.img_home_user_center:
                 drawerLayout.openDrawer(GravityCompat.START);
+                getPresenter().getUserInfo();
                 break;
             case R.id.img_home_message:
                 intent.setClass(MainActivity.this, MessageActivity.class);

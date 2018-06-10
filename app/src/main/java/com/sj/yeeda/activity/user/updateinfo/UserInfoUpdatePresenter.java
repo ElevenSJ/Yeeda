@@ -4,6 +4,7 @@ package com.sj.yeeda.activity.user.updateinfo;
 import com.jady.retrofitclient.HttpManager;
 import com.orhanobut.logger.Logger;
 import com.sj.module_lib.utils.SPUtils;
+import com.sj.module_lib.utils.ToastUtils;
 import com.sj.yeeda.Utils.SPFileUtils;
 import com.sj.yeeda.othertask.UserInfoGetTask;
 import com.sj.yeeda.othertask.UserInfoSaveTask;
@@ -56,6 +57,7 @@ public class UserInfoUpdatePresenter implements  UserInfoUpdateContract.Presente
         HttpManager.get(UrlConfig.UPDATE_USER_URL, parameters, new Callback() {
             @Override
             public void onSuccess(String json) {
+                ToastUtils.showShortToast("更新成功");
                 new UserInfoSaveTask() {
                     @Override
                     protected void onPostExecute(Boolean aBoolean) {

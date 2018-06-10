@@ -125,4 +125,10 @@ public class UserCenterActivity extends TitleBaseActivity<UserCenterContract.Pre
             txtUserName.setText(userInfoBean.getUserName());
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPresenter().getUserData();
+    }
 }

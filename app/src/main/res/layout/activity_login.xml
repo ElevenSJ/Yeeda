@@ -48,7 +48,7 @@
         android:gravity="left|center_vertical|fill_vertical"
         android:hint="@string/txt_phone_hint"
         android:imeOptions="actionNext"
-        android:inputType="number"
+        android:inputType="phone"
         android:maxLength="11"
         android:textColorHint="@color/common_hint_text"
         app:layout_constraintBottom_toTopOf="@+id/line_venue"

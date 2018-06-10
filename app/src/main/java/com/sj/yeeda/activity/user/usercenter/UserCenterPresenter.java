@@ -31,6 +31,10 @@ public class UserCenterPresenter implements UserCenterContract.Presenter {
     @Override
     public void start() {
         mView.upDataItemView( items);
+
+    }
+    @Override
+    public void getUserData(){
         userInfoGetTask = new UserInfoGetTask() {
             @Override
             protected void onPostExecute(UserInfoBean userInfoBean) {

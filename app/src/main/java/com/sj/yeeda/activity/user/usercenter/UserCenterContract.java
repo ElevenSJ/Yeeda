@@ -18,6 +18,6 @@ public interface UserCenterContract {
     }
 
     interface Presenter extends BasePresenter {
-
+        void getUserData();
     }
 }

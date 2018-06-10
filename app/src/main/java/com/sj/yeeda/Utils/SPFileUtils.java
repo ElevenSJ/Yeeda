@@ -19,6 +19,7 @@ public class SPFileUtils {
     public static String IS_LOGIN = "isLogin";
 
     public static String IS_SET_JPUSH_ALIAS = "isSetALias";
+    public static String IS_SHOW_GUIDE = "isShowGuide";
     public static String IM_IS_CONNECTED = "im_is_connected";
 
 

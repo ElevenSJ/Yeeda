@@ -21,7 +21,7 @@ public interface SolutionOrderContract {
     interface Presenter extends BasePresenter {
         void queryDefaultVenue();
 
-        void saveOrder(String schemeId,String venueId,String rentId,String  nums,String  rentMoneys,String showTime,String area,String invoiceId);
+        void saveOrder(String allPrice,String schemeId,String venueId,String rentId,String  nums,String  rentMoneys,String showTime,String area,String invoiceId);
 
     }
 }

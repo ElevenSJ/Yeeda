@@ -59,7 +59,7 @@ public class SolutionOrderPresent implements SolutionOrderContract.Presenter {
     }
 
     @Override
-    public void saveOrder(String schemeId, String venueId, String rentId, String nums, String rentMoneys, String showTime, String area,String invoiceId) {
+    public void saveOrder(final String allPrice,String schemeId, String venueId, String rentId, String nums, String rentMoneys, String showTime, String area,String invoiceId) {
         mView.showProgress();
         Map<String, Object> parameters = new HashMap<>(9);
         parameters.put("token", token);
@@ -82,7 +82,8 @@ public class SolutionOrderPresent implements SolutionOrderContract.Presenter {
             public void onSuccessData(String json) {
                 OrderResultBean orderResultBean = new GsonResponsePasare<OrderResultBean>() {
                 }.deal(json);
-                mView.toPay(orderResultBean.getId(),orderResultBean.getMoney());
+//                mView.toPay(orderResultBean.getId(),orderResultBean.getMoney());
+                mView.toPay(orderResultBean.getId(),allPrice);
             }
 
             @Override

@@ -10,6 +10,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
 import com.jude.easyrecyclerview.EasyRecyclerView;
@@ -39,11 +40,15 @@ public class PayActivity extends TitleBaseActivity<PayContract.Presenter> implem
     public static final String PAY_CANCLE = "com.sj.yeeda.activity.pay.PAY_CANCLE";
     @BindView(R.id.ryl_view)
     EasyRecyclerView rylView;
+    @BindView(R.id.txt_price)
+    TextView txtPrice;
 
     PayRyvAdapter mAdapter;
 
     String orderId;
     String allPrice;
+
+    int payPrice=0;
 
     Handler mHandler = new ResultHandler(this);
 
@@ -86,6 +91,7 @@ public class PayActivity extends TitleBaseActivity<PayContract.Presenter> implem
         setTitleBg();
         orderId = getIntent().getStringExtra("orderId");
         allPrice = getIntent().getStringExtra("allPrice");
+        txtPrice.setText("¥ "+allPrice);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rylView.setLayoutManager(layoutManager);
         DividerDecoration dividerDecoration = new DividerDecoration(getResources().getColor(R.color.gray_AD), 1, 16, 16);
@@ -103,11 +109,11 @@ public class PayActivity extends TitleBaseActivity<PayContract.Presenter> implem
                 switch (type) {
                     case 0:
                         //微信支付
-                        getPresenter().getWechatOrder(orderId, ((int)(Double.valueOf(allPrice)*100))+"", "商品订单号：" + orderId);
+                        getPresenter().getWechatOrder(orderId, payPrice+"", "商品订单号：" + orderId);
                         break;
                     case 1:
                         //支付宝支付
-                        getPresenter().getAlipayOrder(orderId, allPrice);
+                        getPresenter().getAlipayOrder(orderId, payPrice+"");
                         break;
                     default:
                 }
@@ -130,6 +136,17 @@ public class PayActivity extends TitleBaseActivity<PayContract.Presenter> implem
     @Override
     public void upDataItemView(PayListItemBean[] items) {
         mAdapter.addAll(items);
+        try {
+            payPrice = (int)(Double.valueOf(allPrice)*100);
+        }catch(Exception e){
+            e.printStackTrace();
+            ToastUtils.showShortToast("价格不正确");
+            finish();
+//            return;
+        }
+        if ("0".equals(allPrice)){
+            onSuccessBack();
+        }
     }
 
     @Override
@@ -164,7 +181,8 @@ public class PayActivity extends TitleBaseActivity<PayContract.Presenter> implem
         request.appId = wechatOrderBean.getAppId();
         request.partnerId = wechatOrderBean.getPartnerid();
         request.prepayId = wechatOrderBean.getPrepayid();
-        request.packageValue = wechatOrderBean.getPackageX();
+//        request.packageValue = wechatOrderBean.getPackageX();
+        request.packageValue = "Sign=WXPay";
         request.nonceStr = wechatOrderBean.getNoncestr();
         request.timeStamp = wechatOrderBean.getTimestamp();
         request.sign = wechatOrderBean.getSign();

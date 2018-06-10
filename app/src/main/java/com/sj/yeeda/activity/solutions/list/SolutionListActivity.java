@@ -21,6 +21,9 @@ import com.sj.yeeda.activity.solutions.list.bean.SolutionBean;
 import com.sj.yeeda.activity.solutions.list.bean.SolutionList;
 import com.sj.yeeda.activity.solutions.order.SolutionOrderActivity;
 import com.sj.yeeda.base.TitleBaseActivity;
+import com.sj.yeeda.widgets.guideview.Guide;
+import com.sj.yeeda.widgets.guideview.GuideBuilder;
+import com.sj.yeeda.widgets.guideview.component.MutiComponent;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,6 +61,9 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionContract.Pre
 
     //默认选中tab
     int itemSelected = 0;
+
+
+    Guide guide;
 
 
     @Override
@@ -117,6 +123,10 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionContract.Pre
             @Override
             public void run() {
                 tabLayout.scrollTo(width, 0);
+                if (!(Boolean) SPUtils.getInstance().getSharedPreference(SPFileUtils.FILE_USER, SPFileUtils.IS_SHOW_GUIDE, false)) {
+                    SPUtils.getInstance().edit(SPFileUtils.FILE_USER).apply(SPFileUtils.IS_SHOW_GUIDE,true);
+                    showGuideView();
+                }
             }
         });
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -223,6 +233,23 @@ public class SolutionListActivity extends TitleBaseActivity<SolutionContract.Pre
     @Override
     public void onMoreClick() {
         getPresenter().getSolution(mAdapter.getCount() > 0 ? mAdapter.getItem(mAdapter.getCount() - 1).getId(): "", areaDatas.get(itemSelected).getAreaCategory(), 10);
+    }
+
+
+    public void showGuideView() {
+        GuideBuilder builder = new GuideBuilder();
+        builder.setTargetView(tabLayout)
+                .setFullingViewId(R.id.tab_layout)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setHighTargetPadding(10)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+
+        builder.addComponent(new MutiComponent());
+        guide = builder.createGuide();
+        guide.setShouldCheckLocInWindow(true);
+        guide.show(this);
     }
 
 }
